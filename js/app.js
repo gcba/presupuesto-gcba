@@ -8,23 +8,23 @@
 
 
 // Vars de inicializacion
-var w = 970, // ancho del gráfico
-    h = 350, // largo del gráfico
-    cant = 5; // Cant de categorías
-
+var w = 970,    // ancho del gráfico
+    h = 350,    // largo del gráfico
+    cant = 5;   // Cant de categorías
+    maxR = 70;  //maximo radio del circulo
 
 var nodes = d3.range(cant).map(function(i) {
     return {
         type: Math.random() * cant | 0,
         radius: 0,
-        fixed: true, // true para que permanezcan en el lugar
+        fixed: true,
         type: i,
         x: (i + 1) * (w / (cant + 1)),
         y: h / 2
     };
 });
 
-var color = d3.scale.category20();
+var color = d3.scale.category10();
 
 var force = d3.layout.force()
     .gravity(0)
@@ -102,8 +102,9 @@ function collide(node) {
 
 
 
-d3.csv("data/presupuesto.csv", function(data) {
+var nodosTemp;
 
+d3.csv("data/presupuesto.csv", function(data) {
     data.forEach(function(d) {
         d.monto = +d.monto;
     });
@@ -114,53 +115,8 @@ d3.csv("data/presupuesto.csv", function(data) {
 
     var radioRango = d3.scale.linear()
         .domain([0, max])
-        .range([0, 70]); //radio de  0 a 70px
+        .range([0, maxR]);
 
-    var p0;
-
-    var p1 = [500, 50];
-    data.forEach(function(d) {
-
-        if (parseInt(d.monto) > 0) { // solo agrego el nodo si el monto es mayor a 0 pesos
-
-            var node = {
-                radius: 10, // sale del monto (en un dominio)
-                type: 2, // donde pertenece. Sale de id_jurisdiccion
-                x: p1[0],
-                y: p1[1],
-                px: (p0 || (p0 = p1))[0],
-                py: p0[1]
-            };
-
-
-            p0 = p1;
-
-            svg.append("svg:circle")
-                .data([node])
-                .attr("cx", function(d) {
-                    return d.x;
-                })
-                .attr("cy", function(d) {
-                    return d.y;
-                })
-                .attr("r", function(d) {
-                    return d.radius - 1; // -1 es la separacion entre nodos.
-                })
-                .style("fill", function(d) {
-                    return color(d.type);
-                })
-                .attr("stroke", "black")
-                .attr("stroke-width", "1")
-                .attr("opacity", "0.01")
-                .attr("stroke-opacity", "0.5");
-
-console.log("pase");
-//            nodes.push(node);
-            force.resume();
-        }
-
-
-
-    });
+    // saco el máximo y armo el array de nodosTemp para pushear al svg
 
 });

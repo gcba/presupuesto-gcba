@@ -10,8 +10,8 @@
 // Vars de inicializacion
 var w = 970, // ancho del gráfico
     h = 350, // largo del gráfico
-    cant = 5; // Cant de categorías
-
+    cant = 5, // Cant de categorías
+    rangoDeColores = ["#961C41","#BFBA80","#488460","#14183D", "#3A0016"];
 
 var nodes = d3.range(cant).map(function(i) {
 
@@ -26,7 +26,9 @@ var nodes = d3.range(cant).map(function(i) {
             y: h / 2
         };
     });
-var color = d3.scale.category20();
+var color = d3.scale.category10().range(rangoDeColores); // 
+
+
 
 var force = d3.layout.force()
     .gravity(0)
