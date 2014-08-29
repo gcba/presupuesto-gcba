@@ -23,7 +23,8 @@ var nodes = d3.range(cant).map(function(i) {
             y: h / 2
         };
     }),
-    color = d3.scale.category10();
+
+color = d3.scale.category10();
 
 var force = d3.layout.force()
     .gravity(0)
