@@ -8,9 +8,9 @@
 
 
 // Vars de inicializacion
-var w = 970, // ancho del grÃ¡fico
-    h = 350, // largo del grÃ¡fico
-    cant = 5; // Cant de categorÃ­as
+var w = 970, // ancho del gráfico
+    h = 350, // largo del gráfico
+    cant = 5; // Cant de categorías
 
 
 var nodes = d3.range(cant).map(function(i) {
@@ -26,7 +26,6 @@ var nodes = d3.range(cant).map(function(i) {
             y: h / 2
         };
     });
-
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
@@ -105,46 +104,16 @@ function collide(node) {
 
 
 
-d3.csv("presupuesto.csv", function (data) {
-
-    data.forEach(function(d) {
-        d.monto = +d.monto;
-    });
-    
-    var max = d3.max(data, function(d) { return d.monto; });
-
-    var radioRango = d3.scale.linear()
-        .domain([0, max])
-        .range([0, 100]); //radio de  0 a 100px
-
-    
-    data.forEach(function(d) {
-
-
-        var p1 = [500, 50], // origen de entrada
-            node = {
-                radius: radioRango(d.monto), // sale del monto (en un dominio)
-                type: Math.random() * cant | 0, // donde pertenece. Sale de id_jurisdiccion
-                x: p1[0],
-                y: p1[1],
-                px: (p0 || (p0 = p1))[0],
-                py: p0[1]
-            };
-
-    });
-
-});
-
 
 // Intervalo para agregar nodos.
 
-var p0; 
-var nodos = 0; // a modo de testing
+var p0;
+var nodos = 0;
 var intervaloDeTest = setInterval(function() {
     var p1 = [500, 50], // origen de entrada
         node = {
-            radius: Math.random() * 10, // sale del monto (en un dominio)
-            type: Math.random() * cant | 0, // donde pertenece. Sale de id_jurisdiccion
+            radius: Math.random() * 10, // sale del total
+            type: Math.random() * cant | 0, // donde pertenece. Sale de id_
             x: p1[0],
             y: p1[1],
             px: (p0 || (p0 = p1))[0],
@@ -162,7 +131,7 @@ var intervaloDeTest = setInterval(function() {
             return d.y;
         })
         .attr("r", function(d) {
-            return d.radius - 1 ; // -1 es la separacion entre nodos.
+            return d.radius - 2;
         })
         .style("fill", function(d) {
             return color(d.type);
@@ -171,13 +140,12 @@ var intervaloDeTest = setInterval(function() {
         .attr("stroke-width", "1")
         .attr("stroke-opacity", "0.5");
 
+
     nodes.push(node);
     force.resume();
 
-    if (nodos > 100) { // if de testing
-        clearInterval(intervaloDeTest);
+    if (nodos > 100) {
+        clearInterval(intervaloDeTest)
     }
     nodos++
-}, 100);
-
-
+}, 60);
