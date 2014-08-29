@@ -8,23 +8,27 @@
 
 
 // Vars de inicializacion
-var w = 970,    // ancho del grÃ¡fico
-    h = 350,    // largo del grÃ¡fico
-    cant = 5;   // Cant de categorÃ­as
-    maxR = 70;  //maximo radio del circulo
+var w = 970, // ancho del gráfico
+    h = 350, // largo del gráfico
+    cant = 5, // Cant de categorías
+    rangoDeColores = ["#961C41","#BFBA80","#488460","#14183D", "#3A0016"];
 
 var nodes = d3.range(cant).map(function(i) {
-    return {
-        type: Math.random() * cant | 0,
-        radius: 0,
-        fixed: true,
-        type: i,
-        x: (i + 1) * (w / (cant + 1)),
-        y: h / 2
-    };
-});
 
-var color = d3.scale.category10();
+
+
+        return {
+            type: Math.random() * cant | 0,
+            radius: 0,
+            fixed: true, // true para que permanezcan en el lugar
+            type: i,
+            x: (i + 1) * (w / (cant + 1)),
+            y: h / 2
+        };
+    });
+var color = d3.scale.category10().range(rangoDeColores); // 
+
+
 
 var force = d3.layout.force()
     .gravity(0)
@@ -47,7 +51,7 @@ svg.selectAll("circle")
     .data(nodes)
     .enter().append("svg:circle")
     .attr("r", function(d) {
-        return d.radius - 1;
+        return d.radius - 2;
     })
     .style("fill", function(d, i) {
         return color(d.type);
@@ -102,21 +106,48 @@ function collide(node) {
 
 
 
-var nodosTemp;
 
-d3.csv("data/presupuesto.csv", function(data) {
-    data.forEach(function(d) {
-        d.monto = +d.monto;
-    });
+// Intervalo para agregar nodos.
 
-    var max = d3.max(data, function(d) {
-        return d.monto;
-    });
+var p0;
+var nodos = 0;
+var intervaloDeTest = setInterval(function() {
+    var p1 = [500, 50], // origen de entrada
+        node = {
+            radius: Math.random() * 10, // sale del total
+            type: Math.random() * cant | 0, // donde pertenece. Sale de id_
+            x: p1[0],
+            y: p1[1],
+            px: (p0 || (p0 = p1))[0],
+            py: p0[1]
+        };
 
-    var radioRango = d3.scale.linear()
-        .domain([0, max])
-        .range([0, maxR]);
+    p0 = p1;
 
-    // saco el mÃ¡ximo y armo el array de nodosTemp para pushear al svg
+    svg.append("svg:circle")
+        .data([node])
+        .attr("cx", function(d) {
+            return d.x;
+        })
+        .attr("cy", function(d) {
+            return d.y;
+        })
+        .attr("r", function(d) {
+            return d.radius - 2;
+        })
+        .style("fill", function(d) {
+            return color(d.type);
+        })
+        .attr("stroke", "black")
+        .attr("stroke-width", "1")
+        .attr("stroke-opacity", "0.5");
 
-});
+
+    nodes.push(node);
+    force.resume();
+
+    if (nodos > 100) {
+        clearInterval(intervaloDeTest)
+    }
+    nodos++
+}, 60);

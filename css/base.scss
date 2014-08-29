@@ -1,0 +1,193 @@
+@import "../public/components/bourbon/dist/bourbon";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+
+@include font-face('Gotham', 'fonts/gotham');
+
+/* ########
+   Colores
+   ######## */
+
+
+$black: #000;
+$white: #FFF;
+
+
+/* ########
+   Fuentes
+   ######## */
+
+$font-family-sans-serif: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+/* ################
+   Bootstrap Resets
+   ################ */
+
+$navbar-default-bg: transparent;
+$navbar-default-border: none;
+
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
+
+
+html, body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-rendering: optimizelegibility;
+    font-family: "Gotham", Helvetica, Arial, sans-serif;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-backface-visibility: hidden;
+    moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    margin: 0;
+    padding: 0;
+    height:100%;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family-sans-serif;
+}
+
+header{
+    pointer-events: none;    
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 999;
+    
+    .header-gcba {
+        height:50px;
+        padding:10px 0;
+        overflow:visible;
+        background-color: #FFCB05;
+        @include transition (background-color 0.4s ease-in-out);
+    }
+
+    .header-inner {
+        padding-right:20px;
+        padding-left:20px
+    }
+
+    .header-gcba .logo {
+        float:left;
+        width:172px;
+        height:33px;
+        @include retina-image("img/logo-normal", 172px 34px);
+    }
+
+    .header-gcba h2.slogan {
+        float: right;
+        font-weight: bold;
+        margin-top: 0.75em;
+        font-size: 0.85em;
+        font-size:12px;
+        letter-spacing:-1px;
+        color: $black;
+        text-transform: uppercase;
+        min-width: 150px;
+        @include transition (color 0.4s ease-in-out);
+    }
+
+}
+
+// header {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     background: none repeat scroll 0 0 #ffd300;
+//     height: 59px;
+//     line-height: 59px;    
+// }
+
+// header .logo {
+//     float: left;
+//     width: 172px;
+//     height: 34px;
+//     background: url("img/logo-normal.png") no-repeat center center;
+//     position: relative;
+//     top: 12px;
+
+// }
+
+// header .slogan {
+//     float: right;
+//     font-weight: bold;
+//     font-size: 11px;
+//     letter-spacing: -1px;
+//     color: #000;
+//     text-transform: uppercase;
+// }
+
+// footer {
+//     color: #FFF;
+//     position: fixed;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 40px;
+//     line-height: 40px;    
+
+//     background-color: #333333;
+//     font-size: 12px;
+// }
+
+// footer .ministerio {
+//     float: left;
+// }
+
+// footer .transparencia {
+//     float: right;
+// }
+
+// h1 {
+//     font-size: 1em
+// }
+
+// h2{
+//     font-weight: normal;
+//     font-size: 0.8em;
+// }
+
+// hr{
+//     border: 0px;
+//     height: 1px;
+//     background: #CCCCCC;
+// }
+
+// #grafico{
+//     margin: 0 auto;
+//     width: 950px;
+// }
+
+// #cuerpo{
+//     padding-top: 75px;
+//     padding-bottom: 75px;
+//     width: 950px;
+//     margin: 0 auto; 
+// }
+
+// .texto {
+//     font-family: Helvetica, Arial, sans-serif;
+//     font-size: 0.7em;
+// }
+// .container {
+//     width: 950px;
+//     height: 100%;
+//     position:absolute;
+//     left: 0;
+//     right: 0;
+//     margin: 0 auto; 
+// }
