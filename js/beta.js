@@ -8,22 +8,24 @@
 
 
 // Vars de inicializacion
-var w = 970, // ancho del grÃ¡fico
-    h = 350, // largo del grÃ¡fico
-    cant = 5; // Cant de categorÃ­as
+var w = 970, // ancho del gráfico
+    h = 350, // largo del gráfico
+    cant = 5; // Cant de categorías
 
 
 var nodes = d3.range(cant).map(function(i) {
-    return {
-        type: Math.random() * cant | 0,
-        radius: 0,
-        fixed: true, // true para que permanezcan en el lugar
-        type: i,
-        x: (i + 1) * (w / (cant + 1)),
-        y: h / 2
-    };
-});
 
+
+
+        return {
+            type: Math.random() * cant | 0,
+            radius: 0,
+            fixed: true, // true para que permanezcan en el lugar
+            type: i,
+            x: (i + 1) * (w / (cant + 1)),
+            y: h / 2
+        };
+    });
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
@@ -47,7 +49,7 @@ svg.selectAll("circle")
     .data(nodes)
     .enter().append("svg:circle")
     .attr("r", function(d) {
-        return d.radius - 1;
+        return d.radius - 2;
     })
     .style("fill", function(d, i) {
         return color(d.type);
@@ -102,65 +104,48 @@ function collide(node) {
 
 
 
-d3.csv("data/presupuesto.csv", function(data) {
 
-    data.forEach(function(d) {
-        d.monto = +d.monto;
-    });
+// Intervalo para agregar nodos.
 
-    var max = d3.max(data, function(d) {
-        return d.monto;
-    });
+var p0;
+var nodos = 0;
+var intervaloDeTest = setInterval(function() {
+    var p1 = [500, 50], // origen de entrada
+        node = {
+            radius: Math.random() * 10, // sale del total
+            type: Math.random() * cant | 0, // donde pertenece. Sale de id_
+            x: p1[0],
+            y: p1[1],
+            px: (p0 || (p0 = p1))[0],
+            py: p0[1]
+        };
 
-    var radioRango = d3.scale.linear()
-        .domain([0, max])
-        .range([0, 70]); //radio de  0 a 70px
+    p0 = p1;
 
-    var p0;
-
-    var p1 = [500, 50];
-    data.forEach(function(d) {
-
-        if (parseInt(d.monto) > 0) { // solo agrego el nodo si el monto es mayor a 0 pesos
-
-            var node = {
-                radius: 10, // sale del monto (en un dominio)
-                type: 2, // donde pertenece. Sale de id_jurisdiccion
-                x: p1[0],
-                y: p1[1],
-                px: (p0 || (p0 = p1))[0],
-                py: p0[1]
-            };
-
-
-            p0 = p1;
-
-            svg.append("svg:circle")
-                .data([node])
-                .attr("cx", function(d) {
-                    return d.x;
-                })
-                .attr("cy", function(d) {
-                    return d.y;
-                })
-                .attr("r", function(d) {
-                    return d.radius - 1; // -1 es la separacion entre nodos.
-                })
-                .style("fill", function(d) {
-                    return color(d.type);
-                })
-                .attr("stroke", "black")
-                .attr("stroke-width", "1")
-                .attr("opacity", "0.01")
-                .attr("stroke-opacity", "0.5");
-
-console.log("pase");
-//            nodes.push(node);
-            force.resume();
-        }
+    svg.append("svg:circle")
+        .data([node])
+        .attr("cx", function(d) {
+            return d.x;
+        })
+        .attr("cy", function(d) {
+            return d.y;
+        })
+        .attr("r", function(d) {
+            return d.radius - 2;
+        })
+        .style("fill", function(d) {
+            return color(d.type);
+        })
+        .attr("stroke", "black")
+        .attr("stroke-width", "1")
+        .attr("stroke-opacity", "0.5");
 
 
+    nodes.push(node);
+    force.resume();
 
-    });
-
-});
+    if (nodos > 100) {
+        clearInterval(intervaloDeTest)
+    }
+    nodos++
+}, 60);
