@@ -1,12 +1,10 @@
 {
-  "name": "presentacion",
-  "version": "0.0.0",
+  "name": "Presupuesto GCBA",
+  "version": "0.0.1cd ..",
   "main": "css/base.css",
-  "homepage": "https://github.com/davo/frontend-ba",
   "authors": [
     "Davo <davidgalavotti@gmail.com>"
   ],
-  "description": "Slides, demos y samples para la presentación del 27 de Mayo del primer Meetup Frontend Buenos Aires.",
   "license": "MIT",
   "ignore": [
     "**/.*",
