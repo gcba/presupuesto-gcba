@@ -2,6 +2,8 @@
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 
 @include font-face('Gotham', 'fonts/gotham');
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,800);
+
 
 /* ########
    Colores
@@ -16,7 +18,9 @@ $white: #FFF;
    Fuentes
    ######## */
 
-$font-family-sans-serif: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-default: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
 
 /* ################
    Bootstrap Resets
@@ -28,14 +32,6 @@ $navbar-default-border: none;
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
 
 
-html, body {
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-rendering: optimizelegibility;
-    font-family: "Gotham", Helvetica, Arial, sans-serif;
-}
-
 html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -45,8 +41,6 @@ html {
     -webkit-touch-callout: none;
     margin: 0;
     padding: 0;
-    height:100%;
-    width: 100%;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -54,7 +48,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: $font-family-sans-serif;
+    font-family: $fontset-default;
 }
 
 header{
@@ -66,6 +60,7 @@ header{
     margin-left: auto;
     margin-right: auto;
     z-index: 999;
+    font-family: $fontset-gotham;
     
     .header-gcba {
         height:50px;
@@ -99,6 +94,14 @@ header{
         min-width: 150px;
         @include transition (color 0.4s ease-in-out);
     }
+
+}
+
+h1 {
+    font-weight: 800;
+}
+
+h2 {
 
 }
 

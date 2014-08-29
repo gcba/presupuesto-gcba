@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,800);
 @font-face {
   font-family: "Gotham";
   font-weight: normal;
@@ -893,7 +894,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -5304,13 +5305,6 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-html, body {
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  text-rendering: optimizelegibility;
-  font-family: "Gotham", Helvetica, Arial, sans-serif; }
-
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -5320,15 +5314,13 @@ html {
   -webkit-touch-callout: none;
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 header {
   pointer-events: none;
@@ -5338,7 +5330,8 @@ header {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  z-index: 999; }
+  z-index: 999;
+  font-family: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   header .header-gcba {
     height: 50px;
     padding: 10px 0;
@@ -5372,3 +5365,6 @@ header {
     -webkit-transition: color 0.4s ease-in-out;
     -o-transition: color 0.4s ease-in-out;
     transition: color 0.4s ease-in-out; }
+
+h1 {
+  font-weight: 800; }
