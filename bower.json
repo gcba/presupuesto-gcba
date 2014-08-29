@@ -1,7 +1,6 @@
 {
   "name": "Presupuesto GCBA",
-  "version": "0.0.1cd ..",
-  "main": "css/base.css",
+  "version": "0.0.2",
   "authors": [
     "Davo <davidgalavotti@gmail.com>"
   ],
@@ -15,6 +14,8 @@
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.2.0",
-    "bourbon": "~4.0.2"
+    "bourbon": "~4.0.2",
+    "tooltipster": "~3.2.6",
+    "d3": "~3.4.11"
   }
 }
