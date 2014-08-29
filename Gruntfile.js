@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 files: {
-                    'public/css/style.css': 'public/scss/style.scss'
+                    'css/base.css': 'css/base.scss'
                 }
             }
         },
@@ -17,6 +17,12 @@ module.exports = function (grunt) {
             options: {
                 livereload: true
             }
+        },
+        cssmin: {
+            css:{
+                src: 'css/base.css',
+                dest: 'css/base.min.css'
+            }
         }
 
     });
@@ -25,7 +31,7 @@ module.exports = function (grunt) {
     //Register modules to user    
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     //Register tasks
     grunt.registerTask('default', ['watch']);
