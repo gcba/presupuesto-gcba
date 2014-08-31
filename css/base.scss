@@ -2,8 +2,7 @@
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 
 @include font-face('Gotham', 'fonts/gotham');
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,800);
-
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:400,800);
 
 /* ########
    Colores
@@ -18,7 +17,8 @@ $white: #FFF;
    Fuentes
    ######## */
 
-$fontset-default: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-default: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-open: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 
@@ -48,7 +48,8 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: $fontset-default;
+    font-family: $fontset-open;
+    background-color: #FCF9EB;
 }
 
 header{
@@ -66,8 +67,8 @@ header{
         height:50px;
         padding:10px 0;
         overflow:visible;
-        background-color: #FFCB05;
-        @include transition (background-color 0.4s ease-in-out);
+        background-color: transparent;
+        // @include transition (background-color 0.4s ease-in-out);
     }
 
     .header-inner {
@@ -89,108 +90,42 @@ header{
         font-size: 0.85em;
         font-size:12px;
         letter-spacing:-1px;
-        color: $black;
+        color: #4F2F0C;
         text-transform: uppercase;
         min-width: 150px;
         @include transition (color 0.4s ease-in-out);
     }
-
 }
 
-h1 {
-    font-weight: 800;
+.navbar {
+    margin-bottom: 0;
 }
 
-h2 {
-
+.navbar-static-top {
+    border-width: 0;
 }
 
-// header {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     background: none repeat scroll 0 0 #ffd300;
-//     height: 59px;
-//     line-height: 59px;    
-// }
+.jumbotron {
+    background-color: transparent;
+    text-align: center;
+    h1 {
+        font-size: 4.5rem;
+        font-family: $fontset-default;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    h2 {
+        font-size: 1.2em;
+        font-weight: 400;
+        width: 70%;
+        margin: 0 auto;
+    }
+    .lead {
+        font-size: 1em;
+        width: 65%;
+        margin: 0 auto;
+        padding-top: 16px;
+    }
+}
 
-// header .logo {
-//     float: left;
-//     width: 172px;
-//     height: 34px;
-//     background: url("img/logo-normal.png") no-repeat center center;
-//     position: relative;
-//     top: 12px;
 
-// }
-
-// header .slogan {
-//     float: right;
-//     font-weight: bold;
-//     font-size: 11px;
-//     letter-spacing: -1px;
-//     color: #000;
-//     text-transform: uppercase;
-// }
-
-// footer {
-//     color: #FFF;
-//     position: fixed;
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 40px;
-//     line-height: 40px;    
-
-//     background-color: #333333;
-//     font-size: 12px;
-// }
-
-// footer .ministerio {
-//     float: left;
-// }
-
-// footer .transparencia {
-//     float: right;
-// }
-
-// h1 {
-//     font-size: 1em
-// }
-
-// h2{
-//     font-weight: normal;
-//     font-size: 0.8em;
-// }
-
-// hr{
-//     border: 0px;
-//     height: 1px;
-//     background: #CCCCCC;
-// }
-
-// #grafico{
-//     margin: 0 auto;
-//     width: 950px;
-// }
-
-// #cuerpo{
-//     padding-top: 75px;
-//     padding-bottom: 75px;
-//     width: 950px;
-//     margin: 0 auto; 
-// }
-
-// .texto {
-//     font-family: Helvetica, Arial, sans-serif;
-//     font-size: 0.7em;
-// }
-// .container {
-//     width: 950px;
-//     height: 100%;
-//     position:absolute;
-//     left: 0;
-//     right: 0;
-//     margin: 0 auto; 
-// }
