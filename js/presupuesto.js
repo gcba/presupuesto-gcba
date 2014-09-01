@@ -19,18 +19,20 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       tooltip = CustomTooltip("gates_tooltip", 300),
       gravedad = -0.01,
       friction = 0.9,
-      damper = 0.45,
+      damper = 0.5,
       nodes = [],
-      radioMaximo = 50,
+      radioMinimo = 2,
+      radioMaximo = 120,
       vis, force, circles, radius_scale;
  
   var center = {x: width / 2, y: height / 2};
  
   var centroides_finalidad = {
+
       "3": {x: width / 6, y: height / 3},
-      "1": {x: 2 * width / 6, y: height / 3},
-      "2": {x: 3 * width / 6, y: height / 3},
-      "4": {x: 4 * width / 6, y: height / 3},
+      "4": {x: 2 * width / 6, y: height / 3},
+      "1": {x: 3 * width / 6, y: height / 3},
+      "2": {x: 4 * width / 6, y: height / 3},
       "5": {x: 5 * width / 6, y: height / 3}
     };
   
@@ -74,8 +76,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function custom_chart(data) {
     var max_amount = d3.max(data, function(d) { return parseInt(d.monto, 10); } ),
-      //radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([1.5, radioMaximo]);
-      radius_scale = d3.scale.linear().domain([0, max_amount]).range([5, radioMaximo]);
+	    radius_scale = d3.scale.linear().domain([0, max_amount]).range([radioMinimo, radioMaximo]);
  
     //create node objects from original data
     //that will serve as the data behind each
@@ -92,8 +93,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
         id_finalidad: d.id_finalidad,
         funcion: d.funcion,
         id_funcion: d.id_funcion,
-        x: Math.random() * 1200,
-        y: Math.random() * 800
+        x: Math.random() * width,
+        y: Math.random() * height,
       };
       nodes.push(node);
       
@@ -101,6 +102,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     });
 
     nodes.sort(function(a, b) {return b.monto - a.monto; });
+
+    // var maxFinalidad = d3.max(data, function(d) { return d.y; }
  	  
     // console.log(nodes);
 
@@ -156,7 +159,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
          });
     // console.log(force);
     force.start();
-    hide_years();
+    borrarReferencias();
   }
  
   function moverAlCentro(alpha) {
@@ -177,6 +180,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                  .attr("cy", function(d) {return d.y;});
         });
     force.start();
+    borrarReferencias();
   }
 
   function ordenJurisdiccion(alpha) {
@@ -212,11 +216,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function titulosFinalidad() {
       var finalidadId = {
-                      "Adm. Gubernamental": (width-100)/5 * 1  ,
-                      "Deuda Pública - Intereses y Gastos": (width-100)/5 * 2,
-                      "Servicios de Seguridad": (width-100)/5 * 3,
-                      "Servicios Económicos": (width-100)/5 * 4,
-                      "Servicios Sociales": (width-100)/5 * 5
+                      "Servicios Sociales": (width-100)/5 * 1,
+                      "Servicios Económicos": (width-100)/5 * 2,
+                      "Adm. Gubernamental": (width-100)/5 * 3  ,
+                      "Servicios de Seguridad": (width-100)/5 * 4,
+                      "Deuda Pública - Intereses y Gastos": (width-100)/5 * 5
+                      
+                      
                     };
 
       var finalidadKeys = d3.keys(finalidadId);
@@ -227,14 +233,17 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                    .attr("class", "finalidad")
                    .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
+                   .attr("dy", "1em")
+                   .attr("text-wrap", "normal")
                    .attr("text-anchor", "middle")
-                   .text(function(d) { return d;});
+                   .text(function(d) { return d;})
+                   // .call(wrap, function(d) { return finalidadId[d]; })
   }
 
 
 
  
-  function hide_years() {
+  function borrarReferencias() {
       var finalidad = vis.selectAll(".finalidad").remove();
   }
  
@@ -285,6 +294,32 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
   return presupuesto;
 })(d3,CustomTooltip);
+
+function wrap(text, width) {
+
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
 
 d3.csv("/data/presupuesto.csv", function(data) {
         custom_bubble_chart.init(data);
