@@ -106,16 +106,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                 .attr("viewBox", "0 0 1200 800")
                 .attr("id", "svg_vis");
 
-  // agrego bounding box
-    vis.append("svg:rect")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .attr("viewBox", "0 0 1200 800")
-      .style("opacity", "0.2");
-
-
-
- 
     circles = vis.selectAll("circle")
       .data(nodes)
       .enter()
