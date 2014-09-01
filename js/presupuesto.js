@@ -43,7 +43,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "8": {x: 8 * width / 9, y: height / 2},
       "9": {x: width, y: height / 2}
 
-
     };
  
   var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad","Servicios Económicos","Servicios Sociales"];
@@ -83,7 +82,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
     vis = d3.select("#grafico").append("svg")
                 .attr("width", width)
-                .attr("height", height)
+                // .attr("height", height)
                 .attr("id", "svg_vis");
  
     circles = vis.selectAll("circle")
@@ -95,10 +94,10 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       .attr("stroke-width", 1)
       .attr("stroke", function(d) {return d3.rgb(fill_color(d.finalidad)).darker();})
       .attr("id", function(d) { return  "bubble_" + d.id; })
-      .on("mouseover", function(d, i) {show_details(d, i, this);} )
-      .on("mouseout", function(d, i) {hide_details(d, i, this);} );
+      // .on("mouseover", function(d, i) {show_details(d, i, this);} )
+      // .on("mouseout", function(d, i) {hide_details(d, i, this);} );
  
-    circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
+    circles.transition().duration(2500).attr("r", function(d) { return d.radius; });
 
 
  
@@ -121,8 +120,10 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
 
   }
- 
-  function display_group_all() {
+  
+
+
+  function mostrarGrupoCompleto() {
     // console.log('Inicio force.');
     force.gravity(gravedad)
          .charge(charge)
@@ -150,15 +151,15 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
          .charge(charge)
          .friction(0.9)
         .on("tick", function(e) {
-          circles.each(move_towards_year(e.alpha))
+          circles.each(ordenFinalidad(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
         });
     force.start();
-    display_years();
+    titulosFinalidad();
   }
  
-  function move_towards_year(alpha) {
+  function ordenFinalidad(alpha) {
     return function(d) {
       var target = centroides_finalidad[d.id_finalidad];
       d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
@@ -167,13 +168,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   }
  
  
-  function display_years() {
-      var years_x = {
-                      "1": width/6 - 80,
-                      "2": width/6+120,
-                      "3": width/6+380,
-                      "4": width/6+(120*4),
-                      "5": width/6+(120*5)
+  function titulosFinalidad() {
+      var finalidadId = {
+                      "1": width/8,
+                      "2": width,
+                      "3": width,
+                      "4": width,
+                      "5": width
                     };
 
                     // "1": {x: width / 6, y: height / 2},
@@ -181,13 +182,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                     // "3": {x: 3 * width / 6, y: height / 2},
                     // "4": {x: 4 * width / 6, y: height / 2},
                     // "5": {x: 5 * width / 6, y: height / 2}
-      var years_data = d3.keys(years_x);
-      var years = vis.selectAll(".years")
-                 .data(years_data);
+      var finalidadKeys = d3.keys(finalidadId);
+      var finalidad = vis.selectAll(".finalidad")
+                 .data(finalidadKeys);
  
-      years.enter().append("text")
-                   .attr("class", "years")
-                   .attr("x", function(d) { return years_x[d]; }  )
+      finalidad.enter().append("text")
+                   .attr("class", "finalidad")
+                   .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
                    .attr("text-anchor", "middle")
                    .text(function(d) { return d;});
@@ -195,7 +196,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   }
  
   function hide_years() {
-      var years = vis.selectAll(".years").remove();
+      var finalidad = vis.selectAll(".finalidad").remove();
   }
  
  
@@ -224,23 +225,24 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     tooltip.hideTooltip();
   }
  
-  var my_mod = {};
-  my_mod.init = function (_data) {
+  var presupuesto = {};
+  presupuesto.init = function (_data) {
     custom_chart(_data);
     start();
   };
  
-  my_mod.display_all = display_group_all;
-  my_mod.display_year = ver_finalidad;
-  my_mod.toggle_view = function(view_type) {
+  presupuesto.display_all = mostrarGrupoCompleto;
+  presupuesto.display_year = ver_finalidad;
+
+  presupuesto.toggle_view = function(view_type) {
     if (view_type == 'year') {
       ver_finalidad();
     } else {
-      display_group_all();
+      mostrarGrupoCompleto();
       }
     };
  
-  return my_mod;
+  return presupuesto;
 })(d3);
 
 d3.csv("/data/presupuesto.csv", function(data) {
@@ -257,5 +259,10 @@ $(document).ready(function() {
     	custom_bubble_chart.toggle_view(view_type);
     return false;
   });
-  console.log('Inicio visualizacion.');
+
+  $('#my-tooltip').tooltipster({
+    contentAsHTML: true,
+    theme: 'tooltipster-light',
+    content: $('<span><strong>This text is in bold case !</strong><br>Explorá la distribución del presupuesto de la Ciudad Autónoma de Buenos Aires para 2014.</span>')
+  });
 });
