@@ -223,11 +223,11 @@ function tick(e) {
  
   function titulosFinalidad() {
       var finalidadId = {
-                      "AdmInistración Gubernamental": width/8,
-                      "2": width,
-                      "3": width,
-                      "4": width,
-                      "5": width
+                      "Administración Gubernamental": width/8,
+                      "Deuda Pública - Intereses y Gastos": width/6,
+                      "Servicios de Seguridad": width/4,
+                      "Servicios Económicos": width/2,
+                      "Servicios Sociales": width/1
                     };
 
                     // "1": {x: width / 6, y: height / 2},
@@ -243,9 +243,10 @@ function tick(e) {
                    .attr("class", "finalidad")
                    .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
+                   .attr("dy", "1em")
                    .attr("text-anchor", "middle")
-                   .text(function(d) { return d;});
- 
+                   .text(function(d) { return d;}).call(wrap, function(d) { return finalidadId[d]; });
+
   }
  
   function hide_years() {
@@ -299,6 +300,32 @@ function tick(e) {
 
   return presupuesto;
 })(d3,CustomTooltip);
+
+function wrap(text, width) {
+
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
 
 d3.csv("/data/presupuesto.csv", function(data) {
         custom_bubble_chart.init(data);
