@@ -8,9 +8,9 @@
 
 
 // Vars de inicializacion
-var w = 970, // ancho del gr·fico
-    h = 350, // largo del gr·fico
-    cant = 5, // Cant de categorÌas
+var w = 970, // ancho del gr√°fico
+    h = 350, // largo del gr√°fico
+    cant = 5, // Cant de categor√≠as
     rangoDeColores = ["#961C41","#BFBA80","#488460","#14183D", "#3A0016"];
 
 var nodes = d3.range(cant).map(function(i) {
