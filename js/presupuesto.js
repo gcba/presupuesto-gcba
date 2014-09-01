@@ -21,8 +21,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       friction = 0.9,
       damper = 0.5,
       nodes = [],
-      radioMinimo = 2,
-      radioMaximo = 120,
+      radioMinimo = 10,
+      radioMaximo = 70,
       vis, force, circles, radius_scale;
  
   var center = {x: width / 2, y: height / 2};
@@ -45,23 +45,23 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "2":  {x: 2 * (width - correccion) / columnas, y: (height / filas) * 1 },
       "20": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 1 },
       "21": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "26": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 1 },
+      "26": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 2 },
       "28": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 2 },
       "3":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 2 },
       "30": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 2 },
-      "35": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 2 },
+      "35": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 3 },
       "40": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 3 },
       "45": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 3 },
       "5":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 3 },
-      "50": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 3 },
+      "50": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 4 },
       "55": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 4 },
       "6":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 4 },
       "60": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 4 },
-      "65": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 4 },
+      "65": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 5 },
       "68": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 5 },
       "7":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 5 },
       "8":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 5 },
-      "9":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 5 },
+      "9":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 6 },
       "90": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 6 },
       "98": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 6 },
       "99": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 6 }
@@ -135,12 +135,14 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     if (d.value < 0) {
       return 0
     } else {
-      return -Math.pow(d.radius,2.4)/7 
+//      return -Math.pow(d.radius,2.4)/7 
+//      return -Math.pow(d.radius,1.9)
+      return -(d.radius * (d.radius) / 1.2)
     };
   }
  
   function start() {
-    console.log('Inicio todo.');
+    //console.log('Inicio todo.');
 
     force = d3.layout.force()
             .nodes(nodes)
@@ -221,8 +223,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                       "Adm. Gubernamental": (width-100)/5 * 3  ,
                       "Servicios de Seguridad": (width-100)/5 * 4,
                       "Deuda Pública - Intereses y Gastos": (width-100)/5 * 5
-                      
-                      
                     };
 
       var finalidadKeys = d3.keys(finalidadId);
