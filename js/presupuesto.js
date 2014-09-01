@@ -26,9 +26,9 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   var center = {x: width / 2, y: height / 2};
  
   var centroides_finalidad = {
-      "1": {x: width / 6, y: height / 2},
-      "2": {x: 2 * width / 6, y: height / 2},
-      "3": {x: 3 * width / 6, y: height / 2},
+      "3": {x: width / 6, y: height / 2},
+      "1": {x: 2 * width / 6, y: height / 2},
+      "2": {x: 3 * width / 6, y: height / 2},
       "4": {x: 4 * width / 6, y: height / 2},
       "5": {x: 5 * width / 6, y: height / 2}
     };
@@ -297,9 +297,5 @@ $(document).ready(function() {
     return false;
   });
 
-  $('#my-tooltip').tooltipster({
-    contentAsHTML: true,
-    theme: 'tooltipster-light',
-    content: $('<span><strong>This text is in bold case !</strong><br>Explorá la distribución del presupuesto de la Ciudad Autónoma de Buenos Aires para 2014.</span>')
-  });
+
 });
