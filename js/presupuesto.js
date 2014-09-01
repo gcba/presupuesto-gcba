@@ -26,9 +26,9 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   var center = {x: width / 2, y: height / 2};
  
   var centroides_finalidad = {
-      "1": {x: width / 6, y: height / 2},
-      "2": {x: 2 * width / 6, y: height / 2},
-      "3": {x: 3 * width / 6, y: height / 2},
+      "3": {x: width / 6, y: height / 2},
+      "1": {x: 2 * width / 6, y: height / 2},
+      "2": {x: 3 * width / 6, y: height / 2},
       "4": {x: 4 * width / 6, y: height / 2},
       "5": {x: 5 * width / 6, y: height / 2}
     };
@@ -58,7 +58,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "90": {x: 4 * width / 6, y: height / 10},
       "98": {x: 5 * width / 6, y: height / 10},
       "99": {x: width / 2, y: height}
-
     };
  
   var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad","Servicios Económicos","Servicios Sociales"];
@@ -100,8 +99,21 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
     vis = d3.select("#grafico").append("svg")
                 .attr("width", width)
-                // .attr("height", height)
+                .attr("height", height)
+                //.attr("shape-rendering","optimizeSpeed")
+                //.attr("color-rendering","optimizeSpeed")
+                .attr("viewBox", "0 0 1200 800")
                 .attr("id", "svg_vis");
+
+  // agrego bounding box
+    vis.append("svg:rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 1200 800")
+      .style("opacity", "0.2");
+
+
+
  
     circles = vis.selectAll("circle")
       .data(nodes)
@@ -116,10 +128,12 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       .on("mouseout", function(d, i) {hide_details(d, i, this);} );
  
     circles.transition().duration(1500).attr("r", function(d) { return d.radius; });
-
-
  
   }
+// aplica force a los nodos y al bounding box
+function tick(e) {
+  console.log("12313");
+}
  
   function charge(d) {
     if (d.value < 0) {
@@ -135,7 +149,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force = d3.layout.force()
             .nodes(nodes)
             .size([width, height]);
-
 
   }
   
@@ -197,6 +210,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force.start();
     titulosFinalidad();
   }
+
  
   function ordenFinalidad(alpha) {
     return function(d) {
@@ -300,10 +314,4 @@ $(document).ready(function() {
     	custom_bubble_chart.cambiarVista(ver_tipo);
     return false;
   });
-
-  // $('#my-tooltip').tooltipster({
-  //   contentAsHTML: true,
-  //   theme: 'tooltipster-light',
-  //   content: $('<span><strong>This text is in bold case !</strong><br>Explorá la distribución del presupuesto de la Ciudad Autónoma de Buenos Aires para 2014.</span>')
-  // });
 });
