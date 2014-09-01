@@ -18,6 +18,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       height = 800,
       // tooltip = CustomTooltip("gates_tooltip", 240),
       gravedad = -0.01,
+      friction = 0.9,
       damper = 0.45,
       nodes = [],
       vis, force, circles, radius_scale;
@@ -33,16 +34,27 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     };
   
   var centroides_funcion = {
-      "1": {x: width / 9, y: height / 2},
-      "2": {x: 2 * width / 9, y: height / 2},
-      "3": {x: 3 * width / 9, y: height / 2},
-      "4": {x: 4 * width / 9, y: height / 2},
-      "5": {x: 5 * width / 9, y: height / 2},
-      "6": {x: 6 * width / 9, y: height / 2},
-      "7": {x: 7 * width / 9, y: height / 2},
-      "8": {x: 8 * width / 9, y: height / 2},
-      "9": {x: width, y: height / 2}
-
+      "1": {x: width / 6, y: height/4},
+      "2": {x: 2 * width / 6, y: height/4},
+      "3": {x: 3 * width / 6, y: height/4},
+      "4": {x: 4 * width / 6, y: height/4},
+      "5": {x: 5 * width / 6, y: height/4},
+      "6": {x: width / 6, y: height/7},
+      "7": {x: 2 * width / 6, y: height / 7},
+      "8": {x: 3 * width / 6, y: height / 7},
+      "9": {x: 4 * width / 6, y: height / 7},
+      "10": {x: 5 * width / 6, y: height / 7},
+      "11": {x: width / 6, y: height / 8},
+      "12": {x: 2 * width / 6, y: height / 8},
+      "13": {x: 3 * width / 6, y: height / 8},
+      "14": {x: 4 * width / 6, y: height / 8},
+      "15": {x: 5 * width / 6, y: height / 8},
+      "16": {x: width / 6, y: height / 10},
+      "17": {x: 2 * width / 6, y: height / 10},
+      "18": {x: 3 * width / 6, y: height / 10},
+      "19": {x: 4 * width / 6, y: height / 10},
+      "20": {x: 5 * width / 6, y: height / 10},
+      "21": {x: width / 2, y: height}
 
     };
  
@@ -62,13 +74,14 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     //to nodes to be used later
     data.forEach(function(d){
       var node = {
-        id: d.id,
+        id: d.id_funcion,
         radius: radius_scale(parseInt(d.monto, 10)),
         monto: d.monto,
         jurisdiccion: d.jurisdiccion,
         finalidad: d.finalidad,
         id_finalidad: d.id_finalidad,
         funcion: d.funcion,
+        id_funcion: d.id_funcion,
         x: Math.random() * 1200,
         y: Math.random() * 800
       };
@@ -83,7 +96,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
     vis = d3.select("#grafico").append("svg")
                 .attr("width", width)
-                .attr("height", height)
+                // .attr("height", height)
                 .attr("id", "svg_vis");
  
     circles = vis.selectAll("circle")
@@ -92,13 +105,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       .append("circle")
       .attr("r", 0)
       .attr("fill", function(d) { return fill_color(d.finalidad) ;})
-      .attr("stroke-width", 1)
+      .attr("stroke-width", 1.5)
       .attr("stroke", function(d) {return d3.rgb(fill_color(d.finalidad)).darker();})
       .attr("id", function(d) { return  "bubble_" + d.id; })
-      .on("mouseover", function(d, i) {show_details(d, i, this);} )
-      .on("mouseout", function(d, i) {hide_details(d, i, this);} );
+      // .on("mouseover", function(d, i) {show_details(d, i, this);} )
+      // .on("mouseout", function(d, i) {hide_details(d, i, this);} );
  
-    circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
+    circles.transition().duration(1500).attr("r", function(d) { return d.radius; });
 
 
  
@@ -121,12 +134,14 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
 
   }
- 
-  function display_group_all() {
+  
+
+
+  function mostrarGrupoCompleto() {
     // console.log('Inicio force.');
     force.gravity(gravedad)
          .charge(charge)
-         .friction(0.9)
+         .friction(friction)
          .on("tick", function(e) {
             circles.each(moverAlCentro(e.alpha))
                    .attr("cx", function(d) {return d.x;})
@@ -144,21 +159,42 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
     };
   }
- 
-  function ver_finalidad() {
+
+  function mostrarFuncion() {
+    // console.log('Hermione!');
     force.gravity(gravedad)
          .charge(charge)
-         .friction(0.9)
+         .friction(friction)
         .on("tick", function(e) {
-          circles.each(move_towards_year(e.alpha))
+          circles.each(ordenFuncion(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
         });
     force.start();
-    display_years();
+  }
+
+  function ordenFuncion(alpha) {
+    return function(d) {
+      var target = centroides_funcion[d.id_funcion];
+      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
+      d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
+    };
   }
  
-  function move_towards_year(alpha) {
+  function mostrarFinalidad() {
+    force.gravity(gravedad)
+         .charge(charge)
+         .friction(0.9)
+        .on("tick", function(e) {
+          circles.each(ordenFinalidad(e.alpha))
+                 .attr("cx", function(d) {return d.x;})
+                 .attr("cy", function(d) {return d.y;});
+        });
+    force.start();
+    titulosFinalidad();
+  }
+ 
+  function ordenFinalidad(alpha) {
     return function(d) {
       var target = centroides_finalidad[d.id_finalidad];
       d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
@@ -167,13 +203,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   }
  
  
-  function display_years() {
-      var years_x = {
-                      "1": width/6 - 80,
-                      "2": width/6+120,
-                      "3": width/6+380,
-                      "4": width/6+(120*4),
-                      "5": width/6+(120*5)
+  function titulosFinalidad() {
+      var finalidadId = {
+                      "1": width/8,
+                      "2": width,
+                      "3": width,
+                      "4": width,
+                      "5": width
                     };
 
                     // "1": {x: width / 6, y: height / 2},
@@ -181,13 +217,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                     // "3": {x: 3 * width / 6, y: height / 2},
                     // "4": {x: 4 * width / 6, y: height / 2},
                     // "5": {x: 5 * width / 6, y: height / 2}
-      var years_data = d3.keys(years_x);
-      var years = vis.selectAll(".years")
-                 .data(years_data);
+      var finalidadKeys = d3.keys(finalidadId);
+      var finalidad = vis.selectAll(".finalidad")
+                 .data(finalidadKeys);
  
-      years.enter().append("text")
-                   .attr("class", "years")
-                   .attr("x", function(d) { return years_x[d]; }  )
+      finalidad.enter().append("text")
+                   .attr("class", "finalidad")
+                   .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
                    .attr("text-anchor", "middle")
                    .text(function(d) { return d;});
@@ -195,7 +231,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   }
  
   function hide_years() {
-      var years = vis.selectAll(".years").remove();
+      var finalidad = vis.selectAll(".finalidad").remove();
   }
  
  
@@ -224,38 +260,46 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     tooltip.hideTooltip();
   }
  
-  var my_mod = {};
-  my_mod.init = function (_data) {
+  var presupuesto = {};
+  presupuesto.init = function (_data) {
     custom_chart(_data);
     start();
   };
  
-  my_mod.display_all = display_group_all;
-  my_mod.display_year = ver_finalidad;
-  my_mod.toggle_view = function(view_type) {
-    if (view_type == 'year') {
-      ver_finalidad();
+  presupuesto.display_all = mostrarGrupoCompleto;
+  presupuesto.display_year = mostrarFinalidad;
+
+  presupuesto.cambiarVista = function(ver_tipo) {
+    if (ver_tipo == 'finalidad') {
+      mostrarFinalidad();
+    } else if (ver_tipo == 'funcion'){
+      mostrarFuncion();
     } else {
-      display_group_all();
-      }
-    };
- 
-  return my_mod;
+      mostrarGrupoCompleto();
+    }
+  };
+
+  return presupuesto;
 })(d3);
 
 d3.csv("/data/presupuesto.csv", function(data) {
         custom_bubble_chart.init(data);
-        custom_bubble_chart.toggle_view('all');
+        custom_bubble_chart.cambiarVista('todo');
     });
 
 
 $(document).ready(function() {
   $('#view_selection a').click(function() {
-    var view_type = $(this).attr('id');
+    var ver_tipo = $(this).attr('id');
     $('#view_selection a').removeClass('active');
     $(this).toggleClass('active');
-    	custom_bubble_chart.toggle_view(view_type);
+    	custom_bubble_chart.cambiarVista(ver_tipo);
     return false;
   });
-  console.log('Inicio visualizacion.');
+
+  $('#my-tooltip').tooltipster({
+    contentAsHTML: true,
+    theme: 'tooltipster-light',
+    content: $('<span><strong>This text is in bold case !</strong><br>Explorá la distribución del presupuesto de la Ciudad Autónoma de Buenos Aires para 2014.</span>')
+  });
 });
