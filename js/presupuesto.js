@@ -24,7 +24,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
     });
 
     console.log(finalidad ,  totalesFinalidad);
-//    console.log(jurisdiccion ,  totalesJurisdiccion);
+    console.log(jurisdiccion ,  totalesJurisdiccion);
 
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
@@ -289,9 +289,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .text(function(d) { return d;})
                     .attr("dy", ".5em")
                     .attr("x", function(d) { return finalidadId[d]; }  )
-                    // .call(wrap, 100)
+                    .call(wrap, 100)
                     .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle")
+                    .attr("text-anchor", "middle");
                     
                     
 
@@ -303,7 +303,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("dy", "1em")
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(montos(8240909523));
+                    .text(montosLiterales(8240909523));
         }
 
 
@@ -370,10 +370,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 word,
                 line = [],
                 lineNumber = 0,
-                lineHeight = 1.1, // ems
+                lineHeight = .8, // ems
                 y = text.attr("y"),
                 dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                tspan = text.text(null).append("tspan").attr("y", y).attr("dy", dy + "em"); // ver pos X
             while (word = words.pop()) {
                 line.push(word);
                 tspan.text(line.join(" "));
@@ -381,7 +381,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     line.pop();
                     tspan.text(line.join(" "));
                     line = [word];
-                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    tspan = text.append("tspan").attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
                 }
             }
         });
