@@ -33,7 +33,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "5": {x: 5 * width / 6, y: height / 2}
     };
   
-  var centroides_funcion = {
+  var centroides_jurisdiccion = {
       "1": {x: width / 6, y: height/4},
       "2": {x: 2 * width / 6, y: height/4},
       "3": {x: 3 * width / 6, y: height/4},
@@ -54,7 +54,10 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       "18": {x: 3 * width / 6, y: height / 10},
       "19": {x: 4 * width / 6, y: height / 10},
       "20": {x: 5 * width / 6, y: height / 10},
-      "21": {x: width / 2, y: height}
+      "21": {x: 5 * width / 6, y: height / 10},
+      "22": {x: 5 * width / 6, y: height / 10},
+      "23": {x: 5 * width / 6, y: height / 10},
+      "24": {x: width / 2, y: height}
 
     };
  
@@ -74,10 +77,11 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     //to nodes to be used later
     data.forEach(function(d){
       var node = {
-        id: d.id_funcion,
+        id: d.id_jurisdiccion,
         radius: radius_scale(parseInt(d.monto, 10)),
         monto: d.monto,
         jurisdiccion: d.jurisdiccion,
+        id_jurisdiccion: d.id_jurisdiccion,
         finalidad: d.finalidad,
         id_finalidad: d.id_finalidad,
         funcion: d.funcion,
@@ -96,8 +100,21 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
     vis = d3.select("#grafico").append("svg")
                 .attr("width", width)
-                // .attr("height", height)
+                .attr("height", height)
+                //.attr("shape-rendering","optimizeSpeed")
+                //.attr("color-rendering","optimizeSpeed")
+                .attr("viewBox", "0 0 1200 800")
                 .attr("id", "svg_vis");
+
+  // agrego bounding box
+    vis.append("svg:rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 1200 800")
+      .style("opacity", "0.2");
+
+
+
  
     circles = vis.selectAll("circle")
       .data(nodes)
@@ -112,10 +129,12 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       // .on("mouseout", function(d, i) {hide_details(d, i, this);} );
  
     circles.transition().duration(1500).attr("r", function(d) { return d.radius; });
-
-
  
   }
+// aplica force a los nodos y al bounding box
+function tick(e) {
+  console.log("12313");
+}
  
   function charge(d) {
     if (d.value < 0) {
@@ -131,7 +150,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force = d3.layout.force()
             .nodes(nodes)
             .size([width, height]);
-
 
   }
   
@@ -160,22 +178,23 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     };
   }
 
-  function mostrarFuncion() {
+  function mostrarJurisdiccion() {
     // console.log('Hermione!');
     force.gravity(gravedad)
          .charge(charge)
          .friction(friction)
         .on("tick", function(e) {
-          circles.each(ordenFuncion(e.alpha))
+          circles.each(ordenJurisdiccion(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
         });
     force.start();
   }
 
-  function ordenFuncion(alpha) {
+  function ordenJurisdiccion(alpha) {
     return function(d) {
-      var target = centroides_funcion[d.id_funcion];
+      console.log(d.id_jurisdiccion);
+      var target = centroides_jurisdiccion[d.id_jurisdiccion];
       d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
       d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
     };
@@ -193,6 +212,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force.start();
     titulosFinalidad();
   }
+
  
   function ordenFinalidad(alpha) {
     return function(d) {
@@ -272,8 +292,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   presupuesto.cambiarVista = function(ver_tipo) {
     if (ver_tipo == 'finalidad') {
       mostrarFinalidad();
-    } else if (ver_tipo == 'funcion'){
-      mostrarFuncion();
+    } else if (ver_tipo == 'jurisdiccion'){
+      mostrarJurisdiccion();
     } else {
       mostrarGrupoCompleto();
     }
