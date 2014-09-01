@@ -1,30 +1,30 @@
 ﻿id_jurisdiccion,jurisdiccion,id_finalidad,finalidad,id_funcion,funcion,monto,porcentaje
-1,Legislatura de La Ciudad de Buenos Aires,1,AdmInistración Gubernamental,1,Legislativa,1056800000,95.558
-99,Obligaciones A Cargo Del Tesoro,1,AdmInistración Gubernamental,1,Legislativa,49128569,4.442
-5,Ministerio Publico,1,AdmInistración Gubernamental,2,Judicial,1046211361,35.54
-6,Tribunal Superior de Justicia,1,AdmInistración Gubernamental,2,Judicial,125198258,4.253
-7,Consejo de La Magistratura,1,AdmInistración Gubernamental,2,Judicial,1200823213,40.792
-26,Ministerio de Justicia Y Seguridad,1,AdmInistración Gubernamental,2,Judicial,316979173,10.768
-28,Ministerio de Gobierno,1,AdmInistración Gubernamental,2,Judicial,91385363,3.104
-99,Obligaciones A Cargo Del Tesoro,1,AdmInistración Gubernamental,2,Judicial,163197204,5.544
-9,Procuracion General de La Ciudad,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,283319182,12.937
-20,Jefatura de Gobierno,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,270009545,12.33
-21,Jefatura de Gabinete de Ministros,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,123041594,5.619
-28,Ministerio de Gobierno,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,116638028,5.326
-60,Ministerio de Hacienda,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,70739169,3.23
-65,Ministerio de Desarrollo Economico,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,156842465,7.162
-68,Ministerio de Modernización,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,491600033,22.448
-90,Secretaria de Gestion Comunal Y Atención Ciudadana,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,424945918,19.405
-99,Obligaciones A Cargo Del Tesoro,1,AdmInistración Gubernamental,3,Dirección Ejecutiva,252777228,11.543
-21,Jefatura de Gabinete de Ministros,1,AdmInistración Gubernamental,4,Relaciones Interiores,32585070,100
-60,Ministerio de Hacienda,1,AdmInistración Gubernamental,5,Administración Fiscal,1172453247,93.162
-99,Obligaciones A Cargo Del Tesoro,1,AdmInistración Gubernamental,5,Administración Fiscal,86053380,6.838
-2,Auditoria General de La Ciudad de Buenos Aires,1,AdmInistración Gubernamental,6,Control de Gestión,228110755,32.12
-3,Defensoria Del Pueblo,1,AdmInistración Gubernamental,6,Control de Gestión,255500000,35.977
-8,Sindicatura General de La Ciudad de Buenos Aires,1,AdmInistración Gubernamental,6,Control de Gestión,51570086,7.262
-20,Jefatura de Gobierno,1,AdmInistración Gubernamental,6,Control de Gestión,130024366,18.309
-21,Jefatura de Gabinete de Ministros,1,AdmInistración Gubernamental,6,Control de Gestión,5259520,0.741
-99,Obligaciones A Cargo Del Tesoro,1,AdmInistración Gubernamental,6,Control de Gestión,39716796,5.592
+1,Legislatura de La Ciudad de Buenos Aires,1,Administración Gubernamental,1,Legislativa,1056800000,95.558
+99,Obligaciones A Cargo Del Tesoro,1,Administración Gubernamental,1,Legislativa,49128569,4.442
+5,Ministerio Publico,1,Administración Gubernamental,2,Judicial,1046211361,35.54
+6,Tribunal Superior de Justicia,1,Administración Gubernamental,2,Judicial,125198258,4.253
+7,Consejo de La Magistratura,1,Administración Gubernamental,2,Judicial,1200823213,40.792
+26,Ministerio de Justicia Y Seguridad,1,Administración Gubernamental,2,Judicial,316979173,10.768
+28,Ministerio de Gobierno,1,Administración Gubernamental,2,Judicial,91385363,3.104
+99,Obligaciones A Cargo Del Tesoro,1,Administración Gubernamental,2,Judicial,163197204,5.544
+9,Procuracion General de La Ciudad,1,Administración Gubernamental,3,Dirección Ejecutiva,283319182,12.937
+20,Jefatura de Gobierno,1,Administración Gubernamental,3,Dirección Ejecutiva,270009545,12.33
+21,Jefatura de Gabinete de Ministros,1,Administración Gubernamental,3,Dirección Ejecutiva,123041594,5.619
+28,Ministerio de Gobierno,1,Administración Gubernamental,3,Dirección Ejecutiva,116638028,5.326
+60,Ministerio de Hacienda,1,Administración Gubernamental,3,Dirección Ejecutiva,70739169,3.23
+65,Ministerio de Desarrollo Economico,1,Administración Gubernamental,3,Dirección Ejecutiva,156842465,7.162
+68,Ministerio de Modernización,1,Administración Gubernamental,3,Dirección Ejecutiva,491600033,22.448
+90,Secretaria de Gestion Comunal Y Atención Ciudadana,1,Administración Gubernamental,3,Dirección Ejecutiva,424945918,19.405
+99,Obligaciones A Cargo Del Tesoro,1,Administración Gubernamental,3,Dirección Ejecutiva,252777228,11.543
+21,Jefatura de Gabinete de Ministros,1,Administración Gubernamental,4,Relaciones Interiores,32585070,100
+60,Ministerio de Hacienda,1,Administración Gubernamental,5,Administración Fiscal,1172453247,93.162
+99,Obligaciones A Cargo Del Tesoro,1,Administración Gubernamental,5,Administración Fiscal,86053380,6.838
+2,Auditoria General de La Ciudad de Buenos Aires,1,Administración Gubernamental,6,Control de Gestión,228110755,32.12
+3,Defensoria Del Pueblo,1,Administración Gubernamental,6,Control de Gestión,255500000,35.977
+8,Sindicatura General de La Ciudad de Buenos Aires,1,Administración Gubernamental,6,Control de Gestión,51570086,7.262
+20,Jefatura de Gobierno,1,Administración Gubernamental,6,Control de Gestión,130024366,18.309
+21,Jefatura de Gabinete de Ministros,1,Administración Gubernamental,6,Control de Gestión,5259520,0.741
+99,Obligaciones A Cargo Del Tesoro,1,Administración Gubernamental,6,Control de Gestión,39716796,5.592
 98,Servicio de La Deuda Publica,5,Deuda Pública - Intereses y Gastos,7,Deuda Pública - Intereses y Gastos,1396095683,100
 26,Ministerio de Justicia Y Seguridad,2,Servicios de Seguridad,8,Seguridad Interior,2550794675,94.871
 99,Obligaciones A Cargo Del Tesoro,2,Servicios de Seguridad,8,Seguridad Interior,137911108,5.129
