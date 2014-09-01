@@ -18,22 +18,24 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       height = 800,
       tooltip = CustomTooltip("gates_tooltip", 300),
       gravedad = -0.01,
-      friction = 0.9,
-      damper = 0.5,
+      friction = 0.55,
+      damper = 0.45,
       nodes = [],
-      radioMinimo = 2,
+      radioMinimo = 5,
       radioMaximo = 120,
       vis, force, circles, radius_scale;
  
   var center = {x: width / 2, y: height / 2};
+
+  var miles = function(n){return formatNumber(n*1000)};
  
   var centroides_finalidad = {
 
-      "3": {x: width / 6, y: height / 3},
-      "4": {x: 2 * width / 6, y: height / 3},
-      "1": {x: 3 * width / 6, y: height / 3},
-      "2": {x: 4 * width / 6, y: height / 3},
-      "5": {x: 5 * width / 6, y: height / 3}
+      "3": {x: width / 6, y: height / 2},
+      "4": {x: 2 * width / 6, y: height / 2},
+      "1": {x: 3 * width / 6, y: height / 2},
+      "2": {x: 4 * width / 6, y: height / 2},
+      "5": {x: 5 * width / 6, y: height / 2}
     };
   
   var columnas = 4; 
@@ -42,11 +44,11 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
 
   var centroides_jurisdiccion = {
 
-      "1": {x: (width - correccion) / columnas, y: (height / filas) * 1 },
-      "2": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "20": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "21": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "26": {x: (width - correccion) / columnas, y: (height / filas) * 1 },
+      "1": {x: (width - correccion) / columnas, y: (height / filas) * .75 },
+      "2": {x: 2 * (width - correccion) / columnas, y: (height / filas) * .75 },
+      "20": {x: 3 * (width - correccion) / columnas, y: (height / filas) * .75 },
+      "21": {x: 4 * (width - correccion) / columnas, y: (height / filas) * .75 },
+      "26": {x: (width - correccion) / columnas, y: (height / filas) * .75 },
       "28": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 2 },
       "3": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 2 },
       "30": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 2 },
@@ -77,7 +79,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function custom_chart(data) {
     var max_amount = d3.max(data, function(d) { return parseInt(d.monto, 10); } ),
-	    radius_scale = d3.scale.linear().domain([0, max_amount]).range([radioMinimo, radioMaximo]);
+	    radius_scale = d3.scale.pow().exponent(.6).domain([0, max_amount]).range([radioMinimo, radioMaximo]);
  
     //create node objects from original data
     //that will serve as the data behind each
@@ -136,13 +138,11 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     if (d.value < 0) {
       return 0
     } else {
-      return -Math.pow(d.radius,2.4)/7 
+      return -Math.pow(d.radius,2.35)/7
     };
   }
  
   function start() {
-    console.log('Inicio todo.');
-
     force = d3.layout.force()
             .nodes(nodes)
             .size([width, height]);
@@ -166,16 +166,16 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   function moverAlCentro(alpha) {
     // console.log('Muevo objetos al centro.');
     return function(d) {
-      d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha;
-      d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
+      d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha * .75;
+      d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha * .75;
     };
   }
 
   function mostrarJurisdiccion() {
-    force.gravity(gravedad)
-         .charge(charge)
-         .friction(friction)
-        .on("tick", function(e) {
+    force.gravity(0)
+         .charge(1)
+         .friction(0)
+         .on("tick", function(e) {
           circles.each(ordenJurisdiccion(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
@@ -187,16 +187,16 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   function ordenJurisdiccion(alpha) {
     return function(d) {
       var target = centroides_jurisdiccion[d.id_jurisdiccion];
-      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
+      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
       d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
     };
   }
  
   function mostrarFinalidad() {
-    force.gravity(gravedad)
-         .charge(charge)
+    force.gravity(0)
          .friction(0.9)
-        .on("tick", function(e) {
+         .charge(charge)
+         .on("tick", function(e) {
           circles.each(ordenFinalidad(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
@@ -209,8 +209,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   function ordenFinalidad(alpha) {
     return function(d) {
       var target = centroides_finalidad[d.id_finalidad];
-      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
-      d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
+      d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
+      d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
     };
   }
  
@@ -222,23 +222,32 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                       "Adm. Gubernamental": (width-100)/5 * 3  ,
                       "Servicios de Seguridad": (width-100)/5 * 4,
                       "Deuda Pública - Intereses y Gastos": (width-100)/5 * 5
-                      
-                      
                     };
 
       var finalidadKeys = d3.keys(finalidadId);
-      var finalidad = vis.selectAll(".finalidad")
-                 .data(finalidadKeys);
+      var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + 40 + ")").selectAll(".finalidad").data(finalidadKeys);
  
-      finalidad.enter().append("text")
-                   .attr("class", "finalidad")
-                   .attr("x", function(d) { return finalidadId[d]; }  )
-                   .attr("y", 40)
-                   .attr("dy", "1em")
-                   .attr("text-wrap", "normal")
-                   .attr("text-anchor", "middle")
-                   .text(function(d) { return d;})
-                   // .call(wrap, function(d) { return finalidadId[d]; })
+          finalidad.enter()
+            .append("text")
+              .attr("class", "titulo")
+              .text(function(d) { return d;})
+              .attr("dy", ".5em")
+              .attr("x", function(d) { return finalidadId[d]; }  )
+              // .call(wrap, 100)
+              .attr("text-wrap", "normal")
+              .attr("text-anchor", "middle")
+              
+              
+
+          finalidad.enter()
+            .append("text")
+              .attr("class", "total")
+              .attr("x", function(d) { return finalidadId[d]; }  )
+              .attr("y", 90)
+              .attr("dy", "1em")
+              .attr("text-wrap", "normal")
+              .attr("text-anchor", "middle")
+              .text(miles(152000));
   }
 
 
@@ -254,7 +263,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     var content ="<span class=\"name\">Finalidad:</span><span class=\"value\"> " + data.finalidad + "</span><br/>";
     content +="<span class=\"name\">Función:</span><span class=\"value\"> " + data.funcion + "</span><br/>";
     content += "<span class=\"name\">Jurisdicción:</span><span class=\"value\"> " + data.jurisdiccion + "</span><br/>";
-    content +="<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(data.monto)  + "</span>";
+    content +="<span class=\"name\">Monto:</span><span class=\"value\"> $" + data.monto  + "</span>";
     tooltip.showTooltip(content, d3.event);
   }
 
@@ -296,29 +305,87 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   return presupuesto;
 })(d3,CustomTooltip);
 
-function wrap(text, width) {
-
-  text.each(function() {
-    var text = d3.select(this),
-        words = text.text().split(/\s+/).reverse(),
-        word,
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1, // ems
-        y = text.attr("y"),
-        dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-    while (word = words.pop()) {
-      line.push(word);
-      tspan.text(line.join(" "));
-      if (tspan.node().getComputedTextLength() > width) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-      }
+formatNumber = function(n,decimals) {
+    var s, remainder, num, negativePrefix, negativeSuffix, prefix, suffix;
+    suffix = ""
+    negativePrefix = ""
+    negativeSuffix = ""
+    if (n < 0) {
+      negativePrefix = "";
+      negativeSuffix = " in income"
+      n = -n
+    };
+    
+    if (n >= 1000000000) {
+        suffix = " miles de millones"
+        n = n / 1000000000
+        decimals = 0
+    } else if (n >= 1000000) {
+        suffix = " milliones"
+        n = n / 1000000
+        decimals = 0
+    } 
+    
+    
+    prefix = ""
+    if (decimals > 0) {
+        if (n<1) {prefix = "0"};
+        s = String(Math.round(n * (Math.pow(10,decimals))));
+        if (s < 10) {
+            remainder = "0" + s.substr(s.length-(decimals),decimals);
+            num = "";
+        } else{
+            remainder = s.substr(s.length-(decimals),decimals);
+            num = s.substr(0,s.length - decimals);
+        }
+        
+        
+        return  negativePrefix + prefix + num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + "." + remainder + suffix + negativeSuffix;
+    } else {
+        s = String(Math.round(n));
+        s = s.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        return  negativePrefix + s + suffix + negativeSuffix;
     }
-  });
+};
+
+function wrap(text, width) {
+    text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            lines = [],
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy"));
+            gauge_tspan = text.text(null).append("tspan").style('opacity', 0);
+        
+        lines.push(line);
+        while (word = words.pop()) {
+            line.push(word);
+            gauge_tspan.text(line.join(" "));
+            if (gauge_tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                line = [word];
+                lines.push(line);
+            };
+        }
+        
+        var tspans = 
+            text
+                .text(null)
+                .selectAll('tpan')
+                .data(lines.map(function(line) { return line.join(" ") }));
+        tspans.exit().remove();
+        tspans.enter()
+            .append("tspan")
+            .attr("x", 0)
+            .attr("y", y)
+        tspans
+            .text(function(line) { return line })
+            .attr("dy", function(line, index) { return dy + index * lineHeight + "em" })
+    });
 }
 
 
