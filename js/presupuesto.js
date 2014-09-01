@@ -36,11 +36,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
             friction = 0.9,
             damper = 0.5,
             nodes = [],
-            radioMinimo = 10,
-            radioMaximo = 70,
+            radioMinimo = 5,
+            radioMaximo = 120,
             vis, force, circles, radius_scale,
-            miles = d3.format(",");
-
+            montosLiterales = function(n){return formatNumber(n*1)};
         var center = {
             x: width / 2,
             y: height / 2
@@ -304,7 +303,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("dy", "1em")
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(miles(1520000));
+                    .text(montos(8240909523));
         }
 
 
@@ -319,7 +318,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             var content = "<span class=\"name\">Finalidad:</span><span class=\"value\"> " + data.finalidad + "</span><br/>";
             content += "<span class=\"name\">Función:</span><span class=\"value\"> " + data.funcion + "</span><br/>";
             content += "<span class=\"name\">Jurisdicción:</span><span class=\"value\"> " + data.jurisdiccion + "</span><br/>";
-            content += "<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(data.monto) + "</span>";
+            content += "<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(montosLiterales(data.monto)) + "</span>";
             tooltip.showTooltip(content, d3.event);
         }
 
@@ -406,6 +405,52 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+var formatNumber = function(n,decimals) {
+    var s, remainder, num, negativePrefix, negativeSuffix, prefix, suffix;
+    suffix = ""
+    negativePrefix = ""
+    negativeSuffix = ""
+    if (n < 0) {
+      negativePrefix = "";
+      negativeSuffix = " in income"
+      n = -n
+    };
+    
+    if (n >= 1000000000) {
+        suffix = " mil millones"
+        n = n / 1000000000
+        decimals = 0
+    } else if (n >= 1000000) {
+        suffix = " millones"
+        n = n / 1000000
+        decimals = 0 
+    } else if (n >= 100000) {
+        suffix = " centenas de miles"
+        n = n / 100000
+        decimals = 0
+    } 
+    
+    
+    prefix = ""
+    if (decimals > 0) {
+        if (n<1) {prefix = "0"};
+        s = String(Math.round(n * (Math.pow(10,decimals))));
+        if (s < 10) {
+            remainder = "0" + s.substr(s.length-(decimals),decimals);
+            num = "";
+        } else{
+            remainder = s.substr(s.length-(decimals),decimals);
+            num = s.substr(0,s.length - decimals);
+        }
+        
+        
+        return  negativePrefix + prefix + num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + "." + remainder + suffix + negativeSuffix;
+    } else {
+        s = String(Math.round(n));
+        s = s.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        return  negativePrefix + s + suffix + negativeSuffix;
+    }
+};
 
 $(document).ready(function() {
 
