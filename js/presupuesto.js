@@ -2,15 +2,15 @@ var custom_bubble_chart;
 
 d3.csv("/data/presupuesto.csv", function(data) {
 
-    var labels = [];
+    var jurisdiccion = [];
     var finalidad = [];
     var totalesFinalidad = [];
     var totalesJurisdiccion = [];
 
     data.forEach(function(d) {
 
-        if (labels.indexOf(d.id_jurisdiccion) < 0) {
-            labels.push(d.id_jurisdiccion); // junto todos los ids
+        if (jurisdiccion.indexOf(d.id_jurisdiccion) < 0) {
+            jurisdiccion.push(d.id_jurisdiccion); // junto todos los ids
             totalesJurisdiccion.push(0);
         };
         if (finalidad.indexOf(d.finalidad) < 0) {
@@ -19,16 +19,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
         };
 
         totalesFinalidad[finalidad.indexOf(d.finalidad)] = parseInt(totalesFinalidad[finalidad.indexOf(d.finalidad)]) + parseInt(d.monto);
-        
-        //totalesJurisdiccion[labels.indexOf(d.finalidad)] = parseInt(totalesJurisdiccion[labels.indexOf(d.finalidad)]) + parseInt(d.monto);
-
-
-
+        totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)]) + parseInt(d.monto);
 
     });
 
-    console.log(finalidad);
-    console.log(totalesFinalidad);
+    console.log(finalidad ,  totalesFinalidad);
+    console.log(jurisdiccion ,  totalesJurisdiccion);
 
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
@@ -48,6 +44,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
             x: width / 2,
             y: height / 2
         };
+
+        for (var i = 0; i < finalidad.length; i++) {
+            console.log( finalidad[i] , totalesFinalidad[i] );
+        }
 
         var centroides_finalidad = {
 
@@ -71,18 +71,19 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 x: 5 * width / 6,
                 y: height / 2
             }
+
         };
 
         var columnas = 4;
         var filas = 6;
         var correccion = 250;
 
-        //IDs hardcodeadas
+        //IDs
         var centroides_jurisdiccion = {};
         var contador = [1, 1];
 
-        for (var i = 0; i < labels.length; i++) {
-            centroides_jurisdiccion[labels[i]] = {
+        for (var i = 0; i < jurisdiccion.length; i++) {
+            centroides_jurisdiccion[jurisdiccion[i]] = {
                 x: contador[0] * (width - correccion) / columnas,
                 y: (height / filas) * contador[1]
             }
@@ -288,9 +289,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .text(function(d) { return d;})
                     .attr("dy", ".5em")
                     .attr("x", function(d) { return finalidadId[d]; }  )
-                    // .call(wrap, 100)
+                    .call(wrap, 100)
                     .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle")
+                    .attr("text-anchor", "middle");
                     
                     
 
@@ -369,10 +370,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 word,
                 line = [],
                 lineNumber = 0,
-                lineHeight = 1.1, // ems
+                lineHeight = .8, // ems
                 y = text.attr("y"),
                 dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                tspan = text.text(null).append("tspan").attr("y", y).attr("dy", dy + "em"); // ver pos X
             while (word = words.pop()) {
                 line.push(word);
                 tspan.text(line.join(" "));
@@ -380,7 +381,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     line.pop();
                     tspan.text(line.join(" "));
                     line = [word];
-                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    tspan = text.append("tspan").attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
                 }
             }
         });
