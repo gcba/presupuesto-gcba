@@ -302,7 +302,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("dy", "1em")
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(montos(8240909523));
+                    .text(montosLiterales(8240909523));
         }
 
 
