@@ -16,45 +16,55 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   var width = 1200,
       height = 800,
-      // tooltip = CustomTooltip("gates_tooltip", 240),
+      tooltip = CustomTooltip("gates_tooltip", 300),
       gravedad = -0.01,
       friction = 0.9,
-      damper = 0.45,
+      damper = 0.5,
       nodes = [],
+      radioMinimo = 10,
+      radioMaximo = 70,
       vis, force, circles, radius_scale;
  
   var center = {x: width / 2, y: height / 2};
  
   var centroides_finalidad = {
-      "1": {x: width / 6, y: height / 2},
-      "2": {x: 2 * width / 6, y: height / 2},
-      "3": {x: 3 * width / 6, y: height / 2},
-      "4": {x: 4 * width / 6, y: height / 2},
-      "5": {x: 5 * width / 6, y: height / 2}
+
+      "3": {x: width / 6, y: height / 3},
+      "4": {x: 2 * width / 6, y: height / 3},
+      "1": {x: 3 * width / 6, y: height / 3},
+      "2": {x: 4 * width / 6, y: height / 3},
+      "5": {x: 5 * width / 6, y: height / 3}
     };
   
-  var centroides_funcion = {
-      "1": {x: width / 6, y: height/4},
-      "2": {x: 2 * width / 6, y: height/4},
-      "3": {x: 3 * width / 6, y: height/4},
-      "4": {x: 4 * width / 6, y: height/4},
-      "5": {x: 5 * width / 6, y: height/4},
-      "6": {x: width / 6, y: height/7},
-      "7": {x: 2 * width / 6, y: height / 7},
-      "8": {x: 3 * width / 6, y: height / 7},
-      "9": {x: 4 * width / 6, y: height / 7},
-      "10": {x: 5 * width / 6, y: height / 7},
-      "11": {x: width / 6, y: height / 8},
-      "12": {x: 2 * width / 6, y: height / 8},
-      "13": {x: 3 * width / 6, y: height / 8},
-      "14": {x: 4 * width / 6, y: height / 8},
-      "15": {x: 5 * width / 6, y: height / 8},
-      "16": {x: width / 6, y: height / 10},
-      "17": {x: 2 * width / 6, y: height / 10},
-      "18": {x: 3 * width / 6, y: height / 10},
-      "19": {x: 4 * width / 6, y: height / 10},
-      "20": {x: 5 * width / 6, y: height / 10},
-      "21": {x: width / 2, y: height}
+  var columnas = 4; 
+  var filas = 6;
+  var correccion = 250;
+
+  var centroides_jurisdiccion = {
+      "1":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 1 },
+      "2":  {x: 2 * (width - correccion) / columnas, y: (height / filas) * 1 },
+      "20": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 1 },
+      "21": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 1 },
+      "26": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 2 },
+      "28": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 2 },
+      "3":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 2 },
+      "30": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 2 },
+      "35": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 3 },
+      "40": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 3 },
+      "45": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 3 },
+      "5":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 3 },
+      "50": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 4 },
+      "55": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 4 },
+      "6":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 4 },
+      "60": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 4 },
+      "65": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 5 },
+      "68": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 5 },
+      "7":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 5 },
+      "8":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 5 },
+      "9":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 6 },
+      "90": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 6 },
+      "98": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 6 },
+      "99": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 6 }
 
     };
  
@@ -66,7 +76,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function custom_chart(data) {
     var max_amount = d3.max(data, function(d) { return parseInt(d.monto, 10); } ),
-	    radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([1.5, 100]);
+	    radius_scale = d3.scale.linear().domain([0, max_amount]).range([radioMinimo, radioMaximo]);
  
     //create node objects from original data
     //that will serve as the data behind each
@@ -74,31 +84,37 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     //to nodes to be used later
     data.forEach(function(d){
       var node = {
-        id: d.id_funcion,
+        id: d.id_jurisdiccion,
         radius: radius_scale(parseInt(d.monto, 10)),
         monto: d.monto,
         jurisdiccion: d.jurisdiccion,
+        id_jurisdiccion: d.id_jurisdiccion,
         finalidad: d.finalidad,
         id_finalidad: d.id_finalidad,
         funcion: d.funcion,
         id_funcion: d.id_funcion,
-        x: Math.random() * 1200,
-        y: Math.random() * 800
+        x: Math.random() * width,
+        y: Math.random() * height,
       };
       nodes.push(node);
       
-      console.log('Agrego datos.');
+      // console.log(nodes);
     });
 
     nodes.sort(function(a, b) {return b.monto - a.monto; });
+
+    // var maxFinalidad = d3.max(data, function(d) { return d.y; }
  	  
     // console.log(nodes);
 
     vis = d3.select("#grafico").append("svg")
                 .attr("width", width)
-                // .attr("height", height)
+                .attr("height", height)
+                //.attr("shape-rendering","optimizeSpeed")
+                //.attr("color-rendering","optimizeSpeed")
+                .attr("viewBox", "0 0 1200 800")
                 .attr("id", "svg_vis");
- 
+
     circles = vis.selectAll("circle")
       .data(nodes)
       .enter()
@@ -108,12 +124,10 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
       .attr("stroke-width", 1.5)
       .attr("stroke", function(d) {return d3.rgb(fill_color(d.finalidad)).darker();})
       .attr("id", function(d) { return  "bubble_" + d.id; })
-      // .on("mouseover", function(d, i) {show_details(d, i, this);} )
-      // .on("mouseout", function(d, i) {hide_details(d, i, this);} );
+      .on("mouseover", function(d, i) {show_details(d, i, this);} )
+      .on("mouseout", function(d, i) {hide_details(d, i, this);} );
  
     circles.transition().duration(1500).attr("r", function(d) { return d.radius; });
-
-
  
   }
  
@@ -121,21 +135,19 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     if (d.value < 0) {
       return 0
     } else {
-      return -Math.pow(d.radius,2.4)/7 
+//      return -Math.pow(d.radius,2.4)/7 
+//      return -Math.pow(d.radius,1.9)
+      return -(d.radius * (d.radius) / 1.2)
     };
   }
  
   function start() {
-    console.log('Inicio todo.');
+    //console.log('Inicio todo.');
 
     force = d3.layout.force()
             .nodes(nodes)
             .size([width, height]);
-
-
   }
-  
-
 
   function mostrarGrupoCompleto() {
     // console.log('Inicio force.');
@@ -149,7 +161,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
          });
     // console.log(force);
     force.start();
-    hide_years();
+    borrarReferencias();
   }
  
   function moverAlCentro(alpha) {
@@ -160,22 +172,22 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     };
   }
 
-  function mostrarFuncion() {
-    // console.log('Hermione!');
+  function mostrarJurisdiccion() {
     force.gravity(gravedad)
          .charge(charge)
          .friction(friction)
         .on("tick", function(e) {
-          circles.each(ordenFuncion(e.alpha))
+          circles.each(ordenJurisdiccion(e.alpha))
                  .attr("cx", function(d) {return d.x;})
                  .attr("cy", function(d) {return d.y;});
         });
     force.start();
+    borrarReferencias();
   }
 
-  function ordenFuncion(alpha) {
+  function ordenJurisdiccion(alpha) {
     return function(d) {
-      var target = centroides_funcion[d.id_funcion];
+      var target = centroides_jurisdiccion[d.id_jurisdiccion];
       d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
       d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
     };
@@ -193,6 +205,7 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     force.start();
     titulosFinalidad();
   }
+
  
   function ordenFinalidad(alpha) {
     return function(d) {
@@ -205,18 +218,13 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function titulosFinalidad() {
       var finalidadId = {
-                      "1": width/8,
-                      "2": width,
-                      "3": width,
-                      "4": width,
-                      "5": width
+                      "Servicios Sociales": (width-100)/5 * 1,
+                      "Servicios Económicos": (width-100)/5 * 2,
+                      "Adm. Gubernamental": (width-100)/5 * 3  ,
+                      "Servicios de Seguridad": (width-100)/5 * 4,
+                      "Deuda Pública - Intereses y Gastos": (width-100)/5 * 5
                     };
 
-                    // "1": {x: width / 6, y: height / 2},
-                    // "2": {x: 2 * width / 6, y: height / 2},
-                    // "3": {x: 3 * width / 6, y: height / 2},
-                    // "4": {x: 4 * width / 6, y: height / 2},
-                    // "5": {x: 5 * width / 6, y: height / 2}
       var finalidadKeys = d3.keys(finalidadId);
       var finalidad = vis.selectAll(".finalidad")
                  .data(finalidadKeys);
@@ -225,21 +233,26 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
                    .attr("class", "finalidad")
                    .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
+                   .attr("dy", "1em")
+                   .attr("text-wrap", "normal")
                    .attr("text-anchor", "middle")
-                   .text(function(d) { return d;});
- 
+                   .text(function(d) { return d;})
+                   // .call(wrap, function(d) { return finalidadId[d]; })
   }
+
+
+
  
-  function hide_years() {
+  function borrarReferencias() {
       var finalidad = vis.selectAll(".finalidad").remove();
   }
  
  
   function show_details(data, i, element) {
     d3.select(element).attr("stroke", "black");
-    var content = "<span class=\"name\">Jurisdicción:</span><span class=\"value\"> " + data.jurisdiccion + "</span><br/>";
-    content +="<span class=\"name\">Finalidad:</span><span class=\"value\"> " + data.finalidad + "</span><br/>";
+    var content ="<span class=\"name\">Finalidad:</span><span class=\"value\"> " + data.finalidad + "</span><br/>";
     content +="<span class=\"name\">Función:</span><span class=\"value\"> " + data.funcion + "</span><br/>";
+    content += "<span class=\"name\">Jurisdicción:</span><span class=\"value\"> " + data.jurisdiccion + "</span><br/>";
     content +="<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(data.monto)  + "</span>";
     tooltip.showTooltip(content, d3.event);
   }
@@ -266,21 +279,47 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     start();
   };
  
-  presupuesto.display_all = mostrarGrupoCompleto;
-  presupuesto.display_year = mostrarFinalidad;
+  // presupuesto.display_all = mostrarGrupoCompleto;
+  // presupuesto.display_year = mostrarFinalidad;
 
   presupuesto.cambiarVista = function(ver_tipo) {
     if (ver_tipo == 'finalidad') {
       mostrarFinalidad();
-    } else if (ver_tipo == 'funcion'){
-      mostrarFuncion();
+    } else if (ver_tipo == 'jurisdiccion'){
+      mostrarJurisdiccion();
     } else {
       mostrarGrupoCompleto();
     }
   };
 
   return presupuesto;
-})(d3);
+})(d3,CustomTooltip);
+
+function wrap(text, width) {
+
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
+
 
 d3.csv("/data/presupuesto.csv", function(data) {
         custom_bubble_chart.init(data);
@@ -295,11 +334,5 @@ $(document).ready(function() {
     $(this).toggleClass('active');
     	custom_bubble_chart.cambiarVista(ver_tipo);
     return false;
-  });
-
-  $('#my-tooltip').tooltipster({
-    contentAsHTML: true,
-    theme: 'tooltipster-light',
-    content: $('<span><strong>This text is in bold case !</strong><br>Explorá la distribución del presupuesto de la Ciudad Autónoma de Buenos Aires para 2014.</span>')
   });
 });
