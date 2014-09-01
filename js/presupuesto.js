@@ -381,14 +381,38 @@ function addCommas(nStr) {
 }
 
 
-
-
 $(document).ready(function() {
-    $('#view_selection a').click(function() {
-        var ver_tipo = $(this).attr('id');
-        $('#view_selection a').removeClass('active');
-        $(this).toggleClass('active');
-        custom_bubble_chart.cambiarVista(ver_tipo);
-        return false;
+  
+  $('#view_selection a').click(function() {
+    var ver_tipo = $(this).attr('id');
+    window.location = $(this).attr('href');
+    $('#view_selection a').removeClass('active');
+    $(this).toggleClass('active');
+    custom_bubble_chart.cambiarVista(ver_tipo);
+    return false;
+  });
+
+  if (window.location.hash == "#/finalidad"){
+    $('#view_selection a').removeClass('active');
+    $('#finalidad').toggleClass('active');
+    d3.csv("/data/presupuesto.csv", function(data) {
+      custom_bubble_chart.init(data);
+      custom_bubble_chart.cambiarVista('finalidad');
     });
+  } else if (window.location.hash == "#/jurisdiccion"){
+    $('#view_selection a').removeClass('active');
+    $('#finalidad').toggleClass('active');
+    d3.csv("/data/presupuesto.csv", function(data) {
+      custom_bubble_chart.init(data);
+      custom_bubble_chart.cambiarVista('jurisdiccion');
+    });
+  } else if (window.location.hash == "#/total"){
+    $('#view_selection a').removeClass('active');
+    $('#finalidad').toggleClass('active');
+    d3.csv("/data/presupuesto.csv", function(data) {
+      custom_bubble_chart.init(data);
+      custom_bubble_chart.cambiarVista('total');
+    });
+  }
+
 });
