@@ -1,5 +1,4 @@
-function addCommas(nStr)
-{
+function addCommas(nStr){
 	nStr += '';
 	x = nStr.split('.');
 	x1 = x[0];
@@ -40,33 +39,23 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
   var filas = 6;
   var correccion = 250;
 
-  var centroides_jurisdiccion = {
-      "1":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "2":  {x: 2 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "20": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "21": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 1 },
-      "26": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 2 },
-      "28": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 2 },
-      "3":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 2 },
-      "30": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 2 },
-      "35": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 3 },
-      "40": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 3 },
-      "45": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 3 },
-      "5":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 3 },
-      "50": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 4 },
-      "55": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 4 },
-      "6":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 4 },
-      "60": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 4 },
-      "65": {x: 1 * (width - correccion) / columnas, y: (height / filas) * 5 },
-      "68": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 5 },
-      "7":  {x: 3 * (width - correccion) / columnas, y: (height / filas) * 5 },
-      "8":  {x: 4 * (width - correccion) / columnas, y: (height / filas) * 5 },
-      "9":  {x: 1 * (width - correccion) / columnas, y: (height / filas) * 6 },
-      "90": {x: 2 * (width - correccion) / columnas, y: (height / filas) * 6 },
-      "98": {x: 3 * (width - correccion) / columnas, y: (height / filas) * 6 },
-      "99": {x: 4 * (width - correccion) / columnas, y: (height / filas) * 6 }
 
-    };
+  var centroides_jurisdiccion = {};
+
+  //IDs hardcodeadas
+  var labels = ["1","2","20","21","26","28","3","30","35","40","45","5","50","55","6","60","65","68","7","8","9","90","98","99"];
+  var contador = [1,1];
+  for (var i = 0; i < labels.length ; i++){
+
+    centroides_jurisdiccion[labels[i]] = {x: contador[0] * (width - correccion) / columnas, y: (height / filas) * contador[1] }
+
+    contador[0]++;
+
+    if (contador[0] === 5){
+      contador[0] = 1;
+      contador[1]++;
+    }
+  }
  
   var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad","Servicios Económicos","Servicios Sociales"];
 
