@@ -74,7 +74,8 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
  
   function custom_chart(data) {
     var max_amount = d3.max(data, function(d) { return parseInt(d.monto, 10); } ),
-	    radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([1.5, radioMaximo]);
+      //radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([1.5, radioMaximo]);
+      radius_scale = d3.scale.linear().domain([0, max_amount]).range([5, radioMaximo]);
  
     //create node objects from original data
     //that will serve as the data behind each
