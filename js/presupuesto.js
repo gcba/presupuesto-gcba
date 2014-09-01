@@ -120,10 +120,6 @@ var custom_bubble_chart = (function(d3, CustomTooltip) {
     circles.transition().duration(1500).attr("r", function(d) { return d.radius; });
  
   }
-// aplica force a los nodos y al bounding box
-function tick(e) {
-  console.log("12313");
-}
  
   function charge(d) {
     if (d.value < 0) {
@@ -182,7 +178,6 @@ function tick(e) {
   function ordenJurisdiccion(alpha) {
     return function(d) {
       var target = centroides_jurisdiccion[d.id_jurisdiccion];
-      // console.log(centroides_jurisdiccion[d.id_jurisdiccion]);
       d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
       d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
     };
@@ -213,18 +208,13 @@ function tick(e) {
  
   function titulosFinalidad() {
       var finalidadId = {
-                      "AdmInistración Gubernamental": width/8,
-                      "2": width,
-                      "3": width,
-                      "4": width,
-                      "5": width
+                      "Administración Gubernamental": (width-100)/5 * 1  ,
+                      "Deuda Pública - Intereses y Gastos": (width-100)/5 * 2,
+                      "Servicios de Seguridad": (width-100)/5 * 3,
+                      "Servicios Económicos": (width-100)/5 * 4,
+                      "Servicios Sociales": (width-100)/5 * 5
                     };
 
-                    // "1": {x: width / 6, y: height / 2},
-                    // "2": {x: 2 * width / 6, y: height / 2},
-                    // "3": {x: 3 * width / 6, y: height / 2},
-                    // "4": {x: 4 * width / 6, y: height / 2},
-                    // "5": {x: 5 * width / 6, y: height / 2}
       var finalidadKeys = d3.keys(finalidadId);
       var finalidad = vis.selectAll(".finalidad")
                  .data(finalidadKeys);
@@ -233,6 +223,8 @@ function tick(e) {
                    .attr("class", "finalidad")
                    .attr("x", function(d) { return finalidadId[d]; }  )
                    .attr("y", 40)
+                   //.attr
+                   .attr("text-wrap", "normal")
                    .attr("text-anchor", "middle")
                    .text(function(d) { return d;});
  
