@@ -2,15 +2,15 @@ var custom_bubble_chart;
 
 d3.csv("/data/presupuesto.csv", function(data) {
 
-    var labels = [];
+    var jurisdiccion = [];
     var finalidad = [];
     var totalesFinalidad = [];
     var totalesJurisdiccion = [];
 
     data.forEach(function(d) {
 
-        if (labels.indexOf(d.id_jurisdiccion) < 0) {
-            labels.push(d.id_jurisdiccion); // junto todos los ids
+        if (jurisdiccion.indexOf(d.id_jurisdiccion) < 0) {
+            jurisdiccion.push(d.id_jurisdiccion); // junto todos los ids
             totalesJurisdiccion.push(0);
         };
         if (finalidad.indexOf(d.finalidad) < 0) {
@@ -19,16 +19,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
         };
 
         totalesFinalidad[finalidad.indexOf(d.finalidad)] = parseInt(totalesFinalidad[finalidad.indexOf(d.finalidad)]) + parseInt(d.monto);
-        
-        //totalesJurisdiccion[labels.indexOf(d.finalidad)] = parseInt(totalesJurisdiccion[labels.indexOf(d.finalidad)]) + parseInt(d.monto);
-
-
-
+        totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)]) + parseInt(d.monto);
 
     });
 
-    console.log(finalidad);
-    console.log(totalesFinalidad);
+    console.log(finalidad ,  totalesFinalidad);
+//    console.log(jurisdiccion ,  totalesJurisdiccion);
 
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
@@ -49,6 +45,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
             x: width / 2,
             y: height / 2
         };
+
+        for (var i = 0; i < finalidad.length; i++) {
+            console.log( finalidad[i] , totalesFinalidad[i] );
+        }
 
         var centroides_finalidad = {
 
@@ -72,18 +72,19 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 x: 5 * width / 6,
                 y: height / 2
             }
+
         };
 
         var columnas = 4;
         var filas = 6;
         var correccion = 250;
 
-        //IDs hardcodeadas
+        //IDs
         var centroides_jurisdiccion = {};
         var contador = [1, 1];
 
-        for (var i = 0; i < labels.length; i++) {
-            centroides_jurisdiccion[labels[i]] = {
+        for (var i = 0; i < jurisdiccion.length; i++) {
+            centroides_jurisdiccion[jurisdiccion[i]] = {
                 x: contador[0] * (width - correccion) / columnas,
                 y: (height / filas) * contador[1]
             }
