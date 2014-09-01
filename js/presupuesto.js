@@ -40,11 +40,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
             friction = 0.9,
             damper = 0.5,
             nodes = [],
-            radioMinimo = 10,
-            radioMaximo = 70,
+            radioMinimo = 5,
+            radioMaximo = 120,
             vis, force, circles, radius_scale,
-            miles = function(n){return formatNumber(n*1000)};
-
+            montosLiterales = function(n){return formatNumber(n*1)};
         var center = {
             x: width / 2,
             y: height / 2
@@ -303,7 +302,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("dy", "1em")
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(miles(1520000));
+                    .text(montos(8240909523));
         }
 
 
@@ -318,7 +317,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             var content = "<span class=\"name\">Finalidad:</span><span class=\"value\"> " + data.finalidad + "</span><br/>";
             content += "<span class=\"name\">Función:</span><span class=\"value\"> " + data.funcion + "</span><br/>";
             content += "<span class=\"name\">Jurisdicción:</span><span class=\"value\"> " + data.jurisdiccion + "</span><br/>";
-            content += "<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(data.monto) + "</span>";
+            content += "<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(montosLiterales(data.monto)) + "</span>";
             tooltip.showTooltip(content, d3.event);
         }
 
@@ -416,18 +415,18 @@ var formatNumber = function(n,decimals) {
       n = -n
     };
     
-    if (n >= 1000000000000) {
-        suffix = " trillion"
-        n = n / 1000000000000
-        decimals = 2
-    } else if (n >= 1000000000) {
-        suffix = " billion"
+    if (n >= 1000000000) {
+        suffix = " mil millones"
         n = n / 1000000000
-        decimals = 1
+        decimals = 0
     } else if (n >= 1000000) {
-        suffix = " million"
+        suffix = " millones"
         n = n / 1000000
-        decimals = 1
+        decimals = 0 
+    } else if (n >= 100000) {
+        suffix = " centenas de miles"
+        n = n / 100000
+        decimals = 0
     } 
     
     
