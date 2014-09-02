@@ -50,7 +50,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
     // finalidad2d = orderMultiDimensionalArray (finalidad2d, 1);
     jurisdiccion2d = orderMultiDimensionalArray (jurisdiccion2d, 1);
 
-    console.log(finalidad2d);
+    //console.log(finalidad2d);
 
  
     custom_bubble_chart = (function(d3, CustomTooltip) {
@@ -329,7 +329,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("y", 0)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text("$" +montosLiterales(8240909523))
+                    .text( function (d,i){
+                        return "$" +montosLiterales(finalidad2d[i][1]);
+                    }
+                        )
                     .transition().duration(750).style("opacity",1);
         }
 
