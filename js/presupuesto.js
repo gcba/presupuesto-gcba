@@ -51,8 +51,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
             friction = 0.9,
             damper = 0.45,
             nodes = [],
-            radioMinimo = 5,
-            radioMaximo = 120,
+            radioMinimo = 3,
+            radioMaximo = 110,
             vis, force, circles, radius_scale,
             montosLiterales = function(n){return formatNumber(n*1)};
         var center = {
@@ -316,6 +316,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
                 finalidad.enter()
                   .append("text")
+                    .style("opacity",0)
                     .attr("class", "titulo")
                     .attr("x", function(d) { return finalidadId[d]; }  )
                     .attr("dy", "3em")
@@ -323,18 +324,19 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
                     .text(function(d) { return d;})
-                    .call(wrap, 130); 
+                    .call(wrap, 130)
+                    .transition().duration(500).style("opacity",1);
                 
                 finalidad.enter()
                   .append("text")
+                    .style("opacity",0)
                     .attr("class", "total")
                     .attr("x", function(d) { return finalidadId[d]; }  )
                     .attr("y", 0)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text("$" +montosLiterales(8240909523));
-
-
+                    .text("$" +montosLiterales(8240909523))
+                    .transition().duration(750).style("opacity",1);
         }
 
 
