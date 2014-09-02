@@ -289,7 +289,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .text(function(d) { return d;})
                     .attr("dy", ".5em")
                     .attr("x", function(d) { return finalidadId[d]; }  )
-                    .call(wrap, 100)
+                    .call(wrap, 130)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle");
                     
