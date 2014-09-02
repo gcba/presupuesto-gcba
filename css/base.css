@@ -5385,7 +5385,7 @@ header {
     margin: 0 auto; }
   .jumbotron .lead {
     font-size: 1em;
-    width: 65%;
+    width: 60%;
     margin: 0 auto;
     padding-top: 16px; }
 
@@ -5411,6 +5411,9 @@ svg {
   position: absolute;
   z-index: 10; }
   .referencias h3 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2em;
     text-align: center;
     margin: 0 auto;
     width: 450px;
@@ -5425,20 +5428,20 @@ Custom Tooltip
 */
 .tooltip {
   position: absolute;
-  border: 3px solid #000;
+  border: 1px solid #000;
   background: #fff;
   opacity: .9;
   color: black;
-  padding: 10px;
-  width: 300px;
-  height: 100px;
+  padding: 20px;
+  width: 350px;
   z-index: 41;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px; }
+  text-align: center;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px; }
   .tooltip .title {
     font-size: 13px; }
   .tooltip .name {

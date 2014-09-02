@@ -122,7 +122,7 @@ header{
     }
     .lead {
         font-size: 1em;
-        width: 65%;
+        width: 60%;
         margin: 0 auto;
         padding-top: 16px;
     }
@@ -154,6 +154,9 @@ svg {
     z-index: 10;
     
     h3 {
+        font-family: $fontset-default;
+        font-weight: 700;
+        font-size: 2em;
         text-align: center;
         margin: 0 auto;
         width: 450px;
@@ -181,17 +184,17 @@ Custom Tooltip
 
 .tooltip {
   position: absolute;
-  border: 3px solid #000;
+  border: 1px solid #000;
   background: #fff;
   opacity: .9;
   color: black;
-  padding: 10px;
-  width: 300px;
-  height: 100px;
+  padding: 20px;
+  width: 350px;
   z-index: 41;
-  @include border-bottom-radius(10px);
-  @include border-left-radius(10px);
-  @include border-right-radius(10px);
+  text-align: center;
+  @include border-bottom-radius(5px);
+  @include border-left-radius(5px);
+  @include border-right-radius(5px);
   .title {
     font-size: 13px;
   }
