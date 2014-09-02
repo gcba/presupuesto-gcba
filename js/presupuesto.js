@@ -1,9 +1,8 @@
 var custom_bubble_chart, container, referencias;
-
 container = $("#contenedor-visualizacion");
 referencias = $(".referencias");
 
-d3.csv("/data/presupuesto.csv", function(data) {
+d3.csv("data/presupuesto.csv", function(data) {
 
     var jurisdiccion = [];
     var jurisdiccionID = [];
@@ -83,7 +82,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             centroides_finalidad[parseInt(finalidad2d[i][2])] = {
                 id: finalidad2d[i][0],
                 monto: finalidad2d[i][1],
-                x: (i + 1) * width / 6,
+                x: (i + 1) * (width) / 6,
                 y: height / 2
             }
         }
@@ -188,7 +187,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     el.style("stroke-width", 1.5)
                     el.style("opacity", 0.9);
                 });
-
+            
             circles.transition().duration(1500).attr("r", function(d) {
                 return d.radius;
             });
@@ -262,8 +261,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
                             return d.y;
                         })
                         .attr("fill", "#FFF")
-                        .style("opacity", .3);
+                        .style("opacity", 0.3);
                 });
+
+
             force.start();
             titulosJurisdiccion();
         }
