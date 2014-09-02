@@ -1,5 +1,6 @@
-var custom_bubble_chart, referencias;
+var custom_bubble_chart, container, referencias;
 
+container = $("#contenedor-visualizacion");
 referencias = $(".referencias");
 
 d3.csv("/data/presupuesto.csv", function(data) {
@@ -373,10 +374,13 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 referencias.animate({opacity:0},250);
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
+                container.animate({height:900},500);
                 referencias.animate({opacity:0},250);
             } else {
                 mostrarGrupoCompleto();
+                container.animate({height:600},500);
                 referencias.delay(300).animate({opacity:1},350);
+                
             }
         };
 
