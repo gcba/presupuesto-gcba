@@ -227,7 +227,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                         })
                         .attr("cy", function(d) {
                             return d.y;
-                        });
+                        })
+                        .style("opacity", 1);
                 });
             // console.log(force);
             force.start();
@@ -254,10 +255,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                         .attr("cy", function(d) {
                             return d.y;
                         })
-                        .attr("stroke", function(d) {
-                            return d3.rgb(fill_color(d.finalidad)).darker(.9);
-                        })
-                        .attr("fill", "#FFF");
+                        .attr("fill", "#FFF")
+                        .style("opacity", .3);
                 });
             force.start();
             titulosJurisdiccion();
@@ -285,7 +284,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                         })
                         .attr("cy", function(d) {
                             return d.y;
-                        });
+                        })
+                        .style("opacity", 1);
                 });
             force.start();
             titulosFinalidad();
