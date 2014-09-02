@@ -537,33 +537,6 @@ var formatNumber = function(n,decimals) {
 };
 
 
-
-
-function sortNumber(a,b) {
-    return a - b;
-}
-
-function orderMultiDimensionalArray (toOrderArray, campo) {
-    position = new Array();
-    newRow = new Array();
-    jQuery.each(toOrderArray, function(key, row) {
-            regis = row[campo];
-            position[key]  = [regis, key];
-            newRow[key] = toOrderArray[key];
-    });
-
-    position.sort(sortNumber);
-    
-    returnArray = new Array();
-    jQuery.each(position, function(key, row) {
-            pos = position[key][1];
-            returnArray[key] = newRow[pos];
-    });             
-    
-    return returnArray;
-}
-
-
 $(document).ready(function() {
 
   $('#seleccion a').click(function() {
