@@ -1,0 +1,21 @@
+{
+  "name": "tooltipster",
+  "version": "3.2.6",
+  "main": [
+    "js/jquery.tooltipster.min.js",
+    "css/tooltipster.css"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "homepage": "https://github.com/iamceege/tooltipster",
+  "_release": "3.2.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.2.6",
+    "commit": "e1d3db16f81600789f3760cfbcfb76c9374e0dea"
+  },
+  "_source": "git://github.com/iamceege/tooltipster.git",
+  "_target": "~3.2.6",
+  "_originalSource": "tooltipster"
+}
