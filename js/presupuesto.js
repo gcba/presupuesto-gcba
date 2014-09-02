@@ -45,7 +45,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         "use strict";
 
         var width = 1200,
-            height = 500,
+            height = 600,
             tooltip = CustomTooltip("tooltip", 300),
             gravedad = -0.01,
             friction = 0.9,

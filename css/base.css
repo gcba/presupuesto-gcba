@@ -5399,7 +5399,7 @@ header {
   height: 100%;
   position: absolute;
   z-index: 40;
-  top: 60px; }
+  top: 0px; }
 
 svg {
   height: 100%;
@@ -5427,6 +5427,13 @@ svg {
     padding-top: 25px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
+
+.mas-info {
+  font-size: .9em;
+  text-align: center;
+  z-index: 50;
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 /* 
 
