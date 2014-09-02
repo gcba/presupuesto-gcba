@@ -5428,12 +5428,19 @@ svg {
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
 
-.mas-info {
+.mas-info, .definiciones {
   font-size: .9em;
   text-align: center;
   z-index: 50;
   padding-top: 20px;
   padding-bottom: 20px; }
+
+.definiciones {
+  font-size: .9em;
+  text-align: left;
+  display: block;
+  width: 500px;
+  margin: 0 auto; }
 
 /* 
 
