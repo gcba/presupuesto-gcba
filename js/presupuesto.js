@@ -32,17 +32,25 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++){
-        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i]], finalidadID[i]; 
+        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i], finalidadID[i]]; 
     }
+
+    finalidad2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++){
         jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i]]; 
     }
 
+
+    
+
+
     // armo array 2d ordenados
-    finalidad2d = orderMultiDimensionalArray (finalidad2d, 1);
+    // finalidad2d = orderMultiDimensionalArray (finalidad2d, 1);
     jurisdiccion2d = orderMultiDimensionalArray (jurisdiccion2d, 1);
+
+    console.log(finalidad2d);
 
  
     custom_bubble_chart = (function(d3, CustomTooltip) {
@@ -67,8 +75,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         var centroides_finalidad = {};
         for (var i = 0; i < finalidad.length; i++){
-            centroides_finalidad[parseInt(finalidadID[i])] = { x: (i+1) * width / 6, y: height / 2 }
+            centroides_finalidad[parseInt(finalidad2d[i][2])] = { x: (i+1) * width / 6, y: height / 2 }
         }
+
+        // console.log(finalidadID, finalidad);
 
         var columnas = 4;
         var filas = 6;
@@ -151,7 +161,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     return d3.rgb(fill_color(d.finalidad)).darker();
                 })
                 .attr("id", function(d) {
-                    return "bubble_" + d.id;
+                    return "bubble_" + d.id_finalidad;
                 })
                 .on("mouseover", function(d, i) {
                   var el = d3.select(this)
@@ -339,17 +349,6 @@ d3.csv("/data/presupuesto.csv", function(data) {
             tooltip.showTooltip(content, d3.event);
         }
 
-        /*
-    id_jurisdiccion
-    jurisdiccion
-    id_finalidad
-    finalidad
-    id_funcion
-    funcion
-    monto
-    porcentaje
-  */
-
         function hide_details(data, i, element) {
             d3.select(element).attr("stroke", function(d) {
                 return d3.rgb(fill_color(d.finalidad)).darker();
@@ -503,11 +502,6 @@ function orderMultiDimensionalArray (toOrderArray, campo) {
 
 $(document).ready(function() {
 
-  // d3.csv("/data/presupuesto.csv", function(data) {
-  //   custom_bubble_chart.init(data);
-  //   custom_bubble_chart.cambiarVista('finalidad');
-  // });
-  
   $('#seleccion a').click(function() {
       var ver_tipo = $(this).attr('id');
       $('#seleccion a').removeClass('disabled');
