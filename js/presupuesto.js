@@ -74,10 +74,13 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         var centroides_finalidad = {};
         for (var i = 0; i < finalidad.length; i++){
-            centroides_finalidad[parseInt(finalidad2d[i][2])] = { x: (i+1) * width / 6, y: height / 2 }
+            centroides_finalidad[parseInt(finalidad2d[i][2])] = {
+              id: finalidad2d[i][0],
+              monto: finalidad2d[i][1],
+              x: (i+1) * width / 6,
+              y: height / 2 }
         }
 
-        console.log(centroides_finalidad);
 
         var columnas = 4;
         var filas = 6;
@@ -90,6 +93,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         for (var i = 0; i < jurisdiccion.length ; i++) {
             centroides_jurisdiccion[parseInt(jurisdiccion2d[i][2])] = {
                 id: jurisdiccion2d[i][0],
+                monto: jurisdiccion2d[i][1],
                 x: contador[0] * (width - correccion) / columnas,
                 y: (height / filas) * contador[1] + 100
             }
@@ -299,13 +303,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         function titulosFinalidad() {
             borrarReferencias();
-            var finalidadId = {
-                            "Servicios Sociales": (width-100)/5 * 1,
-                            "Servicios Económicos": (width-100)/5 * 2,
-                            "Administración Gubernamental": (width-100)/5 * 3  ,
-                            "Servicios de Seguridad": (width-100)/5 * 4,
-                            "Deuda Pública Intereses y Gastos": (width-100)/5 * 5
-                          };
+            var finalidadId = centroides_finalidad;
 
             var finalidadKeys = d3.keys(finalidadId);
             var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height-90) + ")").selectAll(".finalidad").data(finalidadKeys);
@@ -314,12 +312,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
                   .append("text")
                     .style("opacity",0)
                     .attr("class", "titulo")
-                    .attr("x", function(i) { return finalidadId[i]; }  )
+                    .attr("x", function(i) { return finalidadId[i].x; }  )
                     .attr("dy", "3em")
                     .attr("y", -20)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(function(d) { return d;})
+                    .text(function(i) { return finalidadId[i].id;})
                     .call(wrap, 130)
                     .transition().duration(500).style("opacity",1);
                 
@@ -327,12 +325,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
                   .append("text")
                     .style("opacity",0)
                     .attr("class", "total")
-                    .attr("x", function(i) { return finalidadId[i]; }  )
+                    .attr("x", function(i) { return finalidadId[i].x; }  )
                     .attr("y", 0)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text( function (d,i){
-                        return "$" +montosLiterales(finalidad2d[i][1]);
+                    .text( function (i){
+                        return "$" +montosLiterales(finalidadId[i].monto);
                     }
                         )
                     .transition().duration(750).style("opacity",1);
@@ -366,8 +364,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                             .attr("y", function(i) { return jurisdiccionId[i].y; })
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
-                            .text( function (d,i){
-                                return "$" +montosLiterales(jurisdiccion2d[i][1]);
+                            .text( function (i){
+                                return "$" +montosLiterales(jurisdiccionId[i].monto);
                             }
                                 )
                             .transition().duration(750).style("opacity",1);
