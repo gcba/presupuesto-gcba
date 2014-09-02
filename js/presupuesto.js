@@ -291,7 +291,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .text(function(d) { return d;})
                     .attr("dy", ".5em")
                     .attr("x", function(d) { return finalidadId[d]; }  )
-                    .call(wrap, 100)
+                    .call(wrap, 130)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle");
                     
@@ -377,8 +377,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 lineNumber = 0,
                 lineHeight = .8, // ems
                 y = text.attr("y"),
+                x = text.attr("x"),
                 dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("y", y).attr("dy", dy + "em"); // ver pos X
+                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em"); // ver pos X
             while (word = words.pop()) {
                 line.push(word);
                 tspan.text(line.join(" "));
@@ -386,7 +387,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     line.pop();
                     tspan.text(line.join(" "));
                     line = [word];
-                    tspan = text.append("tspan").attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                    tspan = text.append("tspan").attr("y", y).attr("x", x).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
                 }
             }
         });
