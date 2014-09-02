@@ -338,6 +338,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         }
 
         function titulosJurisdiccion() {
+                  borrarReferencias();
                     var jurisdiccionId = {
                                     "Ministerio de Educacion": (width-100)/5 * 1,
                                     "Ministerio de Salud": (width-100)/5 * 2,
