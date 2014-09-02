@@ -26,6 +26,18 @@ d3.csv("/data/presupuesto.csv", function(data) {
     console.log(finalidad ,  totalesFinalidad);
     console.log(jurisdiccion ,  totalesJurisdiccion);
 
+    var finalidad2d = [];
+    for (var i = 0; i < finalidad.length; i++){
+        finalidad2d[i,0] = finalidad[i]; 
+        finalidad2d[i,1] = totalesFinalidad[i]; 
+    }
+
+    console.log(finalidad2d.sort());
+
+
+
+
+
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
 
