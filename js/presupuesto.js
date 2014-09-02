@@ -36,12 +36,16 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     });
 
+
+
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++){
         finalidad2d[i] = [finalidad[i] , totalesFinalidad[i], finalidadID[i]]; 
     }
 
     finalidad2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
+
+    // alert(finalidad2d);
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++){
@@ -104,7 +108,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             }
         }
 
-        console.log(centroides_jurisdiccion);
+        // console.log(centroides_jurisdiccion);
 
 
         //var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad", "Servicios Económicos", "Servicios Sociales"];
@@ -305,6 +309,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
             borrarReferencias();
             var finalidadId = centroides_finalidad;
 
+
+
             var finalidadKeys = d3.keys(finalidadId);
             var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height-90) + ")").selectAll(".finalidad").data(finalidadKeys);
 
@@ -396,6 +402,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             });
             tooltip.hideTooltip();
         }
+
 
         var presupuesto = {};
         presupuesto.init = function(_data) {
