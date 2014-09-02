@@ -145,7 +145,19 @@ header{
 svg {
     height: 100%;
     overflow: hidden;
+    
+    .titulo {
+
+    }
+
+    .total {
+        font-family: $fontset-default;
+        font-weight: 700;
+        font-size: 1.4em;    
+    }
+
 }
+
 
 .referencias {
     width: 100%;

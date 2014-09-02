@@ -5404,6 +5404,10 @@ header {
 svg {
   height: 100%;
   overflow: hidden; }
+  svg .total {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.4em; }
 
 .referencias {
   width: 100%;

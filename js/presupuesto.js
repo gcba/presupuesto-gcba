@@ -36,7 +36,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
             tooltip = CustomTooltip("tooltip", 300),
             gravedad = -0.01,
             friction = 0.9,
-            damper = 0.5,
+            damper = 0.45,
             nodes = [],
             radioMinimo = 5,
             radioMaximo = 120,
@@ -176,13 +176,19 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         }
 
+        d3.selection.prototype.moveToFront = function() { 
+              return this.each(function() { 
+              this.parentNode.appendChild(this); 
+              }); 
+            };
+
         function charge(d) {
             if (d.value < 0) {
                 return 0
             } else {
                 //      return -Math.pow(d.radius,2.4)/7 
-                //      return -Math.pow(d.radius,1.9)
-                return -(d.radius * (d.radius) / 1.2)
+                return -Math.pow(d.radius,1.9)
+                // return -(d.radius * (d.radius) / 1.2)
             };
         }
 
@@ -277,35 +283,36 @@ d3.csv("/data/presupuesto.csv", function(data) {
             var finalidadId = {
                             "Servicios Sociales": (width-100)/5 * 1,
                             "Servicios Económicos": (width-100)/5 * 2,
-                            "Adm. Gubernamental": (width-100)/5 * 3  ,
+                            "Administración Gubernamental": (width-100)/5 * 3  ,
                             "Servicios de Seguridad": (width-100)/5 * 4,
-                            "Deuda Pública - Intereses y Gastos": (width-100)/5 * 5
+                            "Deuda Pública Intereses y Gastos": (width-100)/5 * 5
                           };
 
             var finalidadKeys = d3.keys(finalidadId);
-            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + 40 + ")").selectAll(".finalidad").data(finalidadKeys);
-        
-                finalidad.enter()
-                  .append("text")
-                    .attr("class", "titulo")
-                    .text(function(d) { return d;})
-                    .attr("dy", ".5em")
-                    .attr("x", function(d) { return finalidadId[d]; }  )
-                    .call(wrap, 130)
-                    .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle");
-                    
-                    
-
+            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + 20 + ")").selectAll(".finalidad").data(finalidadKeys);
+                
                 finalidad.enter()
                   .append("text")
                     .attr("class", "total")
                     .attr("x", function(d) { return finalidadId[d]; }  )
-                    .attr("y", 90)
-                    .attr("dy", "1em")
+                    .attr("y", 20)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text(montosLiterales(8240909523));
+                    .text("$" +montosLiterales(8240909523));
+
+
+                finalidad.enter()
+                  .append("text")
+                    .attr("class", "titulo")
+                    .attr("x", function(d) { return finalidadId[d]; }  )
+                    .attr("dy", "3em")
+                    .attr("y", 5)
+                    .attr("text-wrap", "normal")
+                    .attr("text-anchor", "middle")
+                    .text(function(d) { return d;})
+                    .call(wrap, 130); 
+                    
+
         }
 
 
@@ -367,37 +374,38 @@ d3.csv("/data/presupuesto.csv", function(data) {
         return presupuesto;
     })(d3, CustomTooltip);
 
-    function wrap(text, width) {
-
-        text.each(function() {
-            var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = .8, // ems
-                y = text.attr("y"),
-                x = text.attr("x"),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em"); // ver pos X
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan").attr("y", y).attr("x", x).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                }
-            }
-        });
-    }
 
     custom_bubble_chart.init(data);
     custom_bubble_chart.cambiarVista('todo');
 
 
 });
+
+function wrap(text, width) {
+
+    text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            x = text.attr("x"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em"); // ver pos X
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan").attr("y", y).attr("x", x).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        }
+    });
+}
 
 function addCommas(nStr) {
     nStr += '';
@@ -420,15 +428,15 @@ var formatNumber = function(n,decimals) {
     if (n >= 1000000000) {
         suffix = " mil millones"
         n = n / 1000000000
-        decimals = 0
+        decimals = 1
     } else if (n >= 1000000) {
         suffix = " millones"
         n = n / 1000000
-        decimals = 0 
+        decimals = 1 
     } else if (n >= 100000) {
-        suffix = " centenas de miles"
+        suffix = ""
         n = n / 100000
-        decimals = 0
+        decimals = 1
     } 
     
     
