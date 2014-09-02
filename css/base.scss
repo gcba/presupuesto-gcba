@@ -183,11 +183,44 @@ svg {
     }
 
     .claves {
-
+        
     }
 
     .colores {
-
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        li {
+            color: $white;
+            font-size: .8em;
+            display: inline-block;
+            width: auto;
+            padding: 5px;
+        }
+        .ssoc {
+            background-color: #53777A;
+            border: 1px solid darken(#53777A,10%)
+        }
+        .ssec {
+            background-color: #542437;
+            border: 1px solid darken(#542437,10%)
+        }
+        .adgu {
+            background-color: #ECD078;
+            border: 1px solid darken(#ECD078,10%)
+        }
+        .sseg {
+            background-color: #C02942;
+            border: 1px solid darken(#C02942,10%)
+        }
+        .depu {
+            background-color: #D95B43;
+            border: 1px solid darken(#D95B43,10%)
+        }
     }
 }
 

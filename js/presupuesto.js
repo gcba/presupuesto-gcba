@@ -35,6 +35,8 @@ d3.csv("data/presupuesto.csv", function(data) {
 
     });
 
+
+
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++) {
         finalidad2d[i] = [finalidad[i], totalesFinalidad[i], finalidadID[i]];
@@ -43,6 +45,7 @@ d3.csv("data/presupuesto.csv", function(data) {
     finalidad2d.sort(function(a, b) {
         return d3.descending(a[1], b[1]);
     })
+
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++) {
@@ -110,11 +113,6 @@ d3.csv("data/presupuesto.csv", function(data) {
             }
         }
 
-        //console.log(centroides_jurisdiccion);
-
-
-        //var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad", "Servicios Económicos", "Servicios Sociales"];
-
         var fill_color = d3.scale.ordinal()
             .domain(finalidad)
             .range(["#ECD078", "#D95B43", "#C02942", "#542437", "#53777A"]);
@@ -125,10 +123,6 @@ d3.csv("data/presupuesto.csv", function(data) {
                 }),
                 radius_scale = d3.scale.linear().domain([0, max_amount]).range([radioMinimo, radioMaximo]);
 
-            //create node objects from original data
-            //that will serve as the data behind each
-            //bubble in the vis, then add each node
-            //to nodes to be used later
             data.forEach(function(d) {
                 var node = {
                     id: d.id_jurisdiccion,
@@ -145,16 +139,12 @@ d3.csv("data/presupuesto.csv", function(data) {
                 };
                 nodes.push(node);
 
-                // console.log(nodes);
             });
 
             nodes.sort(function(a, b) {
                 return b.monto - a.monto;
             });
 
-            // var maxFinalidad = d3.max(data, function(d) { return d.y; }
-
-            // console.log(nodes);
 
             vis = d3.select("#presupuesto-visualizado").append("svg")
                 .attr("width", width)
@@ -312,6 +302,8 @@ d3.csv("data/presupuesto.csv", function(data) {
             borrarReferencias();
             var finalidadId = centroides_finalidad;
 
+
+
             var finalidadKeys = d3.keys(finalidadId);
             var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height - 90) + ")").selectAll(".finalidad").data(finalidadKeys);
 
@@ -417,6 +409,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             });
             tooltip.hideTooltip();
         }
+
 
         var presupuesto = {};
         presupuesto.init = function(_data) {

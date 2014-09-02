@@ -5427,6 +5427,35 @@ svg {
     padding-top: 25px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
+  .referencias .colores {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto; }
+    .referencias .colores li {
+      color: white;
+      font-size: .8em;
+      display: inline-block;
+      width: auto;
+      padding: 5px; }
+    .referencias .colores .ssoc {
+      background-color: #53777A;
+      border: 1px solid #3e595c; }
+    .referencias .colores .ssec {
+      background-color: #542437;
+      border: 1px solid #301520; }
+    .referencias .colores .adgu {
+      background-color: #ECD078;
+      border: 1px solid #e6c04b; }
+    .referencias .colores .sseg {
+      background-color: #C02942;
+      border: 1px solid #962034; }
+    .referencias .colores .depu {
+      background-color: #D95B43;
+      border: 1px solid #c24027; }
 
 .mas-info, .definiciones {
   font-size: .9em;
