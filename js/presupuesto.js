@@ -39,23 +39,26 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
 
     var finalidad2d = []; // armo array 2d para ordenar
-    for (var i = 0; i < finalidad.length; i++){
-        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i], finalidadID[i]]; 
+    for (var i = 0; i < finalidad.length; i++) {
+        finalidad2d[i] = [finalidad[i], totalesFinalidad[i], finalidadID[i]];
     }
 
-    finalidad2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
+    finalidad2d.sort(function(a, b) {
+        return d3.descending(a[1], b[1]);
+    })
 
-    // alert(finalidad2d);
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
-    for (var i = 0; i < jurisdiccion.length; i++){
-        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i], jurisdiccionID[i]]; 
+    for (var i = 0; i < jurisdiccion.length; i++) {
+        jurisdiccion2d[i] = [jurisdiccion[i], totalesJurisdiccion[i], jurisdiccionID[i]];
     }
 
-    jurisdiccion2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
+    jurisdiccion2d.sort(function(a, b) {
+        return d3.descending(a[1], b[1]);
+    })
 
 
- 
+
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
 
@@ -69,7 +72,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
             radioMinimo = 3,
             radioMaximo = 110,
             vis, force, circles, radius_scale,
-            montosLiterales = function(n){return formatNumber(n*1)};
+            montosLiterales = function(n) {
+                return formatNumber(n * 1)
+            };
 
         var center = {
             x: width / 2,
@@ -77,12 +82,13 @@ d3.csv("/data/presupuesto.csv", function(data) {
         };
 
         var centroides_finalidad = {};
-        for (var i = 0; i < finalidad.length; i++){
+        for (var i = 0; i < finalidad.length; i++) {
             centroides_finalidad[parseInt(finalidad2d[i][2])] = {
-              id: finalidad2d[i][0],
-              monto: finalidad2d[i][1],
-              x: (i+1) * width / 6,
-              y: height / 2 }
+                id: finalidad2d[i][0],
+                monto: finalidad2d[i][1],
+                x: (i + 1) * width / 6,
+                y: height / 2
+            }
         }
 
 
@@ -94,7 +100,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         var centroides_jurisdiccion = {};
         var contador = [1, 1];
 
-        for (var i = 0; i < jurisdiccion.length ; i++) {
+        for (var i = 0; i < jurisdiccion.length; i++) {
             centroides_jurisdiccion[parseInt(jurisdiccion2d[i][2])] = {
                 id: jurisdiccion2d[i][0],
                 monto: jurisdiccion2d[i][1],
@@ -108,11 +114,6 @@ d3.csv("/data/presupuesto.csv", function(data) {
             }
         }
 
-        // console.log(centroides_jurisdiccion);
-
-
-        //var finalidad = ["Administración Gubernamental", "Deuda Pública - Intereses y Gastos", "Servicios de Seguridad", "Servicios Económicos", "Servicios Sociales"];
-
         var fill_color = d3.scale.ordinal()
             .domain(finalidad)
             .range(["#ECD078", "#D95B43", "#C02942", "#542437", "#53777A"]);
@@ -123,10 +124,6 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 }),
                 radius_scale = d3.scale.linear().domain([0, max_amount]).range([radioMinimo, radioMaximo]);
 
-            //create node objects from original data
-            //that will serve as the data behind each
-            //bubble in the vis, then add each node
-            //to nodes to be used later
             data.forEach(function(d) {
                 var node = {
                     id: d.id_jurisdiccion,
@@ -143,16 +140,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 };
                 nodes.push(node);
 
-                // console.log(nodes);
             });
 
             nodes.sort(function(a, b) {
                 return b.monto - a.monto;
             });
 
-            // var maxFinalidad = d3.max(data, function(d) { return d.y; }
-
-            // console.log(nodes);
 
             vis = d3.select("#presupuesto-visualizado").append("svg")
                 .attr("width", width)
@@ -174,16 +167,16 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     return "bubble_" + d.id_finalidad;
                 })
                 .on("mouseover", function(d, i) {
-                  var el = d3.select(this)
-                      el.style("stroke-width",3)
-                      el.style("opacity", 1);
-                  show_details(d, i, this);
+                    var el = d3.select(this)
+                    el.style("stroke-width", 3)
+                    el.style("opacity", 1);
+                    show_details(d, i, this);
                 })
                 .on("mouseout", function(d, i) {
-                  hide_details(d, i, this);
-                  var el = d3.select(this)
-                      el.style("stroke-width",1.5)
-                      el.style("opacity", 0.9);
+                    hide_details(d, i, this);
+                    var el = d3.select(this)
+                    el.style("stroke-width", 1.5)
+                    el.style("opacity", 0.9);
                 });
 
             circles.transition().duration(1500).attr("r", function(d) {
@@ -192,24 +185,23 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         }
 
-        d3.selection.prototype.moveToFront = function() { 
-              return this.each(function() { 
-              this.parentNode.appendChild(this); 
-              }); 
-            };
+        d3.selection.prototype.moveToFront = function() {
+            return this.each(function() {
+                this.parentNode.appendChild(this);
+            });
+        };
 
         function charge(d) {
             if (d.value < 0) {
                 return 0
             } else {
                 //      return -Math.pow(d.radius,2.4)/7 
-                return -Math.pow(d.radius,1.9)
+                return -Math.pow(d.radius, 1.9)
                 // return -(d.radius * (d.radius) / 1.2)
             };
         }
 
         function start() {
-            //console.log('Inicio todo.');
 
             force = d3.layout.force()
                 .nodes(nodes)
@@ -312,72 +304,86 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
 
             var finalidadKeys = d3.keys(finalidadId);
-            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height-90) + ")").selectAll(".finalidad").data(finalidadKeys);
+            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height - 90) + ")").selectAll(".finalidad").data(finalidadKeys);
 
-                finalidad.enter()
-                  .append("text")
-                    .style("opacity",0)
-                    .attr("class", "titulo")
-                    .attr("x", function(i) { return finalidadId[i].x; }  )
-                    .attr("dy", "3em")
-                    .attr("y", -20)
-                    .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle")
-                    .text(function(i) { return finalidadId[i].id;})
-                    .call(wrap, 130)
-                    .transition().duration(500).style("opacity",1);
-                
-                finalidad.enter()
-                  .append("text")
-                    .style("opacity",0)
-                    .attr("class", "total")
-                    .attr("x", function(i) { return finalidadId[i].x; }  )
-                    .attr("y", 0)
-                    .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle")
-                    .text( function (i){
-                        return "$" +montosLiterales(finalidadId[i].monto);
-                    }
-                        )
-                    .transition().duration(750).style("opacity",1);
+            finalidad.enter()
+                .append("text")
+                .style("opacity", 0)
+                .attr("class", "titulo")
+                .attr("x", function(i) {
+                    return finalidadId[i].x;
+                })
+                .attr("dy", "3em")
+                .attr("y", -20)
+                .attr("text-wrap", "normal")
+                .attr("text-anchor", "middle")
+                .text(function(i) {
+                    return finalidadId[i].id;
+                })
+                .call(wrap, 130)
+                .transition().duration(500).style("opacity", 1);
+
+            finalidad.enter()
+                .append("text")
+                .style("opacity", 0)
+                .attr("class", "total")
+                .attr("x", function(i) {
+                    return finalidadId[i].x;
+                })
+                .attr("y", 0)
+                .attr("text-wrap", "normal")
+                .attr("text-anchor", "middle")
+                .text(function(i) {
+                    return "$" + montosLiterales(finalidadId[i].monto);
+                })
+                .transition().duration(750).style("opacity", 1);
         }
 
         function titulosJurisdiccion() {
-                  borrarReferencias();
-                    var jurisdiccionId = centroides_jurisdiccion;
+            borrarReferencias();
+            var jurisdiccionId = centroides_jurisdiccion;
 
-                    var jurisdiccionKeys = d3.keys(centroides_jurisdiccion);
-                    var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys);
+            var jurisdiccionKeys = d3.keys(centroides_jurisdiccion);
+            var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys);
 
-                        jurisdiccion.enter()
-                          .append("text")
-                            .style("opacity",0)
-                            .attr("class", "titulo")
-                            .attr("x", function(i) { return jurisdiccionId[i].x; }  )
-                            .attr("dy", "3em")
-                            .attr("y", function(i) { return jurisdiccionId[i].y-20; }  )
-                            .style(  "pointer-events",  "none")
-                            .attr("text-wrap", "normal")
-                            .attr("text-anchor", "middle")
-                            .text(function(i) { return jurisdiccionId[i].id;})
-                            .call(wrap, 130)
-                            .transition().duration(500).style("opacity",1);
-                        
-                        jurisdiccion.enter()
-                          .append("text")
-                            .style("opacity",0)
-                            .attr("class", "total")
-                            .attr("x", function(i) { return jurisdiccionId[i].x; } )
-                            .attr("y", function(i) { return jurisdiccionId[i].y; })
-                            .style(  "pointer-events",  "none")
-                            .attr("text-wrap", "normal")
-                            .attr("text-anchor", "middle")
-                            .text( function (i){
-                                return "$" +montosLiterales(jurisdiccionId[i].monto);
-                            }
-                                )
-                            .transition().duration(750).style("opacity",1);
-                }
+            jurisdiccion.enter()
+                .append("text")
+                .style("opacity", 0)
+                .attr("class", "titulo")
+                .attr("x", function(i) {
+                    return jurisdiccionId[i].x;
+                })
+                .attr("dy", "3em")
+                .attr("y", function(i) {
+                    return jurisdiccionId[i].y - 20;
+                })
+                .style("pointer-events", "none")
+                .attr("text-wrap", "normal")
+                .attr("text-anchor", "middle")
+                .text(function(i) {
+                    return jurisdiccionId[i].id;
+                })
+                .call(wrap, 130)
+                .transition().duration(500).style("opacity", 1);
+
+            jurisdiccion.enter()
+                .append("text")
+                .style("opacity", 0)
+                .attr("class", "total")
+                .attr("x", function(i) {
+                    return jurisdiccionId[i].x;
+                })
+                .attr("y", function(i) {
+                    return jurisdiccionId[i].y;
+                })
+                .style("pointer-events", "none")
+                .attr("text-wrap", "normal")
+                .attr("text-anchor", "middle")
+                .text(function(i) {
+                    return "$" + montosLiterales(jurisdiccionId[i].monto);
+                })
+                .transition().duration(750).style("opacity", 1);
+        }
 
 
 
@@ -416,17 +422,29 @@ d3.csv("/data/presupuesto.csv", function(data) {
         presupuesto.cambiarVista = function(ver_tipo) {
             if (ver_tipo == 'finalidad') {
                 mostrarFinalidad();
-                container.delay(200).animate({height:600},1000);
-                referencias.animate({opacity:0},250);
+                container.delay(200).animate({
+                    height: 600
+                }, 1000);
+                referencias.animate({
+                    opacity: 0
+                }, 250);
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
-                container.animate({height:900},500);
-                referencias.animate({opacity:0},250);
+                container.animate({
+                    height: 900
+                }, 500);
+                referencias.animate({
+                    opacity: 0
+                }, 250);
             } else {
                 mostrarGrupoCompleto();
-                container.delay(200).animate({height:600},1000);
-                referencias.delay(300).animate({opacity:1},350);
-                
+                container.delay(200).animate({
+                    height: 600
+                }, 1000);
+                referencias.delay(300).animate({
+                    opacity: 1
+                }, 350);
+
             }
         };
 
@@ -478,12 +496,12 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-var formatNumber = function(n,decimals) {
+var formatNumber = function(n, decimals) {
     var s, remainder, num, negativePrefix, negativeSuffix, prefix, suffix;
     suffix = ""
     negativePrefix = ""
     negativeSuffix = "";
-    
+
     if (n >= 1000000000) {
         suffix = " mil millones"
         n = n / 1000000000
@@ -491,44 +509,46 @@ var formatNumber = function(n,decimals) {
     } else if (n >= 1000000) {
         suffix = " millones"
         n = n / 1000000
-        decimals = 1 
+        decimals = 1
     } else if (n >= 100000) {
         suffix = ""
         n = n / 100000
         decimals = 1
-    } 
-    
-    
+    }
+
+
     prefix = ""
     if (decimals > 0) {
-        if (n<1) {prefix = "0"};
-        s = String(Math.round(n * (Math.pow(10,decimals))));
+        if (n < 1) {
+            prefix = "0"
+        };
+        s = String(Math.round(n * (Math.pow(10, decimals))));
         if (s < 10) {
-            remainder = "0" + s.substr(s.length-(decimals),decimals);
+            remainder = "0" + s.substr(s.length - (decimals), decimals);
             num = "";
-        } else{
-            remainder = s.substr(s.length-(decimals),decimals);
-            num = s.substr(0,s.length - decimals);
+        } else {
+            remainder = s.substr(s.length - (decimals), decimals);
+            num = s.substr(0, s.length - decimals);
         }
-        
-        
-        return  negativePrefix + prefix + num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + "." + remainder + suffix + negativeSuffix;
+
+
+        return negativePrefix + prefix + num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + "." + remainder + suffix + negativeSuffix;
     } else {
         s = String(Math.round(n));
         s = s.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-        return  negativePrefix + s + suffix + negativeSuffix;
+        return negativePrefix + s + suffix + negativeSuffix;
     }
 };
 
 
 $(document).ready(function() {
 
-  $('#seleccion a').click(function() {
-      var ver_tipo = $(this).attr('id');
-      $('#seleccion a').removeClass('disabled');
-      $(this).toggleClass('disabled');
-      custom_bubble_chart.cambiarVista(ver_tipo);
-      return false;
-  });
+    $('#seleccion a').click(function() {
+        var ver_tipo = $(this).attr('id');
+        $('#seleccion a').removeClass('disabled');
+        $(this).toggleClass('disabled');
+        custom_bubble_chart.cambiarVista(ver_tipo);
+        return false;
+    });
 
 });
