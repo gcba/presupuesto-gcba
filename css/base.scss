@@ -141,7 +141,7 @@ header{
     height: 100%;
     position: absolute;
     z-index: 40;
-    top: 50px;
+    top: 60px;
 }
 
 svg {
@@ -149,7 +149,8 @@ svg {
     overflow: hidden;
     
     .titulo {
-
+        font-family: $fontset-open;
+        font-size: .9em;
     }
 
     .total {
@@ -174,7 +175,7 @@ svg {
         text-align: center;
         margin: 0 auto;
         width: 450px;
-        padding-top: 30px;
+        padding-top: 25px;
     }
     
     .claves ul, .colores ul {

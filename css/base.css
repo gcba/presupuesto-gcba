@@ -5399,11 +5399,14 @@ header {
   height: 100%;
   position: absolute;
   z-index: 40;
-  top: 50px; }
+  top: 60px; }
 
 svg {
   height: 100%;
   overflow: hidden; }
+  svg .titulo {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .9em; }
   svg .total {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
@@ -5421,7 +5424,7 @@ svg {
     text-align: center;
     margin: 0 auto;
     width: 450px;
-    padding-top: 30px; }
+    padding-top: 25px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
 

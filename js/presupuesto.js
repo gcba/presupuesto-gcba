@@ -254,7 +254,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
                         .attr("cy", function(d) {
                             return d.y;
                         })
-                        .attr("fill", "rgba(255,255,255,0.9");
+                        .attr("stroke", function(d) {
+                            return d3.rgb(fill_color(d.finalidad)).darker(.9);
+                        })
+                        .attr("fill", "#FFF");
                 });
             force.start();
             borrarReferencias();
@@ -308,16 +311,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                           };
 
             var finalidadKeys = d3.keys(finalidadId);
-            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + 20 + ")").selectAll(".finalidad").data(finalidadKeys);
-                
-                finalidad.enter()
-                  .append("text")
-                    .attr("class", "total")
-                    .attr("x", function(d) { return finalidadId[d]; }  )
-                    .attr("y", 20)
-                    .attr("text-wrap", "normal")
-                    .attr("text-anchor", "middle")
-                    .text("$" +montosLiterales(8240909523));
+            var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height-90) + ")").selectAll(".finalidad").data(finalidadKeys);
 
 
                 finalidad.enter()
@@ -325,12 +319,21 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("class", "titulo")
                     .attr("x", function(d) { return finalidadId[d]; }  )
                     .attr("dy", "3em")
-                    .attr("y", 5)
+                    .attr("y", -20)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
                     .text(function(d) { return d;})
                     .call(wrap, 130); 
-                    
+                
+                finalidad.enter()
+                  .append("text")
+                    .attr("class", "total")
+                    .attr("x", function(d) { return finalidadId[d]; }  )
+                    .attr("y", 0)
+                    .attr("text-wrap", "normal")
+                    .attr("text-anchor", "middle")
+                    .text("$" +montosLiterales(8240909523));
+
 
         }
 
@@ -380,6 +383,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         presupuesto.cambiarVista = function(ver_tipo) {
             if (ver_tipo == 'finalidad') {
                 mostrarFinalidad();
+                container.delay(200).animate({height:600},1000);
                 referencias.animate({opacity:0},250);
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
@@ -387,7 +391,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 referencias.animate({opacity:0},250);
             } else {
                 mostrarGrupoCompleto();
-                container.animate({height:600},500);
+                container.delay(200).animate({height:600},1000);
                 referencias.delay(300).animate({opacity:1},350);
                 
             }
