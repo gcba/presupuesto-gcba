@@ -6,6 +6,7 @@ referencias = $(".referencias");
 d3.csv("/data/presupuesto.csv", function(data) {
 
     var jurisdiccion = [];
+    var jurisdiccionID = [];
     var finalidad = [];
     var finalidadID = [];
     var totalesFinalidad = [];
@@ -13,10 +14,15 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     data.forEach(function(d) {
 
-        if (jurisdiccion.indexOf(d.id_jurisdiccion) < 0) {
-            jurisdiccion.push(d.id_jurisdiccion); // junto todos los ids
+        if (jurisdiccion.indexOf(d.jurisdiccion) < 0) {
+            jurisdiccion.push(d.jurisdiccion); // junto todos los ids
             totalesJurisdiccion.push(0);
         };
+
+        if (jurisdiccionID.indexOf(d.id_jurisdiccion) < 0) {
+            jurisdiccionID.push(d.id_jurisdiccion); // junto todos los ids
+        };
+
         if (finalidad.indexOf(d.finalidad) < 0) {
             finalidad.push(d.finalidad); // junto todos las etiquetas
             totalesFinalidad.push(0);
@@ -26,7 +32,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         };
 
         totalesFinalidad[finalidad.indexOf(d.finalidad)] = parseInt(totalesFinalidad[finalidad.indexOf(d.finalidad)]) + parseInt(d.monto);
-        totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)]) + parseInt(d.monto);
+        totalesJurisdiccion[jurisdiccion.indexOf(d.jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.jurisdiccion)]) + parseInt(d.monto);
 
     });
 
@@ -39,18 +45,12 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++){
-        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i]]; 
+        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i], jurisdiccionID[i]]; 
     }
 
+    jurisdiccion2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
 
-    
-
-
-    // armo array 2d ordenados
-    // finalidad2d = orderMultiDimensionalArray (finalidad2d, 1);
-    jurisdiccion2d = orderMultiDimensionalArray (jurisdiccion2d, 1);
-
-    console.log(finalidad2d);
+    console.log(jurisdiccion2d);
 
  
     custom_bubble_chart = (function(d3, CustomTooltip) {
@@ -89,9 +89,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
         var contador = [1, 1];
 
         for (var i = 0; i < jurisdiccion.length ; i++) {
-            centroides_jurisdiccion[jurisdiccion[i]] = {
+            centroides_jurisdiccion[parseInt(jurisdiccion2d[i][2])] = {
                 x: contador[0] * (width - correccion) / columnas,
-                y: (height / filas) * contador[1] + 20
+                y: (height / filas) * contador[1] + 100
             }
             contador[0]++;
             if (contador[0] === 5) {
