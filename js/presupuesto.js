@@ -350,6 +350,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                             .attr("x", function(i) { return jurisdiccionId[i].x; }  )
                             .attr("dy", "3em")
                             .attr("y", function(i) { return jurisdiccionId[i].y-20; }  )
+                            .style(  "pointer-events",  "none")
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
                             .text(function(i) { return jurisdiccionId[i].id;})
@@ -362,6 +363,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                             .attr("class", "total")
                             .attr("x", function(i) { return jurisdiccionId[i].x; } )
                             .attr("y", function(i) { return jurisdiccionId[i].y; })
+                            .style(  "pointer-events",  "none")
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
                             .text( function (i){
