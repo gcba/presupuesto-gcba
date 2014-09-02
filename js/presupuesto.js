@@ -25,9 +25,21 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     });
 
-    console.log(finalidad ,  totalesFinalidad);
-    console.log(jurisdiccion ,  totalesJurisdiccion);
+    var finalidad2d = []; // armo array 2d para ordenar
+    for (var i = 0; i < finalidad.length; i++){
+        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i]]; 
+    }
 
+    var jurisdiccion2d = []; // armo array 2d para ordenar
+    for (var i = 0; i < jurisdiccion.length; i++){
+        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i]]; 
+    }
+
+    // armo array 2d ordenados
+    finalidad2d = orderMultiDimensionalArray (finalidad2d, 1);
+    jurisdiccion2d = orderMultiDimensionalArray (jurisdiccion2d, 1);
+
+ 
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
 
@@ -47,9 +59,6 @@ d3.csv("/data/presupuesto.csv", function(data) {
             y: height / 2
         };
 
-        for (var i = 0; i < finalidad.length; i++) {
-            console.log( finalidad[i] , totalesFinalidad[i] );
-        }
 
         var centroides_finalidad = {
 
@@ -460,6 +469,34 @@ var formatNumber = function(n,decimals) {
         return  negativePrefix + s + suffix + negativeSuffix;
     }
 };
+
+
+
+
+function sortNumber(a,b) {
+    return a - b;
+}
+
+function orderMultiDimensionalArray (toOrderArray, campo) {
+    position = new Array();
+    newRow = new Array();
+    jQuery.each(toOrderArray, function(key, row) {
+            regis = row[campo];
+            position[key]  = [regis, key];
+            newRow[key] = toOrderArray[key];
+    });
+
+    position.sort(sortNumber);
+    
+    returnArray = new Array();
+    jQuery.each(position, function(key, row) {
+            pos = position[key][1];
+            returnArray[key] = newRow[pos];
+    });             
+    
+    return returnArray;
+}
+
 
 $(document).ready(function() {
 
