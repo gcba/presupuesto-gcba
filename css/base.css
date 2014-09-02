@@ -5371,7 +5371,8 @@ header {
 
 .jumbotron {
   background-color: transparent;
-  text-align: center; }
+  text-align: center;
+  padding-bottom: 0; }
   .jumbotron h1 {
     font-size: 4.5rem;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5398,11 +5399,14 @@ header {
   height: 100%;
   position: absolute;
   z-index: 40;
-  top: 50px; }
+  top: 0px; }
 
 svg {
   height: 100%;
   overflow: hidden; }
+  svg .titulo {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .9em; }
   svg .total {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
@@ -5420,9 +5424,16 @@ svg {
     text-align: center;
     margin: 0 auto;
     width: 450px;
-    padding-top: 50px; }
+    padding-top: 25px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
+
+.mas-info {
+  font-size: .9em;
+  text-align: center;
+  z-index: 50;
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 /* 
 
