@@ -97,7 +97,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         for (var i = 0; i < jurisdiccion.length; i++) {
             centroides_jurisdiccion[jurisdiccion[i]] = {
                 x: contador[0] * (width - correccion) / columnas,
-                y: (height / filas) * contador[1]
+                y: (height / filas) * contador[1] + 20
             }
             contador[0]++;
             if (contador[0] === 5) {
@@ -152,13 +152,13 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
             vis = d3.select("#presupuesto-visualizado").append("svg")
                 .attr("width", width)
-                .attr("id", "svg_vis");
 
             circles = vis.selectAll("circle")
                 .data(nodes)
                 .enter()
                 .append("circle")
                 .attr("r", 0)
+                .style("opacity", 0.9)
                 .attr("fill", function(d) {
                     return fill_color(d.finalidad);
                 })
@@ -171,13 +171,15 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 })
                 .on("mouseover", function(d, i) {
                   var el = d3.select(this)
-                      el.style("stroke-width",3);
+                      el.style("stroke-width",3)
+                      el.style("opacity", 1);
                   show_details(d, i, this);
                 })
                 .on("mouseout", function(d, i) {
                   hide_details(d, i, this);
                   var el = d3.select(this)
-                      el.style("stroke-width",1.5);
+                      el.style("stroke-width",1.5)
+                      el.style("opacity", 0.9);
                 });
 
             circles.transition().duration(1500).attr("r", function(d) {
@@ -217,6 +219,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 .friction(friction)
                 .on("tick", function(e) {
                     circles.each(moverAlCentro(e.alpha))
+                        .attr("fill", function(d) {
+                            return fill_color(d.finalidad);
+                        })
                         .attr("cx", function(d) {
                             return d.x;
                         })
@@ -238,9 +243,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
         }
 
         function mostrarJurisdiccion() {
-            force.gravity(gravedad)
+            force.gravity(-.01)
                 .charge(charge)
-                .friction(friction)
+                .friction(.5)
                 .on("tick", function(e) {
                     circles.each(ordenJurisdiccion(e.alpha))
                         .attr("cx", function(d) {
@@ -248,7 +253,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                         })
                         .attr("cy", function(d) {
                             return d.y;
-                        });
+                        })
+                        .attr("fill", "rgba(255,255,255,0.9");
                 });
             force.start();
             borrarReferencias();
@@ -268,6 +274,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
                 .friction(0.9)
                 .on("tick", function(e) {
                     circles.each(ordenFinalidad(e.alpha))
+                        .attr("fill", function(d) {
+                            return fill_color(d.finalidad);
+                        })
                         .attr("cx", function(d) {
                             return d.x;
                         })

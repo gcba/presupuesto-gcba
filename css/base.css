@@ -5371,7 +5371,8 @@ header {
 
 .jumbotron {
   background-color: transparent;
-  text-align: center; }
+  text-align: center;
+  padding-bottom: 0; }
   .jumbotron h1 {
     font-size: 4.5rem;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5420,7 +5421,7 @@ svg {
     text-align: center;
     margin: 0 auto;
     width: 450px;
-    padding-top: 50px; }
+    padding-top: 30px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
 
