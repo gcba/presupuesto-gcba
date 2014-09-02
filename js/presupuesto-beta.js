@@ -6,7 +6,6 @@ referencias = $(".referencias");
 d3.csv("/data/presupuesto.csv", function(data) {
 
     var jurisdiccion = [];
-    var jurisdiccionID = [];
     var finalidad = [];
     var finalidadID = [];
     var totalesFinalidad = [];
@@ -14,15 +13,10 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     data.forEach(function(d) {
 
-        if (jurisdiccion.indexOf(d.jurisdiccion) < 0) {
-            jurisdiccion.push(d.jurisdiccion); // junto todos los ids
+        if (jurisdiccion.indexOf(d.id_jurisdiccion) < 0) {
+            jurisdiccion.push(d.id_jurisdiccion); // junto todos los ids
             totalesJurisdiccion.push(0);
         };
-
-        if (jurisdiccionID.indexOf(d.id_jurisdiccion) < 0) {
-            jurisdiccionID.push(d.id_jurisdiccion); // junto todos los ids
-        };
-
         if (finalidad.indexOf(d.finalidad) < 0) {
             finalidad.push(d.finalidad); // junto todos las etiquetas
             totalesFinalidad.push(0);
@@ -32,23 +26,25 @@ d3.csv("/data/presupuesto.csv", function(data) {
         };
 
         totalesFinalidad[finalidad.indexOf(d.finalidad)] = parseInt(totalesFinalidad[finalidad.indexOf(d.finalidad)]) + parseInt(d.monto);
-        totalesJurisdiccion[jurisdiccion.indexOf(d.jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.jurisdiccion)]) + parseInt(d.monto);
+        totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)] = parseInt(totalesJurisdiccion[jurisdiccion.indexOf(d.id_jurisdiccion)]) + parseInt(d.monto);
 
     });
 
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++){
-        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i], finalidadID[i]]; 
+        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i] , finalidadID[i]]; 
     }
-
-    finalidad2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++){
-        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i], jurisdiccionID[i]]; 
+        jurisdiccion2d[i] = [jurisdiccion[i] , totalesJurisdiccion[i]]; 
     }
 
+    // armo array 2d ordenados
+
+    finalidad2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
     jurisdiccion2d.sort(function(a, b){ return d3.descending(a[1], b[1]); })
+
 
  
     custom_bubble_chart = (function(d3, CustomTooltip) {
@@ -73,10 +69,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         var centroides_finalidad = {};
         for (var i = 0; i < finalidad.length; i++){
-            centroides_finalidad[parseInt(finalidad2d[i][2])] = { x: (i+1) * width / 6, y: height / 2 }
+            centroides_finalidad[parseInt(finalidadID[i])] = { x: (i+1) * width / 6, y: height / 2 }
         }
-
-        // console.log(finalidadID, finalidad);
 
         var columnas = 4;
         var filas = 6;
@@ -87,9 +81,9 @@ d3.csv("/data/presupuesto.csv", function(data) {
         var contador = [1, 1];
 
         for (var i = 0; i < jurisdiccion.length ; i++) {
-            centroides_jurisdiccion[parseInt(jurisdiccion2d[i][2])] = {
+            centroides_jurisdiccion[jurisdiccion[i]] = {
                 x: contador[0] * (width - correccion) / columnas,
-                y: (height / filas) * contador[1] + 100
+                y: (height / filas) * contador[1] + 20
             }
             contador[0]++;
             if (contador[0] === 5) {
@@ -159,7 +153,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     return d3.rgb(fill_color(d.finalidad)).darker();
                 })
                 .attr("id", function(d) {
-                    return "bubble_" + d.id_finalidad;
+                    return "bubble_" + d.id;
                 })
                 .on("mouseover", function(d, i) {
                   var el = d3.select(this)
@@ -327,10 +321,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     .attr("y", 0)
                     .attr("text-wrap", "normal")
                     .attr("text-anchor", "middle")
-                    .text( function (d,i){
-                        return "$" +montosLiterales(finalidad2d[i][1]);
-                    }
-                        )
+                    .text("$" +montosLiterales(8240909523))
                     .transition().duration(750).style("opacity",1);
         }
 
@@ -349,6 +340,17 @@ d3.csv("/data/presupuesto.csv", function(data) {
             content += "<span class=\"name\">Monto:</span><span class=\"value\"> $" + addCommas(montosLiterales(data.monto)) + "</span>";
             tooltip.showTooltip(content, d3.event);
         }
+
+        /*
+    id_jurisdiccion
+    jurisdiccion
+    id_finalidad
+    finalidad
+    id_funcion
+    funcion
+    monto
+    porcentaje
+  */
 
         function hide_details(data, i, element) {
             d3.select(element).attr("stroke", function(d) {
@@ -473,36 +475,13 @@ var formatNumber = function(n,decimals) {
     }
 };
 
-
-
-
-function sortNumber(a,b) {
-    return a - b;
-}
-
-function orderMultiDimensionalArray (toOrderArray, campo) {
-    position = new Array();
-    newRow = new Array();
-    jQuery.each(toOrderArray, function(key, row) {
-            regis = row[campo];
-            position[key]  = [regis, key];
-            newRow[key] = toOrderArray[key];
-    });
-
-    position.sort(sortNumber);
-    
-    returnArray = new Array();
-    jQuery.each(position, function(key, row) {
-            pos = position[key][1];
-            returnArray[key] = newRow[pos];
-    });             
-    
-    return returnArray;
-}
-
-
 $(document).ready(function() {
 
+  // d3.csv("/data/presupuesto.csv", function(data) {
+  //   custom_bubble_chart.init(data);
+  //   custom_bubble_chart.cambiarVista('finalidad');
+  // });
+  
   $('#seleccion a').click(function() {
       var ver_tipo = $(this).attr('id');
       $('#seleccion a').removeClass('disabled');
