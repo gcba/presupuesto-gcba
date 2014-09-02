@@ -7,6 +7,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     var jurisdiccion = [];
     var finalidad = [];
+    var finalidadID = [];
     var totalesFinalidad = [];
     var totalesJurisdiccion = [];
 
@@ -17,8 +18,11 @@ d3.csv("/data/presupuesto.csv", function(data) {
             totalesJurisdiccion.push(0);
         };
         if (finalidad.indexOf(d.finalidad) < 0) {
-            finalidad.push(d.finalidad); // junto todos los ids
+            finalidad.push(d.finalidad); // junto todos las etiquetas
             totalesFinalidad.push(0);
+        };
+        if (finalidadID.indexOf(d.id_finalidad) < 0) {
+            finalidadID.push(d.id_finalidad); // junto todos los ids
         };
 
         totalesFinalidad[finalidad.indexOf(d.finalidad)] = parseInt(totalesFinalidad[finalidad.indexOf(d.finalidad)]) + parseInt(d.monto);
@@ -28,7 +32,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++){
-        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i]]; 
+        finalidad2d[i] = [finalidad[i] , totalesFinalidad[i]], finalidadID[i]; 
     }
 
     var jurisdiccion2d = []; // armo array 2d para ordenar
@@ -55,36 +59,16 @@ d3.csv("/data/presupuesto.csv", function(data) {
             radioMaximo = 120,
             vis, force, circles, radius_scale,
             montosLiterales = function(n){return formatNumber(n*1)};
+
         var center = {
             x: width / 2,
             y: height / 2
         };
 
-
-        var centroides_finalidad = {
-
-            "3": {
-                x: width / 6,
-                y: height / 2
-            },
-            "4": {
-                x: 2 * width / 6,
-                y: height / 2
-            },
-            "1": {
-                x: 3 * width / 6,
-                y: height / 2
-            },
-            "2": {
-                x: 4 * width / 6,
-                y: height / 2
-            },
-            "5": {
-                x: 5 * width / 6,
-                y: height / 2
-            }
-
-        };
+        var centroides_finalidad = {};
+        for (var i = 0; i < finalidad.length; i++){
+            centroides_finalidad[parseInt(finalidadID[i])] = { x: (i+1) * width / 6, y: height / 2 }
+        }
 
         var columnas = 4;
         var filas = 6;
@@ -94,7 +78,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
         var centroides_jurisdiccion = {};
         var contador = [1, 1];
 
-        for (var i = 0; i < jurisdiccion.length; i++) {
+        for (var i = 0; i < jurisdiccion.length ; i++) {
             centroides_jurisdiccion[jurisdiccion[i]] = {
                 x: contador[0] * (width - correccion) / columnas,
                 y: (height / filas) * contador[1]
