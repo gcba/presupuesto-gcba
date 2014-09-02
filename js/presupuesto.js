@@ -138,12 +138,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
             // console.log(nodes);
 
-            vis = d3.select("#grafico").append("svg")
+            vis = d3.select("#presupuesto-visualizado").append("svg")
                 .attr("width", width)
-                .attr("height", height)
-            //.attr("shape-rendering","optimizeSpeed")
-            //.attr("color-rendering","optimizeSpeed")
-            .attr("viewBox", "0 0 1200 800")
                 .attr("id", "svg_vis");
 
             circles = vis.selectAll("circle")
@@ -162,10 +158,14 @@ d3.csv("/data/presupuesto.csv", function(data) {
                     return "bubble_" + d.id;
                 })
                 .on("mouseover", function(d, i) {
-                    show_details(d, i, this);
+                  var el = d3.select(this)
+                      el.style("stroke-width",3);
+                  show_details(d, i, this);
                 })
                 .on("mouseout", function(d, i) {
-                    hide_details(d, i, this);
+                  hide_details(d, i, this);
+                  var el = d3.select(this)
+                      el.style("stroke-width",1.5);
                 });
 
             circles.transition().duration(1500).attr("r", function(d) {
