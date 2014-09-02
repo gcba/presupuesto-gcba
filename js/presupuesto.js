@@ -351,7 +351,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
                             .attr("class", "titulo")
                             .attr("x", function(i) { return jurisdiccionId[i].x; }  )
                             .attr("dy", "3em")
-                            .attr("y", function(i) { return jurisdiccionId[i].y; }  )
+                            .attr("y", function(i) { return jurisdiccionId[i].y-20; }  )
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
                             .text(function(i) { return jurisdiccionId[i].id;})
