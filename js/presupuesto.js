@@ -3,7 +3,7 @@ var custom_bubble_chart, container, referencias;
 container = $("#contenedor-visualizacion");
 referencias = $(".referencias");
 
-d3.csv("/data/presupuesto.csv", function(data) {
+d3.csv("data/presupuesto.csv", function(data) {
 
     var jurisdiccion = [];
     var jurisdiccionID = [];
