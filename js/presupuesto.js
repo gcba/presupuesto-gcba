@@ -505,12 +505,12 @@ $(document).ready(function() {
   //   custom_bubble_chart.cambiarVista('finalidad');
   // });
   
-  $('#view_selection a').click(function() {
-    var ver_tipo = $(this).attr('id');
-    $('#view_selection a').removeClass('active');
-    $(this).toggleClass('active');
-    custom_bubble_chart.cambiarVista(ver_tipo);
-    return false;
+  $('#seleccion a').click(function() {
+      var ver_tipo = $(this).attr('id');
+      $('#seleccion a').removeClass('disabled');
+      $(this).toggleClass('disabled');
+      custom_bubble_chart.cambiarVista(ver_tipo);
+      return false;
   });
 
 });
