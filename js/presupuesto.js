@@ -89,6 +89,7 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         for (var i = 0; i < jurisdiccion.length ; i++) {
             centroides_jurisdiccion[parseInt(jurisdiccion2d[i][2])] = {
+                id: jurisdiccion2d[i][0],
                 x: contador[0] * (width - correccion) / columnas,
                 y: (height / filas) * contador[1] + 100
             }
@@ -339,46 +340,21 @@ d3.csv("/data/presupuesto.csv", function(data) {
 
         function titulosJurisdiccion() {
                   borrarReferencias();
-                    var jurisdiccionId = {
-                                    "Ministerio de Educacion": (width-100)/5 * 1,
-                                    "Ministerio de Salud": (width-100)/5 * 2,
-                                    "Ministerio de Ambiente Y Espacio Publico": (width-100)/5 * 3  ,
-                                    "Jefatura de Gabinete de Ministros": (width-100)/5 * 4,
-                                    "Ministerio de Justicia Y Seguridad": (width-100)/5 * 5,
-                                    "Obligaciones A Cargo Del Tesoro": (width-100)/5 * 5,
-                                    "Ministerio de Desarrollo Social": (width-100)/5 * 5,
-                                    "Ministerio de Desarrollo Economico": (width-100)/5 * 5,
-                                    "Ministerio de Desarrollo Urbano": (width-100)/5 * 5,
-                                    "Ministerio de Cultura": (width-100)/5 * 5,
-                                    "Servicio de La Deuda Publica": (width-100)/5 * 5,
-                                    "Ministerio de Hacienda": (width-100)/5 * 5,
-                                    "Consejo de La Magistratura": (width-100)/5 * 5,
-                                    "Legislatura de La Ciudad de Buenos Aires": (width-100)/5 * 5,
-                                    "Ministerio Publico": (width-100)/5 * 5,
-                                    "Jefatura de Gobierno": (width-100)/5 * 5,
-                                    "Secretaria de Gestion Comunal Y Atención Ciudadana": (width-100)/5 * 5,
-                                    "Ministerio de Modernización": (width-100)/5 * 5,
-                                    "Procuracion General de La Ciudad": (width-100)/5 * 5,
-                                    "Ministerio de Gobierno": (width-100)/5 * 5,
-                                    "Defensoria Del Pueblo": (width-100)/5 * 5,
-                                    "Auditoria General de La Ciudad de Buenos Aires": (width-100)/5 * 5,
-                                    "Tribunal Superior de Justicia": (width-100)/5 * 5,
-                                    "Sindicatura General de La Ciudad de Buenos Aires": (width-100)/5 * 5
-                                  };
+                    var jurisdiccionId = centroides_jurisdiccion;
 
-                    var jurisdiccionKeys = d3.keys(jurisdiccionId);
-                    var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + (height-90) + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys);
+                    var jurisdiccionKeys = d3.keys(centroides_jurisdiccion);
+                    var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys);
 
                         jurisdiccion.enter()
                           .append("text")
                             .style("opacity",0)
                             .attr("class", "titulo")
-                            .attr("x", function(i) { return jurisdiccionId[i]; }  )
+                            .attr("x", function(i) { return jurisdiccionId[i].x; }  )
                             .attr("dy", "3em")
-                            .attr("y", -20)
+                            .attr("y", function(i) { return jurisdiccionId[i].y; }  )
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
-                            .text(function(d) { return d;})
+                            .text(function(i) { return jurisdiccionId[i].id;})
                             .call(wrap, 130)
                             .transition().duration(500).style("opacity",1);
                         
@@ -386,8 +362,8 @@ d3.csv("/data/presupuesto.csv", function(data) {
                           .append("text")
                             .style("opacity",0)
                             .attr("class", "total")
-                            .attr("x", function(i) { return jurisdiccionId[i]; }  )
-                            .attr("y", 0)
+                            .attr("x", function(i) { return jurisdiccionId[i].x; } )
+                            .attr("y", function(i) { return jurisdiccionId[i].y; })
                             .attr("text-wrap", "normal")
                             .attr("text-anchor", "middle")
                             .text( function (d,i){
