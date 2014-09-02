@@ -1,4 +1,6 @@
-var custom_bubble_chart;
+var custom_bubble_chart, referencias;
+
+referencias = $(".referencias");
 
 d3.csv("/data/presupuesto.csv", function(data) {
 
@@ -352,10 +354,13 @@ d3.csv("/data/presupuesto.csv", function(data) {
         presupuesto.cambiarVista = function(ver_tipo) {
             if (ver_tipo == 'finalidad') {
                 mostrarFinalidad();
+                referencias.animate({opacity:0},250);
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
+                referencias.animate({opacity:0},250);
             } else {
                 mostrarGrupoCompleto();
+                referencias.delay(300).animate({opacity:1},350);
             }
         };
 
@@ -409,12 +414,7 @@ var formatNumber = function(n,decimals) {
     var s, remainder, num, negativePrefix, negativeSuffix, prefix, suffix;
     suffix = ""
     negativePrefix = ""
-    negativeSuffix = ""
-    if (n < 0) {
-      negativePrefix = "";
-      negativeSuffix = " in income"
-      n = -n
-    };
+    negativeSuffix = "";
     
     if (n >= 1000000000) {
         suffix = " mil millones"
