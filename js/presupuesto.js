@@ -115,11 +115,11 @@ d3.csv("data/presupuesto.csv", function(data) {
         }
 
         function yJurisdiccion (contador){
-                var separacion = 100;
+                var separacion = 40;
                 if (contador === 1){
                     return ((height / filas) * contador + 100); 
                 }else{
-                    return ((height / filas) * contador + 100) + (contador * separacion) - separacion;
+                    return ((height / filas) * contador + 100) + (contador * separacion);
                 }
                 
         }
@@ -446,7 +446,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
                 container.animate({
-                    height: 230 * filas
+                    height: 170 * filas
                 }, 500);
                 referencias.animate({
                     opacity: 0
