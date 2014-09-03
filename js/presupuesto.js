@@ -35,8 +35,6 @@ d3.csv("data/presupuesto.csv", function(data) {
 
     });
 
-
-
     var finalidad2d = []; // armo array 2d para ordenar
     for (var i = 0; i < finalidad.length; i++) {
         finalidad2d[i] = [finalidad[i], totalesFinalidad[i], finalidadID[i]];
@@ -46,7 +44,6 @@ d3.csv("data/presupuesto.csv", function(data) {
         return d3.descending(a[1], b[1]);
     })
 
-
     var jurisdiccion2d = []; // armo array 2d para ordenar
     for (var i = 0; i < jurisdiccion.length; i++) {
         jurisdiccion2d[i] = [jurisdiccion[i], totalesJurisdiccion[i], jurisdiccionID[i]];
@@ -55,8 +52,6 @@ d3.csv("data/presupuesto.csv", function(data) {
     jurisdiccion2d.sort(function(a, b) {
         return d3.descending(a[1], b[1]);
     })
-
-
 
     custom_bubble_chart = (function(d3, CustomTooltip) {
         "use strict";
@@ -75,6 +70,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                 return formatNumber(n * 1)
             };
 
+
         var center = {
             x: width / 2,
             y: height / 2
@@ -90,7 +86,6 @@ d3.csv("data/presupuesto.csv", function(data) {
             }
         }
 
-
         var columnas = 4;
         var filas = 6;
         var correccion = 250;
@@ -104,7 +99,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                 id: jurisdiccion2d[i][0],
                 monto: jurisdiccion2d[i][1],
                 x: contador[0] * (width - correccion) / columnas,
-                y: (height / filas) * contador[1] + 100
+                y: yJurisdiccion (contador[i,1])
             }
             contador[0]++;
             if (contador[0] === 5) {
@@ -120,7 +115,6 @@ d3.csv("data/presupuesto.csv", function(data) {
                 }else{
                     return ((height / filas) * contador + 100) + (contador * separacion);
                 }
-                
         }
 
         var fill_color = d3.scale.ordinal()
@@ -154,7 +148,6 @@ d3.csv("data/presupuesto.csv", function(data) {
             nodes.sort(function(a, b) {
                 return b.monto - a.monto;
             });
-
 
             vis = d3.select("#presupuesto-visualizado").append("svg")
                 .attr("width", width)
@@ -204,21 +197,18 @@ d3.csv("data/presupuesto.csv", function(data) {
             if (d.value < 0) {
                 return 0
             } else {
-                //      return -Math.pow(d.radius,2.4)/7 
                 return -Math.pow(d.radius, 1.9)
-                // return -(d.radius * (d.radius) / 1.2)
             };
         }
 
         function start() {
-
             force = d3.layout.force()
                 .nodes(nodes)
                 .size([width, height]);
         }
 
         function mostrarGrupoCompleto() {
-            // console.log('Inicio force.');
+            // Inicio force
             force.gravity(gravedad)
                 .charge(charge)
                 .friction(friction)
@@ -235,13 +225,12 @@ d3.csv("data/presupuesto.csv", function(data) {
                         })
                         .style("opacity", 1);
                 });
-            // console.log(force);
             force.start();
             borrarReferencias();
         }
 
         function moverAlCentro(alpha) {
-            // console.log('Muevo objetos al centro.');
+            // Muevo objetos al centro
             return function(d) {
                 d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha;
                 d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
@@ -263,8 +252,6 @@ d3.csv("data/presupuesto.csv", function(data) {
                         .attr("fill", "#FFF")
                         .style("opacity", 0.3);
                 });
-
-
             force.start();
             titulosJurisdiccion();
         }
@@ -298,7 +285,6 @@ d3.csv("data/presupuesto.csv", function(data) {
             titulosFinalidad();
         }
 
-
         function ordenFinalidad(alpha) {
             return function(d) {
                 var target = centroides_finalidad[d.id_finalidad];
@@ -307,13 +293,9 @@ d3.csv("data/presupuesto.csv", function(data) {
             };
         }
 
-
         function titulosFinalidad() {
             borrarReferencias();
             var finalidadId = centroides_finalidad;
-
-
-
             var finalidadKeys = d3.keys(finalidadId);
             var finalidad = vis.append("g").classed("finalidad", true).attr("transform", "translate(0," + (height - 90) + ")").selectAll(".finalidad").data(finalidadKeys);
 
@@ -355,7 +337,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             var jurisdiccionId = centroides_jurisdiccion;
 
             var jurisdiccionKeys = d3.keys(centroides_jurisdiccion);
-            var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys);
+            var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys); // =^.^= 
 
             jurisdiccion.enter()
                 .append("text")
@@ -396,13 +378,10 @@ d3.csv("data/presupuesto.csv", function(data) {
                 .transition().duration(750).style("opacity", 1);
         }
 
-
-
         function borrarReferencias() {
             var finalidad = vis.selectAll(".finalidad").remove();
             var jurisdiccion = vis.selectAll(".jurisdiccion").remove();
         }
-
 
         function show_details(data, i, element) {
             d3.select(element).attr("stroke", "black");
@@ -420,15 +399,11 @@ d3.csv("data/presupuesto.csv", function(data) {
             tooltip.hideTooltip();
         }
 
-
         var presupuesto = {};
         presupuesto.init = function(_data) {
             custom_chart(_data);
             start();
         };
-
-        // presupuesto.display_all = mostrarGrupoCompleto;
-        // presupuesto.display_year = mostrarFinalidad;
 
         presupuesto.cambiarVista = function(ver_tipo) {
             if (ver_tipo == 'finalidad') {
@@ -555,8 +530,6 @@ var formatNumber = function(n, decimals) {
             remainder = s.substr(s.length - (decimals), decimals);
             num = s.substr(0, s.length - decimals);
         }
-
-
         return negativePrefix + prefix + num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + "." + remainder + suffix + negativeSuffix;
     } else {
         s = String(Math.round(n));
@@ -564,7 +537,6 @@ var formatNumber = function(n, decimals) {
         return negativePrefix + s + suffix + negativeSuffix;
     }
 };
-
 
 $(document).ready(function() {
 
@@ -577,6 +549,4 @@ $(document).ready(function() {
         return false;
     });
 
-    $('.tooltip').tooltipster();
-    
 });
