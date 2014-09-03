@@ -24,18 +24,18 @@ Para más información visitá el sitio del [Ministerio de Hacienda](http://www.
 #### Instalación
 
 Utilizamos [bower](http://bower.io/) para cargar d3.js, jQuery y [grunt](http://gruntjs.com/) para compilar SASS, minificar CSS y JS. 
-```npm install
-```bower install
+	npm install
+	bower install
 
 #### Para servir un html local via HTTP
 
 *Via Python
-```python -m SimpleHTTPServer
+	python -m SimpleHTTPServer
 
 En Chrome correr localhost:8000
 
 *Via Node.js
-```npm install http-server -g
-```http-server .
+	npm install http-server -g
+	http-server .
 
 En Chrome correr localhost:8000
