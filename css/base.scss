@@ -28,6 +28,8 @@ $fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !defau
 $navbar-default-bg: transparent;
 $navbar-default-border: none;
 
+$bubbleSize: 30px;
+
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
 
 
@@ -186,10 +188,9 @@ svg {
     }
 
     .colores {
-        display: none;
         position: absolute;
-        bottom: 0;
-        left: 25%;
+        bottom: 0px;
+        left: 0px;
         padding: 0;
         width: 100%;
         margin: 0 auto;
@@ -197,8 +198,15 @@ svg {
             color: $white;
             font-size: .8em;
             display: inline-block;
-            width: auto;
-            padding: 5px;
+            width: $bubbleSize;
+            height: $bubbleSize;
+            padding: 0px;
+            overflow: hidden;
+            @include hide-text;
+            @include border-top-radius($bubbleSize);
+            @include border-bottom-radius($bubbleSize);
+            @include border-left-radius($bubbleSize);
+            @include border-right-radius($bubbleSize);
         }
         .ssoc {
             background-color: #53777A;

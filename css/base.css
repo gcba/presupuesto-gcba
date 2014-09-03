@@ -5429,10 +5429,9 @@ svg {
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
   .referencias .colores {
-    display: none;
     position: absolute;
-    bottom: 0;
-    left: 25%;
+    bottom: 0px;
+    left: 0px;
     padding: 0;
     width: 100%;
     margin: 0 auto; }
@@ -5440,8 +5439,23 @@ svg {
       color: white;
       font-size: .8em;
       display: inline-block;
-      width: auto;
-      padding: 5px; }
+      width: 30px;
+      height: 30px;
+      padding: 0px;
+      overflow: hidden;
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px; }
     .referencias .colores .ssoc {
       background-color: #53777A;
       border: 1px solid #3e595c; }

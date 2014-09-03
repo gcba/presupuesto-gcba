@@ -465,10 +465,10 @@ d3.csv("data/presupuesto.csv", function(data) {
     custom_bubble_chart.init(data);
     var path = $(location).attr('href');
 
-    if (path.split("#")[1] == '/todo'){
+    if (path.split("#")[1] == '/total'){
         $('#seleccion a').removeClass('disabled');
-        $('#todo').toggleClass('disabled');
-        custom_bubble_chart.cambiarVista("todo");
+        $('#total').toggleClass('disabled');
+        custom_bubble_chart.cambiarVista("total");
     } else if (path.split("#")[1] == '/finalidad'){
         $('#seleccion a').removeClass('disabled');
         $('#finalidad').toggleClass('disabled');
@@ -478,7 +478,7 @@ d3.csv("data/presupuesto.csv", function(data) {
         $('#jurisdiccion').toggleClass('disabled');
         custom_bubble_chart.cambiarVista("jurisdiccion");
     } else {
-        custom_bubble_chart.cambiarVista('todo');
+        custom_bubble_chart.cambiarVista('total');
     }
 
 });
