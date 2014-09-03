@@ -23,6 +23,14 @@ module.exports = function (grunt) {
                 src: 'css/base.css',
                 dest: 'css/base.min.css'
             }
+        },
+
+        uglify: {
+            my_target: {
+              files: {
+                'js/presupuesto.min.js': ['js/presupuesto.js']
+              }
+            }
         }
 
     });
@@ -32,7 +40,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     //Register tasks
     grunt.registerTask('default', ['watch']);
+    grunt.registerTask('deploy', ['cssmin', 'uglify']);
 };
