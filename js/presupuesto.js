@@ -577,5 +577,6 @@ $(document).ready(function() {
         return false;
     });
 
-
+    $('.tooltip').tooltipster();
+    
 });
