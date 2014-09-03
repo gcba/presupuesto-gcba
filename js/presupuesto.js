@@ -455,7 +455,6 @@ d3.csv("data/presupuesto.csv", function(data) {
     custom_bubble_chart.init(data);
     var path = $(location).attr('href');
 
-
     if (path.split("#")[1] == '/todo'){
         $('#seleccion a').removeClass('disabled');
         $('#todo').toggleClass('disabled');
