@@ -570,7 +570,7 @@ $(document).ready(function() {
         var ver_tipo = $(this).attr('id');
         window.location = "#/"+ver_tipo;
         $('#seleccion a').removeClass('disabled');
-        $(this).addClass('disabled');
+        $(this).toggleClass('disabled');
         custom_bubble_chart.cambiarVista(ver_tipo);
         return false;
     });
