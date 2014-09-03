@@ -113,6 +113,16 @@ d3.csv("data/presupuesto.csv", function(data) {
             }
         }
 
+        function yJurisdiccion (contador){
+                var separacion = 40;
+                if (contador === 1){
+                    return ((height / filas) * contador + 100); 
+                }else{
+                    return ((height / filas) * contador + 100) + (contador * separacion);
+                }
+                
+        }
+
         var fill_color = d3.scale.ordinal()
             .domain(finalidad)
             .range(["#ECD078", "#D95B43", "#C02942", "#542437", "#53777A"]);
@@ -432,7 +442,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
                 container.animate({
-                    height: 900
+                    height: 170 * filas
                 }, 500);
                 referencias.animate({
                     opacity: 0
@@ -562,7 +572,7 @@ $(document).ready(function() {
         var ver_tipo = $(this).attr('id');
         window.location = "#/"+ver_tipo;
         $('#seleccion a').removeClass('disabled');
-        $(this).toggleClass('disabled');
+        $(this).addClass('disabled');
         custom_bubble_chart.cambiarVista(ver_tipo);
         return false;
     });
