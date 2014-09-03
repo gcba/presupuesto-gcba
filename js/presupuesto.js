@@ -458,12 +458,15 @@ d3.csv("data/presupuesto.csv", function(data) {
 
     if (path.split("#")[1] == '/todo'){
         $('#seleccion a').removeClass('disabled');
+        $('#todo').toggleClass('disabled');
         custom_bubble_chart.cambiarVista("todo");
     } else if (path.split("#")[1] == '/finalidad'){
         $('#seleccion a').removeClass('disabled');
+        $('#finalidad').toggleClass('disabled');
         custom_bubble_chart.cambiarVista("finalidad");
     } else if (path.split("#")[1] == '/jurisdiccion'){
         $('#seleccion a').removeClass('disabled');
+        $('#jurisdiccion').toggleClass('disabled');
         custom_bubble_chart.cambiarVista("jurisdiccion");
     } else {
         custom_bubble_chart.cambiarVista('todo');
