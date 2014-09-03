@@ -446,7 +446,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
                 container.animate({
-                    height: 230 * filas
+                    height: 170 * filas
                 }, 500);
                 referencias.animate({
                     opacity: 0
@@ -566,4 +566,6 @@ $(document).ready(function() {
         return false;
     });
 
+    $('.tooltip').tooltipster();
+    
 });
