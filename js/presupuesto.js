@@ -452,10 +452,28 @@ d3.csv("data/presupuesto.csv", function(data) {
         return presupuesto;
     })(d3, CustomTooltip);
 
+    var hrefDisabled = function(){
+        $('a').each(function(index){
+            index.removeClass('disabled');
+        });
+    }
+
 
     custom_bubble_chart.init(data);
-    custom_bubble_chart.cambiarVista('todo');
+    var path = $(location).attr('href');
 
+    if (path.split("#")[1] == '/todo'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("todo");
+    } else if (path.split("#")[1] == '/finalidad'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("finalidad");
+    } else if (path.split("#")[1] == '/finalidad'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("jurisdiccion");
+    } else {
+        custom_bubble_chart.cambiarVista('todo');
+    }
 
 });
 
@@ -546,10 +564,12 @@ $(document).ready(function() {
 
     $('#seleccion a').click(function() {
         var ver_tipo = $(this).attr('id');
+        window.location = "#/"+ver_tipo;
         $('#seleccion a').removeClass('disabled');
         $(this).toggleClass('disabled');
         custom_bubble_chart.cambiarVista(ver_tipo);
         return false;
     });
+
 
 });
