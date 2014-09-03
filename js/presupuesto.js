@@ -104,8 +104,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                 id: jurisdiccion2d[i][0],
                 monto: jurisdiccion2d[i][1],
                 x: contador[0] * (width - correccion) / columnas,
-                y: yJurisdiccion( contador[1] )                     
-
+                y: (height / filas) * contador[1] + 100
             }
             contador[0]++;
             if (contador[0] === 5) {
@@ -123,7 +122,6 @@ d3.csv("data/presupuesto.csv", function(data) {
                 }
                 
         }
-
 
         var fill_color = d3.scale.ordinal()
             .domain(finalidad)
@@ -262,7 +260,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                         .attr("cy", function(d) {
                             return d.y;
                         })
-                        //.attr("fill", "#FFF")
+                        .attr("fill", "#FFF")
                         .style("opacity", 0.3);
                 });
 
@@ -272,9 +270,7 @@ d3.csv("data/presupuesto.csv", function(data) {
         }
 
         function ordenJurisdiccion(alpha) {
-
             return function(d) {
-
                 var target = centroides_jurisdiccion[d.id_jurisdiccion];
                 d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
                 d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
@@ -466,10 +462,22 @@ d3.csv("data/presupuesto.csv", function(data) {
         return presupuesto;
     })(d3, CustomTooltip);
 
-
     custom_bubble_chart.init(data);
-    custom_bubble_chart.cambiarVista('todo');
+    var path = $(location).attr('href');
 
+
+    if (path.split("#")[1] == '/todo'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("todo");
+    } else if (path.split("#")[1] == '/finalidad'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("finalidad");
+    } else if (path.split("#")[1] == '/jurisdiccion'){
+        $('#seleccion a').removeClass('disabled');
+        custom_bubble_chart.cambiarVista("jurisdiccion");
+    } else {
+        custom_bubble_chart.cambiarVista('todo');
+    }
 
 });
 
@@ -560,10 +568,12 @@ $(document).ready(function() {
 
     $('#seleccion a').click(function() {
         var ver_tipo = $(this).attr('id');
+        window.location = "#/"+ver_tipo;
         $('#seleccion a').removeClass('disabled');
-        $(this).toggleClass('disabled');
+        $(this).addClass('disabled');
         custom_bubble_chart.cambiarVista(ver_tipo);
         return false;
     });
+
 
 });
