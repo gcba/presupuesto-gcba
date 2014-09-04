@@ -178,7 +178,12 @@ d3.csv("data/presupuesto.csv", function(data) {
                     hide_details(d, i, this);
                     var el = d3.select(this)
                     el.style("stroke-width", 1.5)
-                    el.style("opacity", 0.9);
+                    el.style("opacity", function (){
+                        if ($('#jurisdiccion').hasClass('disabled')){
+                            return 0.3;
+                        }
+                            return 0.9;
+                        });
                 });
             
             circles.transition().duration(1500).attr("r", function(d) {
@@ -249,8 +254,8 @@ d3.csv("data/presupuesto.csv", function(data) {
                         .attr("cy", function(d) {
                             return d.y;
                         })
-                        .attr("fill", "#FFF")
-                        .style("opacity", 0.3);
+                        .attr("fill", "#FFF");
+                //        .style("opacity", 0.3);
                 });
             force.start();
             titulosJurisdiccion();
@@ -416,6 +421,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                 }, 250);
             } else if (ver_tipo == 'jurisdiccion') {
                 mostrarJurisdiccion();
+                circles.style("opacity", 0.3);
                 container.animate({
                     height: 170 * filas
                 }, 500);
