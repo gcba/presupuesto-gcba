@@ -5523,5 +5523,8 @@ footer {
     padding: 20px 50px; }
   footer .modernizacion {
     text-align: left; }
+  footer .labgcba {
+    text-align: center;
+    background: url("img/labgcba.png") no-repeat center center; }
   footer .hacienda {
     text-align: right; }
