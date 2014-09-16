@@ -10,7 +10,6 @@
 
     <script type="text/javascript" src="public/components/d3/d3.min.js"></script>
     <script type='text/javascript' src='public/components/jquery/dist/jquery.min.js'></script>
-
     <script type='text/javascript' src='js/CustomTooltip.js'></script>
 
     <link rel="stylesheet" href="css/base.min.css" />
@@ -43,19 +42,19 @@
 <body>
 
     <header class="navbar navbar-default navbar-static-top" id="top" role="navigation">
-            <div class="header-gcba">
-                <div class="header-inner">
-                    <div class="container">
-                        <a href="http://buenosaires.gob.ar" target="_blank">
-                            <div class="logo"></div>
-                        </a>
-                        <h2 class="slogan">En todo estás vos</h2>
-                    </div>
+        <div class="header-gcba">
+            <div class="header-inner">
+                <div class="container">
+                    <a href="http://buenosaires.gob.ar" target="_blank">
+                        <div class="logo"></div>
+                    </a>
+                    <h2 class="slogan">En todo estás vos</h2>
                 </div>
             </div>
         </div>
+        </div>
     </header>
-    
+
 
     <div class="jumbotron">
         <div class="container">
@@ -63,20 +62,21 @@
                 <div class="col-md-12 col-lg-12">
                     <h1 id="my-tooltip">¿A dónde van nuestros impuestos?</h1>
                     <h2>Explorá cómo se distribuye el presupuesto 2014 sancionado por la Legislatura de la Ciudad.</h2>
-                    <p class="lead">El presupuesto nos muestra de qué modo se decide gastar el dinero recaudado. Existen varias maneras de representarlo, una de las cuales es la clasificación por finalidad del gasto  que implica agrupar en función al tipo de servicio prestado según la institución correspondiente.<br>Recorré la visualización y conocé cómo es el presupuesto de nuestra Ciudad.</p>
+                    <p class="lead">El presupuesto nos muestra de qué modo se decide gastar el dinero recaudado. Existen varias maneras de representarlo, una de las cuales es la clasificación por finalidad del gasto que implica agrupar en función al tipo de servicio prestado según la institución correspondiente.
+                        <br>Recorré la visualización y conocé cómo es el presupuesto de nuestra Ciudad.</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="cuerpo" class="container">
-        
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="seleccion" class="btn-group btn-group-lg btn-group-justified">
-                  <a href="/#/total" id="todo" class="btn btn-default disabled">Presupuesto Total</a>
-                  <a href="/#/finalidad" id="finalidad" class="btn btn-default">Por Finalidad</a>
-                  <a href="/#/jurisdiccion" id="jurisdiccion" class="btn btn-default">Por Jurisdicción</a>
+                    <a href="/#/total" id="total" class="btn btn-default disabled">Presupuesto Total</a>
+                    <a href="/#/finalidad" id="finalidad" class="btn btn-default">Por Finalidad</a>
+                    <a href="/#/jurisdiccion" id="jurisdiccion" class="btn btn-default">Por Jurisdicción</a>
                 </div>
             </div>
         </div>
@@ -95,13 +95,13 @@
                             <li></li>
                         </ul>
                     </div>
-                    <div class="colores">
+                    <div class="colores" style="visibility: hidden;">
                         <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
+                            <li class="ssoc">Servicios Sociales</li>
+                            <li class="ssec">Servicios Económicos</li>
+                            <li class="adgu">Administración Gubernamental</li>
+                            <li class="sseg">Servicios de Seguridad</li>
+                            <li class="depu">Deuda Pública - Intereses y Gastos</li>
                         </ul>
                     </div>
                 </div>
@@ -110,38 +110,58 @@
         <div class="row">
             <div class="col-md-12 col-lg-12">
                 <p class="mas-info">Para más información visitá el sitio del <a href="http://www.buenosaires.gob.ar/areas/hacienda/presupuesto2014_final/" target="_blank">Ministerio de Hacienda</a> o el catálogo de datos abiertos de la Ciudad, <a href="http://data.buenosaires.gob.ar/dataset/presupuesto-sancionado" target="_blank">Buenos Aires Data</a>.</p>
-                <p class="definiciones">Definiciones:<br><strong>Jurisdicción:</strong> Son las organizaciones públicas sin personalidad jurídica que representan a cada uno de los poderes establecidos por la Constitución de Ciudad Autónoma de Buenos Aires. El Art. 6º de la Ley Nº 70 establece como Jurisdicciones a las siguientes unidades institucionales: Legislatura, Justicia, Jefatura de Gobierno y los Ministerios del Poder Ejecutivo. <br><strong>Finalidad:</strong> Es un criterio de clasificación del gasto según la naturaleza de los servicios que prestan las instituciones públicas a la comunidad. El nivel de cuentas de Finalidad se encuentra desagregado en Funciones.<br><strong>Función:</strong> Es el nivel de cuentas dentro de la clasificación del gasto por Finalidad y Función que permite examinar en el tiempo las tendencias del gasto para las funciones generales del Gobierno. Su nivel de cuenta inmediato superior es la Finalidad.
+                <p class="definiciones">Definiciones:
+                    <br>
+                    <strong>Jurisdicción:</strong>Son las organizaciones públicas sin personalidad jurídica que representan a cada uno de los poderes establecidos por la Constitución de Ciudad Autónoma de Buenos Aires. El Art. 6º de la Ley Nº 70 establece como Jurisdicciones a las siguientes unidades institucionales: Legislatura, Justicia, Jefatura de Gobierno y los Ministerios del Poder Ejecutivo.
+                    <br>
+                    <strong>Finalidad:</strong>Es un criterio de clasificación del gasto según la naturaleza de los servicios que prestan las instituciones públicas a la comunidad. El nivel de cuentas de Finalidad se encuentra desagregado en Funciones.
+                    <br>
+                    <strong>Función:</strong>Es el nivel de cuentas dentro de la clasificación del gasto por Finalidad y Función que permite examinar en el tiempo las tendencias del gasto para las funciones generales del Gobierno. Su nivel de cuenta inmediato superior es la Finalidad.
                 </p>
             </div>
         </div>
     </div>
 
-    
+
 
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 ministerio modernizacion">
+                <div class="col-md-4 ministerio modernizacion">
                     Ministerio de Modernización
                 </div>
-                <div class="col-md-6 ministerio hacienda">
+
+                <div class="col-md-4 ministerio labgcba">
+                    &nbsp;
+                </div>
+
+                <div class="col-md-4 ministerio hacienda">
                     Ministerio de Hacienda
                 </div>
             </div>
         </div>
     </footer>
 
+    <script type="text/javascript" src="public/components/d3/d3.min.js"></script>
+    <script type='text/javascript' src='public/components/jquery/dist/jquery.min.js'></script>
+    <script type='text/javascript' src='js/CustomTooltip.js'></script>
+    <script type="text/javascript" src="js/presupuesto.js"></script>
     <script>
-
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-52502664-2', 'auto');
-        ga('send', 'pageview');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-52502664-2', 'auto');
+    ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="js/presupuesto.min.js"></script>
+>>>>>>> master
 </body>
 
 </html>

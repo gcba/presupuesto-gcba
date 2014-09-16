@@ -2,7 +2,7 @@
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 
 @include font-face('Gotham', 'fonts/gotham');
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:400,800);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 /* ########
    Colores
@@ -18,7 +18,6 @@ $white: #FFF;
    ######## */
 
 $fontset-default: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$fontset-open: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 
@@ -28,6 +27,8 @@ $fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !defau
 
 $navbar-default-bg: transparent;
 $navbar-default-border: none;
+
+$bubbleSize: 30px;
 
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss";
 
@@ -50,7 +51,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: $fontset-open;
+    font-family: $fontset-default;
     background-color: #FCF9EB;
 }
 
@@ -70,7 +71,6 @@ header{
         padding:10px 0;
         overflow:visible;
         background-color: transparent;
-        // @include transition (background-color 0.4s ease-in-out);
     }
 
     .header-inner {
@@ -124,6 +124,7 @@ header{
     }
     .lead {
         font-size: 1em;
+        font-weight: 400;
         width: 60%;
         margin: 0 auto;
         padding-top: 16px;
@@ -149,7 +150,7 @@ svg {
     overflow: hidden;
     
     .titulo {
-        font-family: $fontset-open;
+        font-family: $fontset-default;
         font-size: .9em;
     }
 
@@ -183,11 +184,50 @@ svg {
     }
 
     .claves {
-
+        
     }
 
     .colores {
-
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding: 0;
+        width: 100%;
+        margin: 0 auto;
+        li {
+            color: $white;
+            font-size: .8em;
+            display: inline-block;
+            width: $bubbleSize;
+            height: $bubbleSize;
+            padding: 0px;
+            overflow: hidden;
+            @include hide-text;
+            @include border-top-radius($bubbleSize);
+            @include border-bottom-radius($bubbleSize);
+            @include border-left-radius($bubbleSize);
+            @include border-right-radius($bubbleSize);
+        }
+        .ssoc {
+            background-color: #53777A;
+            border: 1px solid darken(#53777A,10%)
+        }
+        .ssec {
+            background-color: #542437;
+            border: 1px solid darken(#542437,10%)
+        }
+        .adgu {
+            background-color: #ECD078;
+            border: 1px solid darken(#ECD078,10%)
+        }
+        .sseg {
+            background-color: #C02942;
+            border: 1px solid darken(#C02942,10%)
+        }
+        .depu {
+            background-color: #D95B43;
+            border: 1px solid darken(#D95B43,10%)
+        }
     }
 }
 
@@ -246,6 +286,11 @@ footer {
     }
     .modernizacion {
         text-align: left;
+    }
+    .labgcba {
+        text-align: center;
+        background: url("img/labgcba.png") no-repeat center center;
+
     }
     .hacienda {
         text-align: right;

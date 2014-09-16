@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:400,800);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 @font-face {
   font-family: "Gotham";
   font-weight: normal;
@@ -5322,7 +5322,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #FCF9EB; }
 
 header {
@@ -5385,6 +5385,7 @@ header {
     margin: 0 auto; }
   .jumbotron .lead {
     font-size: 1em;
+    font-weight: 400;
     width: 60%;
     margin: 0 auto;
     padding-top: 16px; }
@@ -5405,7 +5406,7 @@ svg {
   height: 100%;
   overflow: hidden; }
   svg .titulo {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: .9em; }
   svg .total {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -5427,6 +5428,49 @@ svg {
     padding-top: 25px; }
   .referencias .claves ul, .referencias .colores ul {
     list-style-type: none; }
+  .referencias .colores {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto; }
+    .referencias .colores li {
+      color: white;
+      font-size: .8em;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding: 0px;
+      overflow: hidden;
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px; }
+    .referencias .colores .ssoc {
+      background-color: #53777A;
+      border: 1px solid #3e595c; }
+    .referencias .colores .ssec {
+      background-color: #542437;
+      border: 1px solid #301520; }
+    .referencias .colores .adgu {
+      background-color: #ECD078;
+      border: 1px solid #e6c04b; }
+    .referencias .colores .sseg {
+      background-color: #C02942;
+      border: 1px solid #962034; }
+    .referencias .colores .depu {
+      background-color: #D95B43;
+      border: 1px solid #c24027; }
 
 .mas-info, .definiciones {
   font-size: .9em;
@@ -5479,5 +5523,8 @@ footer {
     padding: 20px 50px; }
   footer .modernizacion {
     text-align: left; }
+  footer .labgcba {
+    text-align: center;
+    background: url("img/labgcba.png") no-repeat center center; }
   footer .hacienda {
     text-align: right; }
