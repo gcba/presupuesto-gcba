@@ -2,7 +2,7 @@ var custom_bubble_chart, container, referencias;
 container = $("#contenedor-visualizacion");
 referencias = $(".referencias");
 
-d3.csv("data/presupuesto.csv", function(data) {
+d3.csv("data/presupuesto2015.csv", function(data) {
 
     var jurisdiccion = [];
     var jurisdiccionID = [];
@@ -111,7 +111,7 @@ d3.csv("data/presupuesto.csv", function(data) {
         function yJurisdiccion (contador){
                 var separacion = 40;
                 if (contador === 1){
-                    return ((height / filas) * contador + 100); 
+                    return ((height / filas) * contador + 100);
                 }else{
                     return ((height / filas) * contador + 100) + (contador * separacion);
                 }
@@ -185,7 +185,7 @@ d3.csv("data/presupuesto.csv", function(data) {
                             return 0.9;
                         });
                 });
-            
+
             circles.transition().duration(1500).attr("r", function(d) {
                 return d.radius;
             });
@@ -341,7 +341,7 @@ d3.csv("data/presupuesto.csv", function(data) {
             var jurisdiccionId = centroides_jurisdiccion;
 
             var jurisdiccionKeys = d3.keys(centroides_jurisdiccion);
-            var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys); // =^.^= 
+            var jurisdiccion = vis.append("g").classed("jurisdiccion", true).attr("transform", "translate(0," + 0 + ")").selectAll(".jurisdiccion").data(jurisdiccionKeys); // =^.^=
 
             jurisdiccion.enter()
                 .append("text")
