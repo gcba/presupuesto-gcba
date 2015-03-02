@@ -1,87 +1,87 @@
 id_jurisdiccion,jurisdiccion,id_finalidad,finalidad,id_funcion,funcion,monto,porcentaje
-60,Ministerio De Hacienda,1,Dirección Ejecutiva,6,Administración Fiscal,1691413631,91.87
-99,Servicio De La Deuda Publica,1,Dirección Ejecutiva,6,Administración Fiscal,149673699,8.13
-35,Ministerio De Ambiente Y Espacio Publico,3,Trabajo,8,Agua Potable Y Alcantarillado,562944658,100.00
-30,Ministerio De Desarrollo Urbano,3,Vivienda,8,Agua Potable Y Alcantarillado,447680057,97.31
-99,Servicio De La Deuda Publica,3,Vivienda,8,Agua Potable Y Alcantarillado,12357784,2.69
-99,Servicio De La Deuda Publica,1,Administración Fiscal,7,Control De La Gestión,83045350,100.00
-2,Auditoria General De La Ciudad De Buenos Aires,1,Administración Gubernamental,7,Control De La Gestión,315604491,33.85
-3,Defensoria Del Pueblo,1,Administración Gubernamental,7,Control De La Gestión,536394000,57.53
-8,Sindicatura General De La Ciudad De Buenos Aires,1,Administración Gubernamental,7,Control De La Gestión,80355255,8.62
-20,Jefatura De Gobierno,1,Dirección Ejecutiva,7,Control De La Gestión,196068215,100.00
-21,Jefatura De Gabinete De Ministros,1,Relaciones Interiores,7,Control De La Gestión,7594397,100.00
-20,Jefatura De Gobierno,3,Educación,5,Cultura,110016069,5.12
-50,Ministerio De Cultura,3,Educación,5,Cultura,1895025359,88.26
-99,Servicio De La Deuda Publica,3,Educación,5,Cultura,142001145,6.61
-21,Jefatura De Gabinete De Ministros,3,Promoción Y Acción Social,5,Cultura,123369418,28.35
-65,Ministerio De Desarrollo Economico,3,Promoción Y Acción Social,5,Cultura,311798619,71.65
-98,Servicio De La Deuda Publica,5,Deuda Pública – Intereses Y Gastos,1,Deuda Pública – Intereses Y Gastos,2794173000,100.00
-21,Jefatura De Gabinete De Ministros,1,Administración Gubernamental,3,Dirección Ejecutiva,167621651,6.42
-20,Jefatura De Gobierno,1,Administración Gubernamental,3,Dirección Ejecutiva,451617135,17.29
-65,Ministerio De Desarrollo Economico,1,Administración Gubernamental,3,Dirección Ejecutiva,232929928,8.92
-60,Ministerio De Hacienda,1,Administración Gubernamental,3,Dirección Ejecutiva,103145768,3.95
-68,Ministerio De Modernizacion,1,Administración Gubernamental,3,Dirección Ejecutiva,588239436,22.53
-9,Procuracion General  De La Ciudad,1,Administración Gubernamental,3,Dirección Ejecutiva,398175743,15.25
-90,Secretaria De Gestion Comunal Y Atenc.Ciudadana,1,Administración Gubernamental,3,Dirección Ejecutiva,669702889,25.65
-28,Ministerio De Gobierno,1,Judicial,3,Dirección Ejecutiva,143011510,25.18
-99,Servicio De La Deuda Publica,1,Judicial,3,Dirección Ejecutiva,425018795,74.82
-35,Ministerio De Ambiente Y Espacio Publico,4,Servicios Económicos,4,Ecología,1074635268,76.21
-65,Ministerio De Desarrollo Economico,4,Servicios Económicos,4,Ecología,731092,0.05
-90,Secretaria De Gestion Comunal Y Atenc.Ciudadana,4,Servicios Económicos,4,Ecología,334803175,23.74
-21,Jefatura De Gabinete De Ministros,4,Transporte,4,Ecología,45791851,43.50
-30,Ministerio De Desarrollo Urbano,4,Transporte,4,Ecología,50605978,48.07
-99,Servicio De La Deuda Publica,4,Transporte,4,Ecología,8880485,8.44
-20,Jefatura De Gobierno,3,Promoción Y Acción Social,4,Educación,177508571,15.34
-99,Servicio De La Deuda Publica,3,Promoción Y Acción Social,4,Educación,979591053,84.66
-50,Ministerio De Cultura,3,Servicios Sociales,4,Educación,185147335,1.04
-55,Ministerio De Educacion,3,Servicios Sociales,4,Educación,17577133767,98.37
-26,Ministerio De Justicia Y Seguridad,3,Servicios Sociales,4,Educación,106410681,0.60
-98,Servicio De La Deuda Publica,9,Gastos No Clasificados,1,Gastos No Clasificados,550000000,100.00
-35,Ministerio De Ambiente Y Espacio Publico,4,Ecología,6,Industria Y Comercio,21267575,11.00
-65,Ministerio De Desarrollo Economico,4,Ecología,6,Industria Y Comercio,172056242,89.00
-99,Servicio De La Deuda Publica,4,Turismo,6,Industria Y Comercio,47935502,100.00
-7,Consejo De La Magistratura,1,Administración Gubernamental,2,Judicial,2150668857,42.78
-28,Ministerio De Gobierno,1,Administración Gubernamental,2,Judicial,121101908,2.41
-26,Ministerio De Justicia Y Seguridad,1,Administración Gubernamental,2,Judicial,905726854,18.01
-5,Ministerio Publico,1,Administración Gubernamental,2,Judicial,1593867070,31.70
-6,Tribunal Superior De Justicia,1,Administración Gubernamental,2,Judicial,256335408,5.10
-99,Servicio De La Deuda Publica,1,Legislativa,2,Judicial,367794600,100.00
-1,Legislatura De La Ciudad De Buenos Aires,1,Administración Gubernamental,1,Legislativa,1510524467,100.00
-99,Servicio De La Deuda Publica,1,Gastos No Clasificados,1,Legislativa,102766072,100.00
-20,Jefatura De Gobierno,3,Salud,2,Promoción Y Acción Social,412004656,23.61
-99,Servicio De La Deuda Publica,3,Salud,2,Promoción Y Acción Social,1332964707,76.39
-21,Jefatura De Gabinete De Ministros,3,Servicios Sociales,2,Promoción Y Acción Social,1640311781,23.84
-35,Ministerio De Ambiente Y Espacio Publico,3,Servicios Sociales,2,Promoción Y Acción Social,649000000,9.43
-65,Ministerio De Desarrollo Economico,3,Servicios Sociales,2,Promoción Y Acción Social,448186565,6.51
-45,Ministerio De Desarrollo Social,3,Servicios Sociales,2,Promoción Y Acción Social,3969996073,57.71
-30,Ministerio De Desarrollo Urbano,3,Servicios Sociales,2,Promoción Y Acción Social,1017600,0.01
-28,Ministerio De Gobierno,3,Servicios Sociales,2,Promoción Y Acción Social,63787637,0.93
-60,Ministerio De Hacienda,3,Servicios Sociales,2,Promoción Y Acción Social,59776048,0.87
-90,Secretaria De Gestion Comunal Y Atenc.Ciudadana,3,Servicios Sociales,2,Promoción Y Acción Social,47375191,0.69
-21,Jefatura De Gabinete De Ministros,1,Dirección Ejecutiva,5,Relaciones Interiores,33746014,100.00
-20,Jefatura De Gobierno,3,Servicios Sociales,1,Salud,254836502,1.53
-40,Ministerio De Salud,3,Servicios Sociales,1,Salud,15535529819,93.22
-99,Servicio De La Deuda Publica,3,Servicios Sociales,1,Salud,874383614,5.25
-26,Ministerio De Justicia Y Seguridad,2,Servicios De Seguridad,2,Seguridad Interior,3770746588,92.90
-99,Servicio De La Deuda Publica,2,Servicios De Seguridad,2,Seguridad Interior,288363549,7.10
-99,Servicio De La Deuda Publica,4,Industria Y Comercio,8,Seguros Y Finanzas,435559,100.00
-60,Ministerio De Hacienda,4,Servicios Económicos,8,Seguros Y Finanzas,6669088,100.00
-21,Jefatura De Gabinete De Ministros,4,Ecología,9,Servicios Urbanos,15000000,1.92
-30,Ministerio De Desarrollo Urbano,4,Ecología,9,Servicios Urbanos,596661357,76.38
-90,Secretaria De Gestion Comunal Y Atenc.Ciudadana,4,Ecología,9,Servicios Urbanos,169487922,21.70
-35,Ministerio De Ambiente Y Espacio Publico,4,Industria Y Comercio,9,Servicios Urbanos,8361602622,100.00
-99,Servicio De La Deuda Publica,4,Seguros Y Finanzas,9,Servicios Urbanos,101008243,100.00
-65,Ministerio De Desarrollo Economico,3,Cultura,6,Trabajo,102629852,89.92
-99,Servicio De La Deuda Publica,3,Cultura,6,Trabajo,11508659,10.08
-35,Ministerio De Ambiente Y Espacio Publico,3,Promoción Y Acción Social,6,Trabajo,581621527,99.24
-45,Ministerio De Desarrollo Social,3,Promoción Y Acción Social,6,Trabajo,4480956,0.76
-68,Ministerio De Modernizacion,3,Servicios Sociales,6,Trabajo,36011680,100.00
-21,Jefatura De Gabinete De Ministros,4,Servicios Económicos,3,Transporte,2847170769,79.59
-30,Ministerio De Desarrollo Urbano,4,Servicios Económicos,3,Transporte,721118226,20.16
-99,Servicio De La Deuda Publica,4,Servicios Económicos,3,Transporte,9077688,0.25
-99,Servicio De La Deuda Publica,4,Ecología,5,Turismo,489651,100.00
-50,Ministerio De Cultura,4,Servicios Económicos,5,Turismo,222472832,100.00
-20,Jefatura De Gobierno,3,Cultura,7,Vivienda,29257973,100.00
-30,Ministerio De Desarrollo Urbano,3,Promoción Y Acción Social,7,Vivienda,276611905,100.00
-65,Ministerio De Desarrollo Economico,3,Trabajo,7,Vivienda,1524235572,85.87
-99,Servicio De La Deuda Publica,3,Trabajo,7,Vivienda,250767273,14.13
+60,Ministerio De Hacienda,1,Dirección Ejecutiva,6,Administración Fiscal,1691413631,91,87
+99,Servicio De La Deuda Publica,1,Dirección Ejecutiva,6,Administración Fiscal,149673699,8,13
+35,Ministerio De Ambiente Y Espacio Publico,3,Trabajo,8,Agua Potable Y Alcantarillado,562944658,100,00
+30,Ministerio De Desarrollo Urbano,3,Vivienda,8,Agua Potable Y Alcantarillado,447680057,97,31
+99,Servicio De La Deuda Publica,3,Vivienda,8,Agua Potable Y Alcantarillado,12357784,2,69
+99,Servicio De La Deuda Publica,1,Administración Fiscal,7,Control De La Gestión,83045350,100,00
+2,Auditoria General De La Ciudad De Buenos Aires,1,Administración Gubernamental,7,Control De La Gestión,315604491,33,85
+3,Defensoria Del Pueblo,1,Administración Gubernamental,7,Control De La Gestión,536394000,57,53
+8,Sindicatura General De La Ciudad De Buenos Aires,1,Administración Gubernamental,7,Control De La Gestión,80355255,8,62
+20,Jefatura De Gobierno,1,Dirección Ejecutiva,7,Control De La Gestión,196068215,100,00
+21,Jefatura De Gabinete De Ministros,1,Relaciones Interiores,7,Control De La Gestión,7594397,100,00
+20,Jefatura De Gobierno,3,Educación,5,Cultura,110016069,5,12
+50,Ministerio De Cultura,3,Educación,5,Cultura,1895025359,88,26
+99,Servicio De La Deuda Publica,3,Educación,5,Cultura,142001145,6,61
+21,Jefatura De Gabinete De Ministros,3,Promoción Y Acción Social,5,Cultura,123369418,28,35
+65,Ministerio De Desarrollo Economico,3,Promoción Y Acción Social,5,Cultura,311798619,71,65
+98,Servicio De La Deuda Publica,5,Deuda Pública – Intereses Y Gastos,1,Deuda Pública – Intereses Y Gastos,2794173000,100,00
+21,Jefatura De Gabinete De Ministros,1,Administración Gubernamental,3,Dirección Ejecutiva,167621651,6,42
+20,Jefatura De Gobierno,1,Administración Gubernamental,3,Dirección Ejecutiva,451617135,17,29
+65,Ministerio De Desarrollo Economico,1,Administración Gubernamental,3,Dirección Ejecutiva,232929928,8,92
+60,Ministerio De Hacienda,1,Administración Gubernamental,3,Dirección Ejecutiva,103145768,3,95
+68,Ministerio De Modernizacion,1,Administración Gubernamental,3,Dirección Ejecutiva,588239436,22,53
+9,Procuracion General  De La Ciudad,1,Administración Gubernamental,3,Dirección Ejecutiva,398175743,15,25
+90,Secretaria De Gestion Comunal Y Atenc,Ciudadana,1,Administración Gubernamental,3,Dirección Ejecutiva,669702889,25,65
+28,Ministerio De Gobierno,1,Judicial,3,Dirección Ejecutiva,143011510,25,18
+99,Servicio De La Deuda Publica,1,Judicial,3,Dirección Ejecutiva,425018795,74,82
+35,Ministerio De Ambiente Y Espacio Publico,4,Servicios Económicos,4,Ecología,1074635268,76,21
+65,Ministerio De Desarrollo Economico,4,Servicios Económicos,4,Ecología,731092,0,05
+90,Secretaria De Gestion Comunal Y Atenc,Ciudadana,4,Servicios Económicos,4,Ecología,334803175,23,74
+21,Jefatura De Gabinete De Ministros,4,Transporte,4,Ecología,45791851,43,50
+30,Ministerio De Desarrollo Urbano,4,Transporte,4,Ecología,50605978,48,07
+99,Servicio De La Deuda Publica,4,Transporte,4,Ecología,8880485,8,44
+20,Jefatura De Gobierno,3,Promoción Y Acción Social,4,Educación,177508571,15,34
+99,Servicio De La Deuda Publica,3,Promoción Y Acción Social,4,Educación,979591053,84,66
+50,Ministerio De Cultura,3,Servicios Sociales,4,Educación,185147335,1,04
+55,Ministerio De Educacion,3,Servicios Sociales,4,Educación,17577133767,98,37
+26,Ministerio De Justicia Y Seguridad,3,Servicios Sociales,4,Educación,106410681,0,60
+98,Servicio De La Deuda Publica,9,Gastos No Clasificados,1,Gastos No Clasificados,550000000,100,00
+35,Ministerio De Ambiente Y Espacio Publico,4,Ecología,6,Industria Y Comercio,21267575,11,00
+65,Ministerio De Desarrollo Economico,4,Ecología,6,Industria Y Comercio,172056242,89,00
+99,Servicio De La Deuda Publica,4,Turismo,6,Industria Y Comercio,47935502,100,00
+7,Consejo De La Magistratura,1,Administración Gubernamental,2,Judicial,2150668857,42,78
+28,Ministerio De Gobierno,1,Administración Gubernamental,2,Judicial,121101908,2,41
+26,Ministerio De Justicia Y Seguridad,1,Administración Gubernamental,2,Judicial,905726854,18,01
+5,Ministerio Publico,1,Administración Gubernamental,2,Judicial,1593867070,31,70
+6,Tribunal Superior De Justicia,1,Administración Gubernamental,2,Judicial,256335408,5,10
+99,Servicio De La Deuda Publica,1,Legislativa,2,Judicial,367794600,100,00
+1,Legislatura De La Ciudad De Buenos Aires,1,Administración Gubernamental,1,Legislativa,1510524467,100,00
+99,Servicio De La Deuda Publica,1,Gastos No Clasificados,1,Legislativa,102766072,100,00
+20,Jefatura De Gobierno,3,Salud,2,Promoción Y Acción Social,412004656,23,61
+99,Servicio De La Deuda Publica,3,Salud,2,Promoción Y Acción Social,1332964707,76,39
+21,Jefatura De Gabinete De Ministros,3,Servicios Sociales,2,Promoción Y Acción Social,1640311781,23,84
+35,Ministerio De Ambiente Y Espacio Publico,3,Servicios Sociales,2,Promoción Y Acción Social,649000000,9,43
+65,Ministerio De Desarrollo Economico,3,Servicios Sociales,2,Promoción Y Acción Social,448186565,6,51
+45,Ministerio De Desarrollo Social,3,Servicios Sociales,2,Promoción Y Acción Social,3969996073,57,71
+30,Ministerio De Desarrollo Urbano,3,Servicios Sociales,2,Promoción Y Acción Social,1017600,0,01
+28,Ministerio De Gobierno,3,Servicios Sociales,2,Promoción Y Acción Social,63787637,0,93
+60,Ministerio De Hacienda,3,Servicios Sociales,2,Promoción Y Acción Social,59776048,0,87
+90,Secretaria De Gestion Comunal Y Atenc,Ciudadana,3,Servicios Sociales,2,Promoción Y Acción Social,47375191,0,69
+21,Jefatura De Gabinete De Ministros,1,Dirección Ejecutiva,5,Relaciones Interiores,33746014,100,00
+20,Jefatura De Gobierno,3,Servicios Sociales,1,Salud,254836502,1,53
+40,Ministerio De Salud,3,Servicios Sociales,1,Salud,15535529819,93,22
+99,Servicio De La Deuda Publica,3,Servicios Sociales,1,Salud,874383614,5,25
+26,Ministerio De Justicia Y Seguridad,2,Servicios De Seguridad,2,Seguridad Interior,3770746588,92,90
+99,Servicio De La Deuda Publica,2,Servicios De Seguridad,2,Seguridad Interior,288363549,7,10
+99,Servicio De La Deuda Publica,4,Industria Y Comercio,8,Seguros Y Finanzas,435559,100,00
+60,Ministerio De Hacienda,4,Servicios Económicos,8,Seguros Y Finanzas,6669088,100,00
+21,Jefatura De Gabinete De Ministros,4,Ecología,9,Servicios Urbanos,15000000,1,92
+30,Ministerio De Desarrollo Urbano,4,Ecología,9,Servicios Urbanos,596661357,76,38
+90,Secretaria De Gestion Comunal Y Atenc,Ciudadana,4,Ecología,9,Servicios Urbanos,169487922,21,70
+35,Ministerio De Ambiente Y Espacio Publico,4,Industria Y Comercio,9,Servicios Urbanos,8361602622,100,00
+99,Servicio De La Deuda Publica,4,Seguros Y Finanzas,9,Servicios Urbanos,101008243,100,00
+65,Ministerio De Desarrollo Economico,3,Cultura,6,Trabajo,102629852,89,92
+99,Servicio De La Deuda Publica,3,Cultura,6,Trabajo,11508659,10,08
+35,Ministerio De Ambiente Y Espacio Publico,3,Promoción Y Acción Social,6,Trabajo,581621527,99,24
+45,Ministerio De Desarrollo Social,3,Promoción Y Acción Social,6,Trabajo,4480956,0,76
+68,Ministerio De Modernizacion,3,Servicios Sociales,6,Trabajo,36011680,100,00
+21,Jefatura De Gabinete De Ministros,4,Servicios Económicos,3,Transporte,2847170769,79,59
+30,Ministerio De Desarrollo Urbano,4,Servicios Económicos,3,Transporte,721118226,20,16
+99,Servicio De La Deuda Publica,4,Servicios Económicos,3,Transporte,9077688,0,25
+99,Servicio De La Deuda Publica,4,Ecología,5,Turismo,489651,100,00
+50,Ministerio De Cultura,4,Servicios Económicos,5,Turismo,222472832,100,00
+20,Jefatura De Gobierno,3,Cultura,7,Vivienda,29257973,100,00
+30,Ministerio De Desarrollo Urbano,3,Promoción Y Acción Social,7,Vivienda,276611905,100,00
+65,Ministerio De Desarrollo Economico,3,Trabajo,7,Vivienda,1524235572,85,87
+99,Servicio De La Deuda Publica,3,Trabajo,7,Vivienda,250767273,14,13
