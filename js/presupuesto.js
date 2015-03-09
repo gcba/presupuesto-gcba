@@ -84,6 +84,7 @@ d3.csv("data/presupuesto2015.csv", function(data) {
                 x: (i + 1) * (width) / 6,
                 y: height / 2
             }
+            console.log(centroides_finalidad);
         }
 
         var columnas = 4;
@@ -250,6 +251,7 @@ d3.csv("data/presupuesto2015.csv", function(data) {
                     circles.each(ordenJurisdiccion(e.alpha))
                         .attr("cx", function(d) {
                             return d.x;
+
                         })
                         .attr("cy", function(d) {
                             return d.y;
@@ -258,14 +260,17 @@ d3.csv("data/presupuesto2015.csv", function(data) {
                 });
             force.start();
             titulosJurisdiccion();
+
         }
 
         function ordenJurisdiccion(alpha) {
             return function(d) {
                 var target = centroides_jurisdiccion[d.id_jurisdiccion];
+                console.log(target);
                 d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
                 d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
             };
+
         }
 
         function mostrarFinalidad() {
@@ -292,6 +297,7 @@ d3.csv("data/presupuesto2015.csv", function(data) {
         function ordenFinalidad(alpha) {
             return function(d) {
                 var target = centroides_finalidad[d.id_finalidad];
+                 // console.log(target);
                 d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.2;
                 d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.2;
             };
