@@ -4,15 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title>Presupuesto 2015 de la Ciudad de Buenos Aires</title>
-    <meta name="description" content="Presupuesto 2015 de la Ciudad de Buenos Aires">
+    <title>Presupuesto de la Ciudad de Buenos Aires</title>
+    <meta name="description" content="Presupuesto de la Ciudad de Buenos Aires">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script type="text/javascript" src="public/components/d3/d3.min.js"></script>
     <script type='text/javascript' src='public/components/jquery/dist/jquery.min.js'></script>
     <script type='text/javascript' src='js/CustomTooltip.js'></script>
 
-    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/base.min.css" />
 
     <meta name="viewport" content="width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -24,13 +24,13 @@
     <meta name="twitter:site" content="@LABgcba">
     <meta name="twitter:creator" content="@LABgcba">
     <meta name="twitter:image:src" content="http://i.imgur.com/srxz0wW.png">
-    <meta name="twitter:description" content="Explorá cómo se distribuye el presupuesto 2015 sancionado por la Legislatura de la Ciudad de Buenos Aires">
+    <meta name="twitter:description" content="Explorá cómo se distribuye el presupuesto sancionado por la Legislatura de la Ciudad de Buenos Aires">
     <meta name="twitter:title" content="¿A dónde van nuestros impuestos?">
     <meta name="twitter:url" content="http://gcba.github.io/presupuesto-gcba/">
 
     <meta property="og:title" content="¿A dónde van nuestros impuestos?" />
     <meta property="og:site_name" content="Visualización del Presupuesto 2015" />
-    <meta property="og:description" content="Explorá cómo se distribuye el presupuesto 2015 sancionado por la Legislatura de la Ciudad de Buenos Aires" />
+    <meta property="og:description" content="Explorá cómo se distribuye el presupuesto sancionado por la Legislatura de la Ciudad de Buenos Aires" />
     <meta property="og:image" content="http://i.imgur.com/oA7xlzX.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="250" />
@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12">
                     <h1 id="my-tooltip">¿A dónde van nuestros impuestos?</h1>
-                    <h2>Explorá cómo se distribuye el presupuesto 2015 sancionado por la Legislatura de la Ciudad.</h2>
+                    <h2>Explorá cómo se distribuye el presupuesto <span id="selectedYear">----</span> sancionado por la Legislatura de la Ciudad.</h2>
                     <p class="lead">El presupuesto nos muestra de qué modo se decide gastar el dinero recaudado. Existen varias maneras de representarlo, una de las cuales es la clasificación por finalidad del gasto que implica agrupar en función al tipo de servicio prestado según la institución correspondiente.
                         <br>Recorré la visualización y conocé cómo es el presupuesto de nuestra Ciudad.</p>
 
@@ -85,7 +85,7 @@
                 <div id="presupuesto-visualizado"></div>
                 <div class="referencias">
                     <div class="titulo">
-                        <h3>¿Cómo se distribuyen los $86 mil millones de la Ciudad?</h3>
+                        <h3> </h3>
                     </div>
                     <div class="claves">
                         <ul>
@@ -108,13 +108,17 @@
             </div>
         </div>
 
+        <div class="presupuestosAnteriores"> <!-- VER PRESUPUESTOS -->
+                <button id="a2014" onclick="veoPresupuesto(2014)" type="button" style="margin-top: 25px;" class="btn btn-default"> Ir al año 2014 </button>
+                <button id="a2015" onclick="veoPresupuesto(2015)" type="button" style="margin-top: 25px;" class="btn btn-default"> Ir al año 2015 </button>
+        </div>
 
         <div class="row">
             <div class="col-md-12 col-lg-12">
-                <p class="mas-info">Para más información visitá el sitio del <a href="http://www.buenosaires.gob.ar/areas/hacienda/presupuesto2014_final/" target="_blank">Ministerio de Hacienda</a> o el catálogo de datos abiertos de la Ciudad, <a href="http://data.buenosaires.gob.ar/dataset/presupuesto-sancionado" target="_blank">Buenos Aires Data</a>.
-                    <br>
-
-<a href="http://www.buenosaires.gob.ar/transparencia"><button type="button" style="margin-top: 25px;" class="btn btn-default"> volver al sitio de transparencia </button></a>
+                <p class="mas-info">
+                    Para más información visitá el sitio del <a href="http://www.buenosaires.gob.ar/areas/hacienda/" target="_blank">Ministerio de Hacienda</a> o el catálogo de datos abiertos de la Ciudad, <a href="http://data.buenosaires.gob.ar/dataset/presupuesto-sancionado" target="_blank">Buenos Aires Data</a>. <br>
+                    <a href="http://www.buenosaires.gob.ar/transparencia" style="line-height:3em;">volver al sitio de transparencia</a>
+                </p>
 
 
 
@@ -182,7 +186,6 @@
 
 
 
-
     <footer>
         <div class="container">
             <div class="row">
@@ -204,7 +207,7 @@
     <script type="text/javascript" src="public/components/d3/d3.min.js"></script>
     <script type='text/javascript' src='public/components/jquery/dist/jquery.min.js'></script>
     <script type='text/javascript' src='js/CustomTooltip.js'></script>
-    <script type="text/javascript" src="js/presupuesto.js"></script>
+    <script type="text/javascript" src="js/presupuesto.min.js"></script>
     <script>
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
