@@ -157,7 +157,7 @@ svg {
     .total {
         font-family: $fontset-default;
         font-weight: 700;
-        font-size: 1.4em;    
+        font-size: 1.2em;    
     }
 
 }
@@ -295,4 +295,12 @@ footer {
     .hacienda {
         text-align: right;
     }
+}
+
+.presupuestosAnteriores {
+    text-align: center;
+    #a2015 {
+        display: none;
+    }
+
 }
