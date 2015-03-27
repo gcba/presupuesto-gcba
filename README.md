@@ -2,13 +2,13 @@
 ================================
 ### Visualización del presupuesto del Gobierno de la Ciudad Autónoma de Buenos Aires
 
-Para acompañar el lanzamiento del [portal de Transparencia](http://www.buenosaires.gob.ar/transparencia) decidimos desarrollar una visualización del presupuesto 2014 sancionado por la Legislatura de la Ciudad de Buenos Aires, con la intención de que cualquier persona interesada, pueda entender cómo se distribuye el dinero que todos aportamos.
+Para acompañar el lanzamiento del [portal de Transparencia](http://www.buenosaires.gob.ar/transparencia) decidimos desarrollar una visualización de los presupuestos sancionados por la Legislatura de la Ciudad de Buenos Aires, con la intención de que cualquier persona interesada, pueda entender cómo se distribuye el dinero que todos aportamos.
 
 [¿A dónde van nuestros impuestos?](http://gcba.github.io/presupuesto-gcba) muestra una de las tantas maneras en que se clasifica el gasto y la inversión pública. En este caso por Finalidad y Función, a lo que le agregamos un corte transversal, por Jurisdiccion. Esto nos permite ver y explorar el presupuesto de la Ciudad de una forma más comprensible.
 
 Un trabajo en conjunto entre el [Laboratorio de Gobierno](https://twitter.com/labgcba) y el [Ministerio de Hacienda](http://www.buenosaires.gob.ar/areas/hacienda).
 
-Para más información visitá el sitio del [Ministerio de Hacienda](http://www.buenosaires.gob.ar/areas/hacienda/presupuesto2014_final/) o el catálogo de datos abiertos de la Ciudad, [Buenos Aires Data](http://data.buenosaires.gob.ar/dataset/presupuesto-sancionado).
+Para más información visitá el sitio del [Ministerio de Hacienda](http://www.buenosaires.gob.ar/areas/hacienda/) o el catálogo de datos abiertos de la Ciudad, [Buenos Aires Data](http://data.buenosaires.gob.ar/dataset/presupuesto-sancionado).
 
 #### Referencias
 * [Four Ways to Slice Obama’s 2013 Budget Proposal](http://www.nytimes.com/interactive/2012/02/13/us/politics/2013-budget-proposal-graphic.html), Shan Carter, New York Times.
