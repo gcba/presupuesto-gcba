@@ -18,7 +18,7 @@ function veoPresupuesto(year){
 
         case "2015":
             $(".titulo h3").text("¿Cómo se distribuyen los $86 mil millones de la Ciudad?");
-            presupuesto("data/presupuesto2015.csv",7,8,["#ECD078", "#D95B43", "#C02942", "#542437", "#53777A", "#c1dd53"],110);
+            presupuesto("data/presupuesto2015.csv",6,8,["#ECD078", "#D95B43", "#C02942", "#542437", "#53777A", "#c1dd53"],110);
             $("#a2014").css("display","inline");
             break;
     }
